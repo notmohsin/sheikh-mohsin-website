@@ -1,0 +1,24 @@
+import { defineDiaryEntry } from "@/lib/diary/metadata";
+
+export const metadata = defineDiaryEntry({
+  title: "Hello, diary",
+  description:
+    "A placeholder draft entry to preview how writing will appear on this site.",
+  publishedAt: "2026-09-01",
+  tags: ["intro", "placeholder"],
+  draft: true,
+});
+
+This is a **draft** diary entry. It is hidden from the public diary index, RSS feed, and sitemap until `draft: true` is removed from the metadata above.
+
+Use it to preview:
+
+- MDX formatting and code blocks
+- How tags and dates render on `/diary/[entry]`
+- The terminal `diary` command once published
+
+```bash
+pnpm diary:new
+```
+
+Scaffolds future posts with the correct metadata shape.

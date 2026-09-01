@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# jeetsh4h.dev
 
-## Getting Started
+## Attribution
 
-First, run the development server:
+**Cat ASCII art:**
+
+- https://user.xmission.com/~emailbox/ascii_cats.htm
+- https://emojicombos.com/cute-cat-ascii-art
+- https://www.asciiart.eu/animals/cat
+- https://asciiart.website/cat.php?category_id=32
+
+**Cat sprites:**
+
+- https://luizmelo.itch.io/pet-cat-pack
+
+**Color scheme:**
+
+- https://catppuccin.com
+
+<!-- Add attribution for the SVGs and note about AI-generated SVGs -->
+
+## Local Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## CV Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Requires a local TeX Live installation with `latexmk`, `xelatex`, and the
+OpenType fonts used by `cv/cv.tex`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm cv:check-deps
+pnpm cv:build
+```
 
-## Learn More
+The generated PDF is copied to `public/cv.pdf` for local preview.
 
-To learn more about Next.js, take a look at the following resources:
+On CachyOS/Arch with `fish` and `paru`, install the required TeX Live packages
+with:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```fish
+pnpm cv:install-deps:cachyos
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The installer wraps:
 
-## Deploy on Vercel
+```fish
+paru -S --needed texlive-bin texlive-binextra texlive-basic texlive-xetex texlive-latex texlive-latexrecommended texlive-latexextra texlive-fontsrecommended
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Merge PDFs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Fish CLI requires `pdfunite`, provided by Poppler. By default it prompts
+for the PDF order and output path:
+
+```fish
+pnpm pdf:merge resume.pdf letter.pdf transcript.pdf
+```
+
+At the order prompt, press Enter to keep the displayed order or enter every
+item number in the desired order, such as `2 1 3`.
+
+For automation, skip either or both prompts:
+
+```fish
+pnpm pdf:merge --current-order resume.pdf letter.pdf
+pnpm pdf:merge --output application.pdf resume.pdf letter.pdf
+pnpm pdf:merge --current-order --output application.pdf resume.pdf letter.pdf
+```
+
+An explicit `--output` path replaces an existing file. The interactive path
+asks before replacing one.
+
+## CI LaTeX Image
+
+Deploy workflows build `public/cv.pdf` with a slim GHCR image:
+
+`ghcr.io/jeetsh4h/jeetsh4h-dev/latex-cv:latest`
+
+If the image dependencies change, update `.github/docker/latex-cv/Dockerfile`
+and run the `Build LaTeX CV Image` workflow before relying on deploy workflows.
+
+## Checks
+
+```bash
+pnpm lint
+pnpm test
+pnpm build
+pnpm verify
+```
+
+## Manual Date Maintenance
+
+Some dates are content decisions and must be reviewed by hand when changing the
+site:
+
+- `diary/*.mdx`: keep `publishedAt` as the original publish date and set
+  `updatedAt` only when the entry content meaningfully changes.
+- `lib/content/seo.ts`: update `SEO.updatedAt` when the homepage/site content has
+  a meaningful content update; it feeds sitemap freshness for the canonical
+  homepage.
+- `lib/content/experience.ts`, `lib/content/education.ts`, and
+  `lib/content/research.ts`: review date ranges, `Present` entries, research
+  years, and any revisit notes whenever profile content changes.
+- `cv/cv.tex`: keep experience, publication, and education dates in sync with
+  the site content.
+- Ensure the footer copyright years and License copyright year is updated.
+
+## Diary Entries
+
+```bash
+pnpm diary:new
+```
+
+Creates `diary/change-this-diary-entry-slug.mdx` with placeholder
+title/description and today's date. The placeholders are intentionally loud;
+change the slug, title, and description before publishing.
+
+Useful variants:
+
+```bash
+pnpm diary:new -- "Entry Title"
+pnpm diary:new -- "Entry Title" --slug custom-slug --date YYYY-MM-DD
+pnpm diary:new -- "Entry Title" --published
+```
+
+- Pass the title as one quoted argument.
+- Drafts include `draft: true` and stay out of the diary index, RSS, and sitemap.
+- Published entries need a non-empty `description` and `publishedAt`.
+- Slugs must be lowercase letters/numbers with single hyphens.

@@ -1,0 +1,43 @@
+import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import PDFViewer from "@/components/pdf-viewer";
+import ThemeToggle from "@/components/theme-toggle";
+
+import { ABOUT } from "@/lib/content/about";
+
+export const metadata: Metadata = {
+  title: "CV",
+  description: `${ABOUT.name}'s CV as an embeddable PDF viewer.`,
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+
+export default function PDFPage() {
+  return (
+    <main
+      id="main-content"
+      className="h-dvh flex flex-col"
+    >
+      <div className="mx-auto flex w-full flex-none items-center justify-between px-4 pt-2 pb-2 md:p-4 md:pb-2">
+        <Button
+          nativeButton={false}
+          render={<Link href="/" />}
+          variant="link"
+          className="flex text-xs"
+        >
+          <span className="transition-transform group-hover:-translate-x-0.5">
+            ←
+          </span>
+          <span className="underline">../home</span>
+        </Button>
+        <ThemeToggle />
+      </div>
+      <div className="mx-auto min-h-0 w-full max-w-6xl flex-1 px-4 pb-4">
+        <PDFViewer />
+      </div>
+    </main>
+  );
+}

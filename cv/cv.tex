@@ -1,0 +1,147 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.55in,top=0.4in,bottom=0.4in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\setlist{topsep=1pt, itemsep=0pt, parsep=0pt, partopsep=0pt}
+
+% Define colors
+\definecolor{headercolor}{RGB}{0, 51, 102}
+\definecolor{linkcolor}{RGB}{0, 102, 204}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor,
+}
+
+% Section formatting
+\titleformat{\section}{\large\bfseries\color{headercolor}}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{4pt}{1pt}
+
+% Remove page numbers
+\pagestyle{empty}
+\renewcommand{\baselinestretch}{0.93}
+
+% Custom commands
+\newcommand{\cvheader}[6]{
+    \begin{center}
+        {\Large\bfseries #1}\\[0.2em]
+        #2 \textbullet\ \href{mailto:#3}{#3}\\
+        \href{https://linkedin.com/in/#4}{LinkedIn} \textbullet\ \href{https://github.com/#5}{GitHub} \textbullet\ \href{#6}{Portfolio}
+    \end{center}
+    \vspace{-0.6em}
+}
+
+\newcommand{\education}[4]{
+    \textbf{#1} \hfill #2\\
+    \textit{#3} \hfill #4\\[0.1em]
+}
+
+\newcommand{\experience}[4]{
+    \textbf{#1} \hfill #2\\
+    \textit{#3} \hfill #4\\[0.1em]
+}
+
+\newcommand{\project}[4]{
+    \textbf{#1} \hfill #2\\
+    \textit{#3} \hfill #4\\[0.1em]
+}
+
+\begin{document}
+\small
+
+\cvheader{Sheikh Mohsin}{+91 6005277810}{sheikh.mohsin@flame.edu.in}{sheikh-mohsin-213653254}{SheikhMohsin9311}{https://sheikh-mohsin.vercel.app/}
+
+\section*{Profile Summary}
+Third-year B.Sc. Computer Science and Business Analytics student who builds, tests, and explains technical work. At IIT Ropar, I implement and evaluate SSD cache strategies; in operations and QA roles, I turn raw data and edge cases into clearer decisions and more reliable releases. I bring systems thinking, applied analysis, and careful technical writing to new problems.
+
+\section*{Education}
+
+\education{FLAME University, Pune}{Aug 2024 -- Present}{B.Sc. Computer Science \& Business Analytics (Full Scholarship)}{Cumulative GPA: 7.65/10}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Modeled and verified concurrent and distributed systems with SAT solvers, temporal-logic model checking, and Alloy/TLA+ specifications
+    \item Implemented and compared classification and clustering methods, using PCA to test how feature selection affected model behavior
+    \item Term paper on globalization and India's LPG-era economic reforms (Public Policy coursework)
+    \item Joined Dot Slash Club and completed interdisciplinary projects connecting computer science with Philosophy and Public Policy
+\end{itemize}
+
+\education{Jawahar Navodaya Vidyalaya, Ganderbal}{2017 -- 2024}{Senior Secondary Education (Merit Scholarship, Residential)}{Grades 6--12}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Led extracurricular activities and coordinated Atal Tinkering Labs; taught junior students to turn ideas into 3D-printed prototypes
+\end{itemize}
+
+\section*{Experience}
+
+\experience{IIT Ropar}{May 2026 -- Present}{Research Intern (Summer Internship Program) -- SSD Systems}{}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Learned SSD storage systems from first principles under Prof. Venkata Kalyan Tavva and compared recency- and frequency-based cache eviction strategies in the SimpleSSD-Standalone 2.0 simulator as a foundation for an original performance study
+    \item Designed and implemented a spatial prefetching approach that predicts nearby address-translation entries from how data is grouped in flash; found and fixed a cache-order bug that caused newly loaded entries to evict one another before use
+    \item Investigated how ransomware write bursts interact with an SSD's internal cleanup process, identified a race that may destroy recoverable data before detection responds, and assessed whether a targeted defense could form a new research contribution
+\end{itemize}
+
+\experience{Discover India Program (DIP)}{Sept 2025 -- April 2026}{Research -- Taraksi (Silver Filigree)}{}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Studied, within a 13-member research team, how Taraksi silver filigree moved from a household craft to a commercial practice
+    \item Traced the craft's history and technique through literature, then designed field surveys and semi-structured interviews to capture how artisans describe the shift from craft to commerce
+    \item Synthesized qualitative findings into academic documentation and cultural analysis
+\end{itemize}
+
+\experience{PartyHub (Remote)}{Jul 2025 -- Aug 2025}{QA Testing Intern}{}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Tested frontend and backend features before release, focusing on edge cases that could break real user flows rather than checking only the happy path
+    \item Wrote reproducible bug reports with exact steps and expected-versus-actual behavior, giving developers a clear path from discovery to triage
+    \item Checked API responses and cross-device behavior to expose integration issues before release
+\end{itemize}
+
+\experience{Goonj, Delhi}{May 2025 -- Jul 2025}{Research and Operations Intern}{}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Traced donation and redistribution data through the sorting pipeline, isolated stages that created backlog, and built structured datasets and visual summaries to support allocation decisions
+    \item Tested data patterns against field-team observations before proposing process changes, separating patterns that reflected real field conditions from patterns caused by incomplete records
+\end{itemize}
+
+\section*{Projects}
+
+\project{Cache Performance Benchmark Suite}{May 2026}{C++, \texttt{perf\_event\_open}, RDTSCP}{\href{https://github.com/SheikhMohsin9311/Performance-and-Data-Representation}{Repository}}
+Built a benchmarking harness that measured hardware clock-cycle costs across 16 data structures, using performance counters to isolate machine-level behavior from wall-clock noise. Compared contiguous (array-of-structs / struct-of-arrays) and pointer-based layouts across access patterns and data sizes, then automated collection, CSV export, and Chart.js visualization to make the results reproducible.
+
+\project{IPL Data Mining}{April 2026}{Python, Data Analysis, Data Visualization}{\href{https://github.com/SheikhMohsin9311/IPL---Data-Mining}{Repository}}
+Cleaned and explored IPL data to compare team and player patterns, turning match records into findings that could be inspected through visual summaries. Built a repeatable analysis workflow in Python, separating data preparation from interpretation so conclusions could be checked against the underlying records.
+
+\project{Personal Website \& Portfolio}{2025 -- Present}{HTML, CSS, JavaScript, Vercel}{\href{https://sheikh-mohsin.vercel.app/}{Website}}
+Designed and built a responsive personal website from scratch to present projects, research, and writing in one place. Deployed the site through GitHub and Vercel and kept the structure focused on making technical work easy to find and inspect.
+
+\section*{Technical Skills}
+
+\textbf{Programming \& Tools:} Python, C++, JavaScript, SQL, HTML/CSS, Git/GitHub, Linux, LaTeX, Markdown\\
+\textbf{Data \& Systems:} Data Structures \& Algorithms, Data Analysis, Data Mining, Data Visualization, Statistical Reasoning, FTL/NAND flash internals, hardware performance profiling (\texttt{perf\_event\_open}, RDTSCP), basic AWS\\
+\textbf{Soft Skills:} Technical writing, research communication, independent learning, analytical thinking, collaboration\\
+\textbf{Languages:} English, Hindi, Urdu, Kashmiri
+
+\section*{Leadership \& Service}
+
+\experience{Karta Inter-University Workshops}{Dec 2025; Jul 2026}{Technical Lead (Winter) \& Operations Lead (Summer)}{Karta Initiative India Foundation}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Led technical operations during the five-day winter workshop, setting up and troubleshooting projectors, speakers, mixer amplifiers, microphones, and presentation displays so sessions ran without disruption
+    \item Supported speakers and participants in real time by managing presentation changes, resolving equipment issues, and coordinating with the organizing team when problems arose
+    \item Took broader responsibility for the summer workshop, coordinating housing, food, events, schedules, and related arrangements for students from Karta's university network and following each detail through to completion
+\end{itemize}
+
+\experience{FLAME University -- Karta Initiative}{Aug 2024 -- Present}{University Leader}{}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Served as a peer representative for a cohort of more than 40 Karta Scholars, running weekly Sabhas that gave students a regular space to share updates, raise concerns, and agree on next steps
+    \item Onboarded new scholars and carried information between the cohort and Karta Initiative India Foundation, keeping students informed about requirements, opportunities, and support
+    \item Collected grades, attendance, banking details, and other records, while checking in with students who became disengaged and escalating larger concerns to the assigned mentor
+\end{itemize}
+
+\section*{Writing \& Publications}
+
+\textbf{Deccan Herald:} Co-authored article on education policy and technology -- ``Lost in Instruction''\\
+\textbf{Kashmir Poetics:} Contributed reflective and literary writing, including a published poem -- \href{https://kashmirpoetics.com}{kashmirpoetics.com}\\
+Comfortable synthesizing research material and communicating technical ideas to diverse audiences.
+
+\end{document}

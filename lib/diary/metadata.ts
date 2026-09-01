@@ -1,0 +1,171 @@
+export type DateString = `${number}-${number}-${number}`;
+
+type BaseDiaryEntryMetadataInput = {
+  title: string;
+  description?: string;
+  publishedAt?: DateString;
+  updatedAt?: DateString;
+  tags?: readonly string[];
+};
+
+type PublishedDiaryEntryMetadataInput = BaseDiaryEntryMetadataInput & {
+  description: string;
+  publishedAt: DateString;
+  draft?: false;
+};
+
+type DraftDiaryEntryMetadataInput = BaseDiaryEntryMetadataInput & {
+  draft: true;
+};
+
+export type DiaryEntryMetadataInput =
+  | PublishedDiaryEntryMetadataInput
+  | DraftDiaryEntryMetadataInput;
+
+export type DiaryEntryMetadata = {
+  title: string;
+  description: string;
+  publishedAt?: DateString;
+  updatedAt?: DateString;
+  tags: readonly string[];
+  draft: boolean;
+};
+
+export type DiaryEntrySummary = DiaryEntryMetadata & {
+  slug: string;
+};
+
+export type PublishedDiaryEntrySummary = DiaryEntrySummary & {
+  draft: false;
+  publishedAt: DateString;
+  updatedAt: DateString;
+};
+
+type MetadataRecord = Record<string, unknown>;
+
+function isRecord(value: unknown): value is MetadataRecord {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function requiredString(
+  input: unknown,
+  fieldName: string,
+  { allowEmpty = false } = {},
+) {
+  if (typeof input !== "string") {
+    throw new Error(`${fieldName} must be a string.`);
+  }
+
+  const value = input.trim();
+
+  if (!allowEmpty && !value) {
+    throw new Error(`${fieldName} cannot be empty.`);
+  }
+
+  return value;
+}
+
+function optionalString(input: unknown, fieldName: string) {
+  if (input === undefined) {
+    return undefined;
+  }
+
+  return requiredString(input, fieldName, { allowEmpty: true });
+}
+
+function validateDate(
+  input: unknown,
+  fieldName: string,
+): DateString | undefined {
+  if (input === undefined) {
+    return undefined;
+  }
+
+  if (typeof input !== "string") {
+    throw new Error(`${fieldName} must be a YYYY-MM-DD string.`);
+  }
+
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(input);
+
+  if (!match) {
+    throw new Error(`${fieldName} must be a valid YYYY-MM-DD date.`);
+  }
+
+  const [, yearPart, monthPart, dayPart] = match;
+  const year = Number(yearPart);
+  const month = Number(monthPart);
+  const day = Number(dayPart);
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) {
+    throw new Error(`${fieldName} must be a valid YYYY-MM-DD date.`);
+  }
+
+  return input as DateString;
+}
+
+export function dateStringToIsoDateTime(date: DateString) {
+  return `${date}T00:00:00.000Z`;
+}
+
+export function dateStringToUtcDate(date: DateString) {
+  return new Date(dateStringToIsoDateTime(date));
+}
+
+function normalizeTags(input: unknown) {
+  if (input === undefined) {
+    return [];
+  }
+
+  if (!Array.isArray(input)) {
+    throw new Error("tags must be an array of strings.");
+  }
+
+  return input.map((tag) => requiredString(tag, "tags"));
+}
+
+export function defineDiaryEntry(
+  input: DiaryEntryMetadataInput,
+): DiaryEntryMetadata {
+  if (!isRecord(input)) {
+    throw new Error("Diary entry metadata must be an object.");
+  }
+
+  const title = requiredString(input.title, "title");
+  const draft = input.draft ?? false;
+
+  if (typeof draft !== "boolean") {
+    throw new Error("draft must be a boolean.");
+  }
+
+  const description = optionalString(input.description, "description") ?? "";
+  const publishedAt = validateDate(input.publishedAt, "publishedAt");
+  const updatedAt = validateDate(input.updatedAt, "updatedAt") ?? publishedAt;
+
+  if (!draft) {
+    if (!description) {
+      throw new Error("description is required for published entries.");
+    }
+
+    if (!publishedAt) {
+      throw new Error("publishedAt is required for published entries.");
+    }
+  }
+
+  if (publishedAt && updatedAt && updatedAt < publishedAt) {
+    throw new Error("updatedAt cannot be earlier than publishedAt.");
+  }
+
+  return {
+    title,
+    description,
+    publishedAt,
+    updatedAt,
+    tags: normalizeTags(input.tags),
+    draft,
+  };
+}

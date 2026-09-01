@@ -1,26 +1,407 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-mono);
+  --font-hand: var(--font-hand);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-term-muted: var(--term-muted);
+  --color-subtext: var(--subtext);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes readme-button-wiggle {
+  0%,
+  70%,
+  100% {
+    transform: translateX(-50%) translateY(0)
+      rotate(var(--readme-button-rotate));
+  }
+
+  76% {
+    transform: translateX(-50%) translateY(-1px)
+      rotate(calc(var(--readme-button-rotate) - 2deg));
+  }
+
+  82% {
+    transform: translateX(-50%) translateY(1px)
+      rotate(calc(var(--readme-button-rotate) + 2deg));
+  }
+
+  88% {
+    transform: translateX(-50%) translateY(-1px)
+      rotate(calc(var(--readme-button-rotate) - 1deg));
+  }
+
+  94% {
+    transform: translateX(-50%) translateY(0)
+      rotate(calc(var(--readme-button-rotate) + 1deg));
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes readme-thoughts-type {
+  0%,
+  7% {
+    content: "";
+  }
+
+  10% {
+    content: "t";
+  }
+
+  13% {
+    content: "th";
+  }
+
+  16% {
+    content: "tho";
+  }
+
+  19% {
+    content: "thou";
+  }
+
+  22% {
+    content: "thoug";
+  }
+
+  25% {
+    content: "though";
+  }
+
+  28% {
+    content: "thought";
+  }
+
+  31% {
+    content: "thoughts";
+  }
+
+  34%,
+  58% {
+    content: "thoughts?";
+  }
+
+  61% {
+    content: "thoughts";
+  }
+
+  64% {
+    content: "thought";
+  }
+
+  67% {
+    content: "though";
+  }
+
+  70% {
+    content: "thoug";
+  }
+
+  73% {
+    content: "thou";
+  }
+
+  76% {
+    content: "tho";
+  }
+
+  79% {
+    content: "th";
+  }
+
+  82% {
+    content: "t";
+  }
+
+  85%,
+  100% {
+    content: "";
+  }
+}
+
+@keyframes readme-thoughts-cursor {
+  0%,
+  3%,
+  7% {
+    opacity: 1;
+  }
+
+  4%,
+  6% {
+    opacity: 0;
+  }
+
+  8%,
+  34% {
+    opacity: 1;
+  }
+
+  38%,
+  46%,
+  54%,
+  58% {
+    opacity: 1;
+  }
+
+  42%,
+  50% {
+    opacity: 0;
+  }
+
+  61%,
+  85% {
+    opacity: 1;
+  }
+
+  89%,
+  97%,
+  100% {
+    opacity: 1;
+  }
+
+  93% {
+    opacity: 0;
+  }
+}
+
+@keyframes readme-light-ray {
+  0%,
+  100% {
+    opacity: 1;
+    stroke-dasharray: 1 0;
+    stroke-dashoffset: 0;
+  }
+
+  45%,
+  55% {
+    opacity: 0.72;
+    stroke-dasharray: 0.001 1;
+    stroke-dashoffset: -0.5;
+  }
+}
+
+:root,
+.dark {
+  /* Base - Purple Gray */
+  --background: #24273a;
+  /* Text - White/Lavender */
+  --foreground: #cad3f5;
+
+  /* Card - Mantle */
+  --card: #1e2030;
+  --card-foreground: #cad3f5;
+
+  --popover: #1e2030;
+  --popover-foreground: #cad3f5;
+
+  /* Primary - Mauve */
+  --primary: #c6a0f6;
+  --primary-foreground: #1e2030;
+
+  /* Secondary - Pink */
+  --secondary: #f5bde6;
+  --secondary-foreground: #1e2030;
+  --subtext: #b8c0e0;
+
+  /* Muted - Surface */
+  --muted: #363a4f;
+  --muted-foreground: #a5adcb;
+
+  /* Accent - Lavender */
+  --accent: #8aadf4;
+  --accent-foreground: #1e2030;
+
+  --destructive: #ed8796;
+  --destructive-foreground: #1e2030;
+
+  --border: #363a4f;
+  --input: #363a4f;
+  --ring: #c6a0f6;
+
+  --radius: 0.75rem;
+
+  --success: #a6da95; /* Green */
+  --warning: #eed49f; /* Yellow */
+  --term-muted: #5b6078; /* Surface2 */
+
+  --diary-prose-font-size: 0.9375rem;
+  --diary-prose-line-height: 1.75;
+  --diary-inline-code-radius: 0.25rem;
+  --syntax-background: var(--card);
+  --syntax-foreground: var(--foreground);
+  --syntax-code-line-height: 1.65;
+}
+
+.light {
+  /* Base - Warm soft white */
+  --background: #eff1f5;
+  /* Text - Deep gray-purple */
+  --foreground: #4c4f69;
+
+  --card: #e6e9ef;
+  --card-foreground: #4c4f69;
+
+  --popover: #e6e9ef;
+  --popover-foreground: #4c4f69;
+
+  /* Primary - Mauve */
+  --primary: #8839ef;
+  --primary-foreground: #eff1f5;
+
+  /* Secondary - Pink */
+  --secondary: #ea76cb;
+  --secondary-foreground: #eff1f5;
+  --subtext: #5c5f77;
+
+  /* Muted - Subtext */
+  --muted: #ccd0da;
+  --muted-foreground: #5c5f77;
+
+  /* Accent - Blue */
+  --accent: #1e66f5;
+  --accent-foreground: #eff1f5;
+
+  --destructive: #d20f39;
+  --destructive-foreground: #eff1f5;
+
+  --border: #ccd0da;
+  --input: #bcc0cc;
+  --ring: #8839ef;
+
+  --radius: 0.75rem;
+
+  --success: #40a02b; /* Green */
+  --warning: #df8e1d; /* Yellow */
+  --term-muted: #9ca0b0; /* Overlay0 */
+}
+
+@layer base {
+  html {
+    background-color: var(--background);
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+@layer components {
+  .crt-overlay-static {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.055) 0,
+        rgba(255, 255, 255, 0.055) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+  }
+
+  .dark .crt-overlay-static {
+    background-image:
+      linear-gradient(rgba(138, 173, 244, 0.02), rgba(198, 160, 246, 0.02)),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(202, 211, 245, 0.08) 0,
+        rgba(202, 211, 245, 0.08) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+  }
+
+  .diary-prose {
+    font-size: var(--diary-prose-font-size);
+    line-height: var(--diary-prose-line-height);
+  }
+
+  .diary-inline-code {
+    border-radius: var(--diary-inline-code-radius);
+  }
+
+  .shiki {
+    box-sizing: border-box;
+    margin: 1.5rem 0;
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background-color: var(--syntax-background) !important;
+    color: var(--syntax-foreground);
+    font-family: var(--font-mono), monospace;
+    font-size: inherit;
+    line-height: var(--syntax-code-line-height);
+    padding: 1.25rem;
+  }
+
+  .shiki code {
+    display: block;
+    width: max-content;
+    min-width: 100%;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .shiki span {
+    color: var(--shiki-dark);
+    font-style: var(--shiki-dark-font-style);
+    font-weight: var(--shiki-dark-font-weight);
+    text-decoration: var(--shiki-dark-text-decoration);
+  }
+
+  .dark .shiki span {
+    color: var(--shiki-dark);
+    font-style: var(--shiki-dark-font-style);
+    font-weight: var(--shiki-dark-font-weight);
+    text-decoration: var(--shiki-dark-text-decoration);
+  }
+
+  .light .shiki span {
+    color: var(--shiki-light);
+    font-style: var(--shiki-light-font-style);
+    font-weight: var(--shiki-light-font-weight);
+    text-decoration: var(--shiki-light-text-decoration);
+  }
 }
