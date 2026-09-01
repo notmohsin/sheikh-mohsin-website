@@ -1,6 +1,12 @@
-# jeetsh4h.dev
+# sheikh-mohsin.vercel.app
+
+Personal portfolio forked from [Jeet Shah](https://jeetsh4h.dev)'s [jeetsh4h-dev](https://github.com/jeetsh4h/jeetsh4h-dev) project. Terminal UI, diary, CV pipeline, and site structure are based on that work; content is my own.
 
 ## Attribution
+
+**Site template & implementation:**
+
+- [Jeet Shah](https://jeetsh4h.dev) — original author of [jeetsh4h-dev](https://github.com/jeetsh4h/jeetsh4h-dev)
 
 **Cat ASCII art:**
 

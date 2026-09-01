@@ -20,7 +20,25 @@ export default function Footer({ className }: { className?: string }) {
           rel="noopener noreferrer"
           className="underline text-primary decoration-primary/40 hover:decoration-primary transition-colors"
         >
-          Source Code
+          Source
+        </Link>
+        . Forked from{" "}
+        <Link
+          href="https://github.com/jeetsh4h/jeetsh4h-dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline text-primary decoration-primary/40 hover:decoration-primary transition-colors"
+        >
+          Jeet Shah
+        </Link>
+        &apos;s{" "}
+        <Link
+          href="https://jeetsh4h.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline text-primary decoration-primary/40 hover:decoration-primary transition-colors"
+        >
+          jeetsh4h.dev
         </Link>
         .
       </p>
