@@ -15,7 +15,7 @@ export default function Footer({ className }: { className?: string }) {
       <p>
         © {currentYear} Sheikh Mohsin.{" "}
         <Link
-          href="https://github.com/jeetsh4h/jeetsh4h-dev"
+          href="https://github.com/SheikhMohsin9311/sheikh-mohsin-website"
           target="_blank"
           rel="noopener noreferrer"
           className="underline text-primary decoration-primary/40 hover:decoration-primary transition-colors"
