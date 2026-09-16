@@ -8,7 +8,7 @@ import {
 export const SOCIALS: SocialLink[] = [
   {
     label: "GitHub",
-    href: "https://github.com/SheikhMohsin9311",
+    href: "https://github.com/notmohsin",
     icon: IconBrandGithub,
   },
   {

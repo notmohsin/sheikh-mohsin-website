@@ -1,10 +1,10 @@
 # Deploy to Vercel
 
-Repo: **https://github.com/SheikhMohsin9311/sheikh-mohsin-website**
+Repo: **https://github.com/notmohsin/sheikh-mohsin-website**
 
 ## One-time setup (recommended)
 
-1. Open [Import on Vercel](https://vercel.com/new/import?s=https://github.com/SheikhMohsin9311/sheikh-mohsin-website)
+1. Open [Import on Vercel](https://vercel.com/new/import?s=https://github.com/notmohsin/sheikh-mohsin-website)
 2. Sign in with GitHub if prompted
 3. **Root directory:** leave as `.` (repo root)
 4. **Framework:** Next.js (auto-detected)

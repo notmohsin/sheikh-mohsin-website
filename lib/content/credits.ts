@@ -6,7 +6,7 @@ export const CREDITS = {
     repoLabel: "jeetsh4h-dev",
     repoHref: "https://github.com/jeetsh4h/jeetsh4h-dev",
   },
-  thisRepoHref: "https://github.com/SheikhMohsin9311/sheikh-mohsin-website",
+  thisRepoHref: "https://github.com/notmohsin/sheikh-mohsin-website",
   catAscii: [
     {
       label: "ASCII cats (xmission)",

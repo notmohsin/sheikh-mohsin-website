@@ -9,7 +9,7 @@ export const PROJECTS: ProjectItem[] = [
     links: [
       {
         label: "Repository",
-        href: "https://github.com/SheikhMohsin9311/Performance-and-Data-Representation",
+        href: "https://github.com/notmohsin/Performance-and-Data-Representation",
       },
     ],
     stack: ["C++", "perf_event_open", "RDTSCP", "Chart.js"],
@@ -23,7 +23,7 @@ export const PROJECTS: ProjectItem[] = [
     links: [
       {
         label: "Repository",
-        href: "https://github.com/SheikhMohsin9311/IPL---Data-Mining",
+        href: "https://github.com/notmohsin/IPL---Data-Mining",
       },
     ],
     stack: ["Python", "Data Analysis", "Data Visualization"],
