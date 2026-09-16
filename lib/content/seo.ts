@@ -14,7 +14,7 @@ export const SEO: SeoContent = {
   description:
     "Sheikh Mohsin is a B.Sc. Computer Science and Business Analytics student at FLAME University building systems software, data tools, and applied research across SSD storage, QA, and operations.",
   url: "https://sheikh-mohsin.vercel.app",
-  updatedAt: "2026-09-01",
+  updatedAt: "2026-09-17",
   areas: [
     "Computer science",
     "Business analytics",

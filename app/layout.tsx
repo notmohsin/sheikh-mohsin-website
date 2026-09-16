@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Crafty_Girls, JetBrains_Mono } from "next/font/google";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { TRPCReactProvider } from "@/trpc/react";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import CrtOverlay from "@/components/ui/crt-overlay";
@@ -113,13 +114,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider>
-            <div className="flex min-h-dvh flex-col">
-              <div className="flex flex-1 flex-col">{children}</div>
-              <Footer className="mt-16" />
-            </div>
-          </TooltipProvider>
-          <CrtOverlay />
+          <TRPCReactProvider>
+            <TooltipProvider>
+              <div className="flex min-h-dvh flex-col">
+                <div className="flex flex-1 flex-col">{children}</div>
+                <Footer className="mt-16" />
+              </div>
+            </TooltipProvider>
+            <CrtOverlay />
+          </TRPCReactProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

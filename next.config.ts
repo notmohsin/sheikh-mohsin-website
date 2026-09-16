@@ -1,6 +1,8 @@
 import { type NextConfig } from "next";
 import createMDX from "@next/mdx";
 
+import "./env";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   reactCompiler: true,

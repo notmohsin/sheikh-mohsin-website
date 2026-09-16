@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { IconBrandSpotify } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
-import type { SpotifyResponse } from "@/components/terminal/types";
+import { api } from "@/trpc/react";
+import type { SpotifyOverview, SpotifyResponse, SpotifyTopItem } from "./types";
 
 function getFormattedTimeAgo(dateString: string) {
   const diffMs = Date.now() - new Date(dateString).getTime();
@@ -30,76 +30,85 @@ function formatDuration(ms: number) {
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
-type SpotifyFetchState =
-  | { status: "loading" }
-  | { status: "error" }
-  | { status: "success"; data: SpotifyResponse };
-
-const SPOTIFY_FALLBACK: SpotifyResponse = {
+const EMPTY_PLAYBACK: SpotifyResponse = {
+  status: "empty",
   isPlaying: false,
   title: "Not playing",
   artist: "",
   url: "",
 };
 
-// Match the server/CDN freshness window so repeated command runs share a fetch.
-const BUCKET_TIME_MS = 15_000;
-let globalFetchPromise: Promise<SpotifyResponse> | null = null;
-let lastFetchTime = 0;
+function playbackHeading(data: SpotifyResponse) {
+  if (data.status === "unconfigured") return "Not configured";
+  if (data.status === "auth_failed") return "Auth failed";
+  if (data.status === "rate_limited") return "Rate limited";
+  if (data.isPlaying) return "Now Playing";
+  if (data.playedAt) return "Recently Played";
+  return "Paused";
+}
 
-export default function SpotifyCommand() {
-  const [state, setState] = useState<SpotifyFetchState>({ status: "loading" });
-
-  useEffect(() => {
-    let isMounted = true;
-    const now = Date.now();
-
-    if (!globalFetchPromise || now - lastFetchTime >= BUCKET_TIME_MS) {
-      lastFetchTime = now;
-      globalFetchPromise = fetch("/api/spotify").then((res) => {
-        if (!res.ok) {
-          throw new Error(`Spotify request failed: ${res.status}`);
-        }
-
-        return res.json() as Promise<SpotifyResponse>;
-      });
-    }
-
-    globalFetchPromise
-      .then((fetchedData) => {
-        if (isMounted) setState({ status: "success", data: fetchedData });
-      })
-      .catch(() => {
-        if (isMounted) setState({ status: "error" });
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  if (state.status === "loading") {
-    return <SpotifySkeleton />;
+function TopList({ title, items }: { title: string; items: SpotifyTopItem[] }) {
+  if (items.length === 0) {
+    return null;
   }
 
-  const data = state.status === "error" ? SPOTIFY_FALLBACK : state.data;
+  return (
+    <div className="flex flex-col gap-1.5">
+      <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+        {title}
+      </div>
+      <ol className="flex flex-col gap-1 text-xs">
+        {items.map((item, index) => (
+          <li
+            key={`${item.name}-${index}`}
+            className="flex min-w-0 items-baseline gap-2"
+          >
+            <span className="w-4 shrink-0 font-mono text-muted-foreground">
+              {index + 1}.
+            </span>
+            {item.url ?
+              <Link
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-w-0 truncate hover:underline"
+              >
+                <span className="font-medium">{item.name}</span>
+                {item.subtitle ?
+                  <span className="text-muted-foreground">
+                    {" "}
+                    ~ {item.subtitle}
+                  </span>
+                : null}
+              </Link>
+            : <span className="min-w-0 truncate">
+                <span className="font-medium">{item.name}</span>
+                {item.subtitle ?
+                  <span className="text-muted-foreground">
+                    {" "}
+                    ~ {item.subtitle}
+                  </span>
+                : null}
+              </span>
+            }
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
 
+function PlaybackCard({ data }: { data: SpotifyResponse }) {
   const progressMs = data.progressMs ?? 0;
   const durationMs = data.durationMs ?? 1;
   const progressPercent = Math.min((progressMs / durationMs) * 100, 100);
 
   return (
-    <div className="mt-2 flex max-w-sm flex-col gap-3 rounded-lg border border-border bg-card p-3 text-card-foreground shadow-sm">
+    <div className="flex max-w-sm flex-col gap-3 rounded-lg border border-border bg-card p-3 text-card-foreground shadow-sm">
       <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
         <div className="flex items-center gap-2 text-success">
           <IconBrandSpotify size={16} />
-          <span>
-            {data.isPlaying ?
-              "Now Playing"
-            : data.playedAt ?
-              "Recently Played"
-            : "Paused"}
-          </span>
+          <span>{playbackHeading(data)}</span>
         </div>
         {!data.isPlaying && data.playedAt && (
           <div className="text-[10px] normal-case text-muted-foreground font-mono">
@@ -125,9 +134,7 @@ export default function SpotifyCommand() {
           </div>
         }
 
-        {/* Removed py-0.5 to allow true top/bottom alignment */}
         <div className="flex flex-1 min-w-0 flex-col h-16 @container">
-          {/* Top-aligned when playing, vertically centered when paused */}
           <div
             className={
               data.isPlaying ?
@@ -159,7 +166,6 @@ export default function SpotifyCommand() {
             </div>
           </div>
 
-          {/* Locked strictly to the bottom */}
           {data.isPlaying && (
             <div className="flex flex-col gap-1.5 w-full mt-auto pb-0.5">
               <div className="h-1 w-full overflow-hidden rounded-full bg-muted/80">
@@ -176,6 +182,51 @@ export default function SpotifyCommand() {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+export default function SpotifyCommand() {
+  const { data, isLoading, isError } = api.spotify.overview.useQuery();
+
+  if (isLoading) {
+    return <SpotifySkeleton />;
+  }
+
+  const overview: SpotifyOverview =
+    isError || !data ?
+      {
+        playback: EMPTY_PLAYBACK,
+        topTracks: [],
+        topArtists: [],
+        topStatus: "unavailable",
+      }
+    : data;
+
+  return (
+    <div className="mt-2 flex flex-col gap-4">
+      <PlaybackCard data={overview.playback} />
+      {overview.topStatus === "ok" ?
+        <div className="flex max-w-sm flex-col gap-3 rounded-lg border border-border bg-card p-3 text-card-foreground shadow-sm">
+          <TopList
+            title="Top tracks"
+            items={overview.topTracks}
+          />
+          <TopList
+            title="Top artists"
+            items={overview.topArtists}
+          />
+        </div>
+      : (
+        overview.playback.status === "ok" ||
+        overview.playback.status === "empty"
+      ) ?
+        <p className="max-w-sm text-[11px] text-muted-foreground">
+          Top lists need the <code>user-top-read</code> scope. Run{" "}
+          <code>pnpm spotify:auth</code> and replace{" "}
+          <code>SPOTIFY_REFRESH_TOKEN</code>.
+        </p>
+      : null}
     </div>
   );
 }

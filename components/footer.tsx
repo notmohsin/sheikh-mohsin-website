@@ -40,6 +40,13 @@ export default function Footer({ className }: { className?: string }) {
         >
           jeetsh4h.dev
         </Link>
+        .{" "}
+        <Link
+          href="/credits"
+          className="underline text-primary decoration-primary/40 hover:decoration-primary transition-colors"
+        >
+          Credits
+        </Link>
         .
       </p>
     </footer>

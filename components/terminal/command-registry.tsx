@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
+import Credits from "@/components/credits";
 import About from "./about";
 import Awards from "./awards";
 import CatArt from "./cat";
@@ -390,6 +391,19 @@ const TERMINAL_COMMANDS: TerminalCommand[] = [
       aliases: ["cls"],
     },
     () => ({ kind: "clear" }),
+  ),
+  createCommand(
+    {
+      name: "credits",
+      description: "Attribution for the template and assets",
+      category: "system",
+      aliases: ["colophon", "thanks"],
+    },
+    () => ({
+      kind: "render",
+      node: <Credits compact />,
+      status: "success",
+    }),
   ),
   createCommand(
     {

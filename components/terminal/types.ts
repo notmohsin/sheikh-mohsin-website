@@ -39,7 +39,15 @@ export type HistoryItem =
  * SPOTIFY types
  */
 
+export type SpotifyPlaybackStatus =
+  | "ok"
+  | "unconfigured"
+  | "auth_failed"
+  | "rate_limited"
+  | "empty";
+
 export type SpotifyResponse = {
+  status: SpotifyPlaybackStatus;
   isPlaying: boolean;
   title: string;
   artist: string;
@@ -48,6 +56,20 @@ export type SpotifyResponse = {
   playedAt?: string;
   progressMs?: number;
   durationMs?: number;
+};
+
+export type SpotifyTopItem = {
+  name: string;
+  subtitle?: string;
+  url: string;
+  imageUrl?: string;
+};
+
+export type SpotifyOverview = {
+  playback: SpotifyResponse;
+  topTracks: SpotifyTopItem[];
+  topArtists: SpotifyTopItem[];
+  topStatus: "ok" | "unavailable";
 };
 
 export interface SpotifyArtist {

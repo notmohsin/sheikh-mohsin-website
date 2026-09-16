@@ -27,13 +27,13 @@ Then update [`lib/content/seo.ts`](lib/content/seo.ts) `url` if the canonical UR
 
 After deploy, add in Vercel → **Settings** → **Environment Variables**:
 
-| Name | Value |
-|------|--------|
-| `SPOTIFY_CLIENT_ID` | from Spotify Dashboard |
+| Name                    | Value                  |
+| ----------------------- | ---------------------- |
+| `SPOTIFY_CLIENT_ID`     | from Spotify Dashboard |
 | `SPOTIFY_CLIENT_SECRET` | from Spotify Dashboard |
-| `SPOTIFY_REFRESH_TOKEN` | from OAuth flow |
+| `SPOTIFY_REFRESH_TOKEN` | from OAuth flow        |
 
-See [`SPOTIFY.md`](SPOTIFY.md) for how to get the refresh token. Redeploy after saving.
+See [`SPOTIFY.md`](SPOTIFY.md) for the full click-by-click flow, including `pnpm spotify:auth`. Redeploy after saving.
 
 ## CV on Vercel
 

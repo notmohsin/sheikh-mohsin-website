@@ -1,29 +1,32 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import useSWR, { useSWRConfig } from "swr";
 import { IconBrandSpotify } from "@tabler/icons-react";
 import Link from "next/link";
-import { fetcher } from "@/lib/utils";
+import { api } from "@/trpc/react";
 import type { SpotifyResponse } from "./types";
 
 const SPOTIFY_DEDUPING_INTERVAL_MS = 15_000;
+
+const FALLBACK: SpotifyResponse = {
+  status: "empty",
+  isPlaying: false,
+  title: "Not playing",
+  artist: "",
+  url: "",
+};
 
 export function SpotifyPromptSegment({
   refreshTrigger,
 }: {
   refreshTrigger: number;
 }) {
-  const { mutate } = useSWRConfig();
+  const utils = api.useUtils();
   const lastMutateRef = useRef<number>(0);
-
-  const { data, error, isLoading, isValidating } = useSWR<SpotifyResponse>(
-    `/api/spotify`,
-    fetcher,
+  const { data, error, isLoading, isFetching } = api.spotify.now.useQuery(
+    undefined,
     {
-      dedupingInterval: SPOTIFY_DEDUPING_INTERVAL_MS,
-      errorRetryCount: 0,
-      revalidateOnFocus: false,
+      refetchInterval: SPOTIFY_DEDUPING_INTERVAL_MS,
     },
   );
 
@@ -31,12 +34,11 @@ export function SpotifyPromptSegment({
     const now = Date.now();
     if (now - lastMutateRef.current >= SPOTIFY_DEDUPING_INTERVAL_MS) {
       lastMutateRef.current = now;
-      mutate(`/api/spotify`);
+      void utils.spotify.now.invalidate();
     }
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, [refreshTrigger]);
+  }, [refreshTrigger, utils.spotify.now]);
 
-  if ((isLoading || isValidating) && !data && !error) {
+  if ((isLoading || isFetching) && !data && !error) {
     return (
       <div className="flex items-center text-xs font-bold select-none">
         <span className="text-muted-foreground/70">[</span>
@@ -54,13 +56,7 @@ export function SpotifyPromptSegment({
     );
   }
 
-  const fallbackData: SpotifyResponse = {
-    isPlaying: false,
-    title: "Not playing",
-    artist: "",
-    url: "",
-  };
-  const spotifyData = data ?? fallbackData;
+  const spotifyData = data ?? FALLBACK;
   const bracketColor = spotifyData.isPlaying ? "text-success" : "text-warning";
 
   return (

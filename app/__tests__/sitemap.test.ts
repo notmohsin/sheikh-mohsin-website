@@ -52,6 +52,7 @@ describe("sitemap", () => {
     expect(urls).toEqual(
       expect.arrayContaining([
         SEO.url,
+        `${SEO.url}/credits`,
         `${SEO.url}/cv.pdf`,
         `${SEO.url}/diary`,
         `${SEO.url}/diary/published-entry`,
