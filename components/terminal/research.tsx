@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { buildResearchSection } from "@/lib/site-content";
+import { externalLinkProps } from "@/lib/utils";
 
 export default function Research({ kind }: { kind?: string }) {
   const research = buildResearchSection();
@@ -28,8 +29,7 @@ export default function Research({ kind }: { kind?: string }) {
             {primaryLink ?
               <Link
                 href={primaryLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...externalLinkProps(primaryLink.href)}
                 className="font-bold block mb-1 text-primary underline decoration-primary/50 hover:decoration-primary transition-all"
               >
                 {paper.title}
@@ -48,8 +48,7 @@ export default function Research({ kind }: { kind?: string }) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...externalLinkProps(link.href)}
                     className="hover:decoration-accent transition-all"
                   >
                     {link.label}

@@ -1,0 +1,15 @@
+import { defineDiaryEntry } from "@/lib/diary/metadata";
+
+export const metadata = defineDiaryEntry({
+  title: "The entries that evict each other",
+  description:
+    "A short note on SSD cache eviction, spatial prefetching, and a bug where new entries threw each other out.",
+  publishedAt: "2026-09-29",
+  tags: ["systems", "ssd", "research"],
+});
+
+This summer I have been at IIT Ropar with Prof. Venkata Kalyan Tavva, learning SSD storage from the ground up. The work sits inside the SimpleSSD-Standalone 2.0 simulator. We compared eviction that prefers what you touched recently with eviction that prefers what you touch often. That comparison was the floor, not the finding.
+
+The part I stayed with is spatial prefetching: predicting nearby address-translation entries from how data is grouped in flash. While building it I found a cache-order bug. Newly loaded entries were evicting one another before anything had a chance to use them. I fixed that. Parts of the simulator still go over my head. Some of it does not. I stay with what I can hold, and keep reading until the rest is a little less opaque.
+
+The other question is what happens when ransomware writes arrive in a burst and the drive, in private, starts its own cleanup. I do not have a defense to show. I have the collision, and the suspicion that a targeted defense could be a research contribution if I can keep the question in view.

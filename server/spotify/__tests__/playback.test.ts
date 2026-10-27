@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { emptyPlayback, spotifyTrackToResponse } from "../playback";
+import { formatSpotifyPrompt } from "@/components/terminal/spotify-prompt-segment";
 
 describe("spotify playback mapping", () => {
   it("labels silent failures instead of always saying not playing", () => {
@@ -35,5 +36,28 @@ describe("spotify playback mapping", () => {
       playedAt: undefined,
       durationMs: 180000,
     });
+  });
+
+  it("prefixes a finished track in the prompt", () => {
+    expect(
+      formatSpotifyPrompt({
+        status: "ok",
+        isPlaying: false,
+        title: "Track",
+        artist: "A",
+        url: "https://open.spotify.com/track/1",
+        playedAt: "2026-09-29T00:00:00.000Z",
+      }),
+    ).toBe("last played Track ~ A");
+
+    expect(
+      formatSpotifyPrompt({
+        status: "ok",
+        isPlaying: true,
+        title: "Track",
+        artist: "A",
+        url: "https://open.spotify.com/track/1",
+      }),
+    ).toBe("Track ~ A");
   });
 });

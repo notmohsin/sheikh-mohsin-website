@@ -53,6 +53,10 @@ describe("sitemap", () => {
       expect.arrayContaining([
         SEO.url,
         `${SEO.url}/credits`,
+        `${SEO.url}/now`,
+        `${SEO.url}/uses`,
+        `${SEO.url}/music`,
+        `${SEO.url}/guestbook`,
         `${SEO.url}/cv.pdf`,
         `${SEO.url}/diary`,
         `${SEO.url}/diary/published-entry`,

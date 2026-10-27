@@ -56,4 +56,4 @@ npx vercel --prod
 
 ## Future pushes
 
-Connect the GitHub repo in Vercel → every `git push` to `master` can auto-deploy (enable in project Settings → Git).
+[`vercel.json`](vercel.json) leaves Git deploys enabled. A push to `master` ships production when this GitHub repo is still connected in the Vercel project (Settings → Git). Removing the repo there is a dashboard change; this file cannot reconnect it.

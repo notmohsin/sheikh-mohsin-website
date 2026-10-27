@@ -5,6 +5,7 @@ import type {
   SpotifyPlaybackStatus,
   SpotifyRecentlyPlayedResponse,
   SpotifyResponse,
+  SpotifyTimeRange,
   SpotifyTokenResponse,
   SpotifyTopItem,
   SpotifyTrack,
@@ -299,10 +300,11 @@ type SpotifyTopArtistsResponse = {
 async function fetchTopList(
   accessToken: string,
   endpoint: string,
+  timeRange: SpotifyTimeRange,
 ): Promise<Response> {
   const url = new URL(endpoint);
   url.searchParams.set("limit", "5");
-  url.searchParams.set("time_range", "medium_term");
+  url.searchParams.set("time_range", timeRange);
 
   return fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}` },
@@ -319,7 +321,9 @@ function tracksToTopItems(tracks: SpotifyTrack[]): SpotifyTopItem[] {
   }));
 }
 
-export async function getSpotifyOverview(): Promise<SpotifyOverview> {
+export async function getSpotifyOverview(
+  timeRange: SpotifyTimeRange = "medium_term",
+): Promise<SpotifyOverview> {
   const { playback } = await getSpotifyPlayback();
   const emptyOverview: SpotifyOverview = {
     playback,
@@ -344,8 +348,8 @@ export async function getSpotifyOverview(): Promise<SpotifyOverview> {
 
   try {
     const [tracksRes, artistsRes] = await Promise.all([
-      fetchTopList(tokenResult.accessToken, TOP_TRACKS_ENDPOINT),
-      fetchTopList(tokenResult.accessToken, TOP_ARTISTS_ENDPOINT),
+      fetchTopList(tokenResult.accessToken, TOP_TRACKS_ENDPOINT, timeRange),
+      fetchTopList(tokenResult.accessToken, TOP_ARTISTS_ENDPOINT, timeRange),
     ]);
 
     if (!tracksRes.ok || !artistsRes.ok) {

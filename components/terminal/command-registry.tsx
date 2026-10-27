@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
+import Now from "@/components/now";
+import Uses from "@/components/uses";
 import Credits from "@/components/credits";
 import About from "./about";
 import Awards from "./awards";
@@ -15,6 +17,7 @@ import Research from "./research";
 import Skills from "./skills";
 import Socials from "./socials";
 import SpotifyCommand from "./spotify";
+import Ganderbal from "./ganderbal";
 import { Theme, isThemeArg } from "./theme";
 import type { TerminalCommand, TerminalCommandCategory } from "./command-types";
 import type { EducationView } from "./education";
@@ -313,6 +316,23 @@ const TERMINAL_COMMANDS: TerminalCommand[] = [
   ),
   createCommand(
     {
+      name: "now",
+      description: "What I am doing this month",
+      category: "navigation",
+      aliases: ["status"],
+    },
+    () => ({ kind: "render", node: <Now compact />, status: "success" }),
+  ),
+  createCommand(
+    {
+      name: "uses",
+      description: "Editor, system, languages, and research tools",
+      category: "navigation",
+    },
+    () => ({ kind: "render", node: <Uses compact />, status: "success" }),
+  ),
+  createCommand(
+    {
       name: "pdf",
       description: "Open or download my CV",
       category: "navigation",
@@ -407,12 +427,21 @@ const TERMINAL_COMMANDS: TerminalCommand[] = [
   ),
   createCommand(
     {
-      name: "spotify",
-      description: "View my Spotify activity",
+      name: "music",
+      description: "Now playing, last played, and top lists",
       category: "fun",
-      aliases: ["music", "nowplaying"],
+      aliases: ["spotify", "nowplaying"],
     },
     () => ({ kind: "render", node: <SpotifyCommand />, status: "success" }),
+  ),
+  createCommand(
+    {
+      name: "ganderbal",
+      description: "A small valley, and one line from home",
+      category: "fun",
+      aliases: ["kashmir"],
+    },
+    () => ({ kind: "render", node: <Ganderbal />, status: "success" }),
   ),
   createCommand(
     {

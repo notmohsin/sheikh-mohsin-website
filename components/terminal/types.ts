@@ -65,6 +65,20 @@ export type SpotifyTopItem = {
   imageUrl?: string;
 };
 
+export type SpotifyTimeRange = "short_term" | "medium_term" | "long_term";
+
+export const SPOTIFY_TIME_RANGES = [
+  "short_term",
+  "medium_term",
+  "long_term",
+] as const satisfies readonly SpotifyTimeRange[];
+
+export const SPOTIFY_TIME_RANGE_LABELS: Record<SpotifyTimeRange, string> = {
+  short_term: "4 weeks",
+  medium_term: "6 months",
+  long_term: "all time",
+};
+
 export type SpotifyOverview = {
   playback: SpotifyResponse;
   topTracks: SpotifyTopItem[];

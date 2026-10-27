@@ -36,6 +36,9 @@ export const ABOUT = {
 | Leadership         | [`lib/content/leadership.ts`](lib/content/leadership.ts) |
 | Coursework         | [`lib/content/coursework.ts`](lib/content/coursework.ts) |
 | Credits            | [`lib/content/credits.ts`](lib/content/credits.ts)       |
+| Now                | [`lib/content/now.ts`](lib/content/now.ts)               |
+| Uses               | [`lib/content/uses.ts`](lib/content/uses.ts)             |
+| Listening snapshot | [`lib/content/listening.ts`](lib/content/listening.ts)   |
 
 Each file exports a typed array or object. Types live in [`lib/content/types.ts`](lib/content/types.ts) if you need the shape.
 

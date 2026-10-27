@@ -75,6 +75,24 @@ export default function Profile() {
 
         <About />
 
+        <nav className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-secondary">
+          {[
+            ["/now", "now"],
+            ["/uses", "uses"],
+            ["/music", "music"],
+            ["/guestbook", "guestbook"],
+            ["/diary", "diary"],
+          ].map(([href, label]) => (
+            <Link
+              key={href}
+              href={href}
+              className="underline decoration-primary/30 hover:text-primary hover:decoration-primary"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+
         <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-5 text-sm">
           <Socials />
           <ReadmeCta />

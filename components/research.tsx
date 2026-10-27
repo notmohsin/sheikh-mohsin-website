@@ -3,6 +3,7 @@ import { SectionHeading } from "./ui/section";
 import Link from "next/link";
 import { buildResearchSection } from "@/lib/site-content";
 import type { ResearchEntryModel } from "@/lib/site-content";
+import { externalLinkProps } from "@/lib/utils";
 
 function ResearchEntry({ paper }: { paper: ResearchEntryModel }) {
   const primaryLink = paper.links?.[0];
@@ -15,8 +16,7 @@ function ResearchEntry({ paper }: { paper: ResearchEntryModel }) {
           {primaryLink ?
             <Link
               href={primaryLink.href}
-              target="_blank"
-              rel="noreferrer"
+              {...externalLinkProps(primaryLink.href)}
             >
               <h3 className="-ml-2 font-bold leading-tight text-primary underline decoration-primary/20 transition-all hover:decoration-primary sm:-ml-3">
                 {paper.title}
@@ -43,8 +43,7 @@ function ResearchEntry({ paper }: { paper: ResearchEntryModel }) {
               <Link
                 key={link.href}
                 href={link.href}
-                target="_blank"
-                rel="noreferrer"
+                {...externalLinkProps(link.href)}
                 className="hover:decoration-accent transition-all"
               >
                 {link.label}

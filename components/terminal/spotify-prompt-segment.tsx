@@ -6,6 +6,17 @@ import Link from "next/link";
 import { api } from "@/trpc/react";
 import type { SpotifyResponse } from "./types";
 
+export function formatSpotifyPrompt(data: SpotifyResponse) {
+  const track =
+    data.artist ? `${data.title} ~ ${data.artist}` : data.title;
+
+  if (!data.isPlaying && data.playedAt && data.status === "ok") {
+    return `last played ${track}`;
+  }
+
+  return track;
+}
+
 const SPOTIFY_DEDUPING_INTERVAL_MS = 15_000;
 
 const FALLBACK: SpotifyResponse = {
@@ -76,12 +87,11 @@ export function SpotifyPromptSegment({
             className="truncate max-w-75 hover:underline cursor-pointer"
           >
             <span>
-              {spotifyData.title} ~ {spotifyData.artist}
+              {formatSpotifyPrompt(spotifyData)}
             </span>
           </Link>
-        : <span className="truncate max-w-75">
-            {spotifyData.title}
-            {spotifyData.artist ? ` ~ ${spotifyData.artist}` : ""}
+        :           <span className="truncate max-w-75">
+            {formatSpotifyPrompt(spotifyData)}
           </span>
         }
       </div>

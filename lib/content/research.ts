@@ -10,7 +10,12 @@ export const RESEARCH: ResearchItem[] = [
     summary:
       "A co-authored piece for Deccan Herald on education policy and technology. Instruction is supposed to lead somewhere; I wanted to sit with what happens when it does not, and with the people expected to follow it anyway. I did not start from a finished answer. The questions would not leave me alone.",
     featured: true,
-    links: [],
+    links: [
+      {
+        label: "Deccan Herald",
+        href: "https://www.deccanherald.com/india/lost-in-instruction-3568384",
+      },
+    ],
   },
   {
     title: "Taraksi Silver Filigree — Craft to Commerce",
@@ -21,7 +26,12 @@ export const RESEARCH: ResearchItem[] = [
     summary:
       "Field research on how Taraksi silver filigree moved from a household craft into something that has to survive as commerce. We read, surveyed, and sat with artisans. I am still not sure the story is only one of progress; it is also what remains, and what gets priced, when a practice has to live outside the house it grew up in.",
     featured: true,
-    links: [],
+    links: [
+      {
+        label: "Note",
+        href: "/diary/what-remains-when-a-craft-has-to-leave-the-house",
+      },
+    ],
   },
   {
     title: "SSD Spatial Prefetching & Ransomware Write Patterns",
@@ -32,6 +42,11 @@ export const RESEARCH: ResearchItem[] = [
     summary:
       "Summer research at IIT Ropar on SSD cache eviction, spatial prefetching for address-translation entries, and how ransomware write bursts collide with the cleanup the drive does in private. Parts of the simulator still go over my head; some of it does not. I stay with what I can hold, and keep reading until the rest becomes a little less opaque.",
     featured: true,
-    links: [],
+    links: [
+      {
+        label: "Note",
+        href: "/diary/the-entries-that-evict-each-other",
+      },
+    ],
   },
 ];

@@ -73,6 +73,45 @@ export default async function NotFound() {
             <span>./cv.pdf</span>
           </Button>
         </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Button
+            nativeButton={false}
+            render={<Link href="/now" />}
+            variant="tertiary"
+            size="lg"
+            className="flex font-mono"
+          >
+            <span>./now</span>
+          </Button>
+          <Button
+            nativeButton={false}
+            render={<Link href="/uses" />}
+            variant="tertiary"
+            size="lg"
+            className="flex font-mono"
+          >
+            <span>./uses</span>
+          </Button>
+          <Button
+            nativeButton={false}
+            render={<Link href="/music" />}
+            variant="tertiary"
+            size="lg"
+            className="flex font-mono"
+          >
+            <span>./music</span>
+          </Button>
+          <Button
+            nativeButton={false}
+            render={<Link href="/guestbook" />}
+            variant="tertiary"
+            size="lg"
+            className="flex font-mono"
+          >
+            <span>./guestbook</span>
+          </Button>
+        </div>
       </main>
     </div>
   );

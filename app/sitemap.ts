@@ -39,6 +39,22 @@ export function buildSitemapEntries({
       lastModified: dateStringToUtcDate(SEO.updatedAt),
     },
     {
+      url: `${SEO.url}/now`,
+      lastModified: dateStringToUtcDate(SEO.updatedAt),
+    },
+    {
+      url: `${SEO.url}/uses`,
+      lastModified: dateStringToUtcDate(SEO.updatedAt),
+    },
+    {
+      url: `${SEO.url}/music`,
+      lastModified: dateStringToUtcDate(SEO.updatedAt),
+    },
+    {
+      url: `${SEO.url}/guestbook`,
+      lastModified: dateStringToUtcDate(SEO.updatedAt),
+    },
+    {
       url: `${SEO.url}/cv.pdf`,
       lastModified: cvLastModified,
     },

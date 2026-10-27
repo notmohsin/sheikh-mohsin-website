@@ -7,14 +7,14 @@ export function applySiteTitleTemplate(title: string) {
 }
 
 export const DIARY_DESCRIPTION =
-  "Writing by Sheikh Mohsin on systems, data, research, and technical craft.";
+  "Writing by Sheikh Mohsin on home, research, and systems.";
 
 export const SEO: SeoContent = {
   title: "Sheikh Mohsin | Computer Science & Business Analytics",
   description:
-    "Sheikh Mohsin is a B.Sc. Computer Science and Business Analytics student at FLAME University building systems software, data tools, and applied research across SSD storage, QA, and operations.",
+    "Sheikh Mohsin writes from Pune about how a drive decides what to keep, how a craft survives once it has to be sold, and what a classroom does when its language is not the language of home.",
   url: "https://sheikh-mohsin.vercel.app",
-  updatedAt: "2026-09-17",
+  updatedAt: "2026-09-29",
   areas: [
     "Computer science",
     "Business analytics",

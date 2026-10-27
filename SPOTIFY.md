@@ -86,7 +86,7 @@ Read the JSON `status` field. It is no longer a silent “Not playing” for eve
 | `auth_failed`  | Refresh token or secret is wrong, or scopes missing | Repeat **C**. Confirm you copied the **refresh** token, not the access token. |
 | `rate_limited` | Spotify asked us to slow down                       | Wait a minute and retry.                                                      |
 
-Then open `http://127.0.0.1:3000/terminal`. The prompt bar should show a track. Type `spotify` for the card plus top lists.
+Then open `http://127.0.0.1:3000/terminal`. The prompt bar should show a track. A live track is the title and artist. A finished track is prefixed with `last played`. Type `music` (or `spotify`) for the card, a time-range toggle (4 weeks / 6 months / all time), and top lists.
 
 Restart `pnpm dev` after every `.env.local` change. Next.js does not always pick up new env vars on a hot reload.
 
@@ -110,6 +110,10 @@ Use the same `status` table. If production is `unconfigured`, the vars are on th
 ## Top tracks / artists
 
 That data needs the `user-top-read` scope. `pnpm spotify:auth` requests it. If you generated a token **before** that scope existed, run **C** again and replace `SPOTIFY_REFRESH_TOKEN` locally and on Vercel.
+
+The `music` command and `/music` default to the last 6 months (`medium_term`). The toggle also requests 4 weeks (`short_term`) and all time (`long_term`).
+
+A curated static list can live in [`lib/content/listening.ts`](lib/content/listening.ts). It stays hidden while the array is empty.
 
 ---
 

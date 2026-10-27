@@ -1,17 +1,18 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import FooterPlant from "@/components/footer-plant";
 
 export default function Footer({ className }: { className?: string }) {
   const currentYear = new Date().getFullYear();
 
-  // TODO: add rose/tulsi easter egg that you can water on top of the footer separator.
   return (
     <footer
       className={cn(
-        "pt-10 pb-8 border-t border-muted/30 text-center text-xs text-muted-foreground font-mono",
+        "relative pt-10 pb-8 border-t border-muted/30 text-center text-xs text-muted-foreground font-mono",
         className,
       )}
     >
+      <FooterPlant />
       <p>
         © {currentYear} Sheikh Mohsin.{" "}
         <Link

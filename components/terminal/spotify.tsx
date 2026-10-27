@@ -3,8 +3,19 @@
 import { IconBrandSpotify } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { api } from "@/trpc/react";
-import type { SpotifyOverview, SpotifyResponse, SpotifyTopItem } from "./types";
+import ListeningSnapshot from "@/components/listening-snapshot";
+import type {
+  SpotifyOverview,
+  SpotifyResponse,
+  SpotifyTimeRange,
+  SpotifyTopItem,
+} from "./types";
+import {
+  SPOTIFY_TIME_RANGE_LABELS,
+  SPOTIFY_TIME_RANGES,
+} from "./types";
 
 function getFormattedTimeAgo(dateString: string) {
   const diffMs = Date.now() - new Date(dateString).getTime();
@@ -187,7 +198,10 @@ function PlaybackCard({ data }: { data: SpotifyResponse }) {
 }
 
 export default function SpotifyCommand() {
-  const { data, isLoading, isError } = api.spotify.overview.useQuery();
+  const [timeRange, setTimeRange] = useState<SpotifyTimeRange>("medium_term");
+  const { data, isLoading, isError } = api.spotify.overview.useQuery({
+    timeRange,
+  });
 
   if (isLoading) {
     return <SpotifySkeleton />;
@@ -206,6 +220,22 @@ export default function SpotifyCommand() {
   return (
     <div className="mt-2 flex flex-col gap-4">
       <PlaybackCard data={overview.playback} />
+      <div className="flex flex-wrap gap-1">
+        {SPOTIFY_TIME_RANGES.map((range) => (
+          <button
+            key={range}
+            type="button"
+            onClick={() => setTimeRange(range)}
+            className={
+              timeRange === range ?
+                "rounded-md bg-primary px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground"
+              : "rounded-md px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground hover:text-foreground"
+            }
+          >
+            {SPOTIFY_TIME_RANGE_LABELS[range]}
+          </button>
+        ))}
+      </div>
       {overview.topStatus === "ok" ?
         <div className="flex max-w-sm flex-col gap-3 rounded-lg border border-border bg-card p-3 text-card-foreground shadow-sm">
           <TopList
@@ -227,6 +257,7 @@ export default function SpotifyCommand() {
           <code>SPOTIFY_REFRESH_TOKEN</code>.
         </p>
       : null}
+      <ListeningSnapshot compact />
     </div>
   );
 }
