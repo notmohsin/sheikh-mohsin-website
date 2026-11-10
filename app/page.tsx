@@ -4,6 +4,8 @@ import Experience from "@/components/experience";
 import Research from "@/components/research";
 import Education from "@/components/education";
 import Projects from "@/components/projects";
+import Skills from "@/components/skills";
+import Leadership from "@/components/leadership";
 import { ABOUT } from "@/lib/content/about";
 import { EDUCATION } from "@/lib/content/education";
 import { SEO } from "@/lib/content/seo";
@@ -108,37 +110,57 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: structuredData }}
       />
-      <div className="mx-auto max-w-6xl space-y-14 px-5 pb-16 pt-5 sm:px-7 md:space-y-20 md:py-12">
+      <div className="mx-auto max-w-6xl space-y-16 px-4 pb-16 pt-6 sm:px-7 md:space-y-24 md:py-12">
         <section>
           <Profile />
         </section>
 
         <section
-          className="space-y-8"
+          id="experience"
+          className="scroll-mt-8 space-y-8"
           aria-labelledby="experience-heading"
         >
           <Experience />
         </section>
 
         <section
-          className="space-y-8"
+          id="projects"
+          className="scroll-mt-8 space-y-8"
+          aria-labelledby="projects-heading"
+        >
+          <Projects />
+        </section>
+
+        <section
+          id="research"
+          className="scroll-mt-8 space-y-8"
           aria-labelledby="research-heading"
         >
           <Research />
         </section>
 
         <section
-          className="space-y-8"
-          aria-labelledby="featured-work-heading"
+          id="skills"
+          className="scroll-mt-8 space-y-8"
+          aria-labelledby="skills-heading"
         >
-          <Projects />
+          <Skills />
         </section>
 
         <section
-          className="space-y-8"
+          id="education"
+          className="scroll-mt-8 space-y-8"
           aria-labelledby="education-heading"
         >
           <Education />
+        </section>
+
+        <section
+          id="leadership"
+          className="scroll-mt-8 space-y-8"
+          aria-labelledby="leadership-heading"
+        >
+          <Leadership />
         </section>
       </div>
     </main>
