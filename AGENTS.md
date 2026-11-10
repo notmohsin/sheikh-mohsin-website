@@ -1,4 +1,4 @@
-# sheikh-mohsin.vercel.app
+# sheikhmohsin.vercel.app
 
 ## Project
 
@@ -23,6 +23,6 @@
 
 ## SEO-sensitive edits
 
-- The canonical production origin is `https://sheikh-mohsin.vercel.app` (`lib/content/seo.ts`). When editing an indexable route, preserve accurate page-specific metadata, its self-canonical, crawlable HTML content, and structured data that matches visible content.
+- The canonical production origin is `https://sheikhmohsin.vercel.app` (`lib/content/seo.ts`). When editing an indexable route, preserve accurate page-specific metadata, its self-canonical, crawlable HTML content, and structured data that matches visible content.
 - Indexing policy: `/`, `/diary`, published diary entries, `/cv.pdf`, `/now`, `/uses`, `/music`, `/guestbook`, and `/credits` are indexable; `/pdf`, `/resumes`, `/resumes/*.pdf`, `/terminal`, drafts, and error or utility pages are not. Only canonical indexable URLs belong in `app/sitemap.ts`.
 - When a route or published diary entry changes, keep its metadata, canonical URL, robots policy, sitemap entry, RSS entry, dates, structured data, and relevant tests consistent. Do not alter diary prose for SEO.

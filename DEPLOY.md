@@ -16,12 +16,19 @@ Vercel reads [`vercel.json`](vercel.json) — region `bom1` (Mumbai).
 
 ## Custom domain
 
-If you already use **sheikh-mohsin.vercel.app** on another project:
+Production is served at **https://sheikhmohsin.vercel.app** (no hyphen), the
+domain attached to the `sheikh-mohsin-website` Vercel project.
 
-- Vercel → old project → Settings → Domains → remove the domain, **or**
-- This project → Settings → Domains → add `sheikh-mohsin.vercel.app`
+`sheikh-mohsin.vercel.app` (with a hyphen) belongs to an older, unrelated
+project (`my-digital-showcase-237`) and does **not** serve this site. Don't
+link to it.
 
-Then update [`lib/content/seo.ts`](lib/content/seo.ts) `url` if the canonical URL changes.
+If the domain ever changes, update every reference together:
+[`lib/content/seo.ts`](lib/content/seo.ts) `url`, the canonical header in
+[`next.config.ts`](next.config.ts), the header in
+[`cv/resumes/resume-layout.tex`](cv/resumes/resume-layout.tex), and the links in
+[`cv/cv.tex`](cv/cv.tex); then run `pnpm cv:build && pnpm resumes:build` and
+commit the PDFs. `git grep vercel.app` finds them all.
 
 ## Spotify on production
 

@@ -92,7 +92,7 @@ Restart `pnpm dev` after every `.env.local` change. Next.js does not always pick
 
 ### E. Production (Vercel)
 
-1. Vercel → the project that serves **sheikh-mohsin.vercel.app** (not an old unused project).
+1. Vercel → the project that serves **sheikhmohsin.vercel.app** (not an old unused project).
 2. **Settings → Environment Variables**.
 3. Add all three names, same values as `.env.local`, for **Production**. Add **Preview** too if you want preview deploys to work.
 4. **Deployments → … on the latest deployment → Redeploy**. Saving env vars does nothing until a new deploy.
@@ -100,7 +100,7 @@ Restart `pnpm dev` after every `.env.local` change. Next.js does not always pick
 After deploy:
 
 ```bash
-curl -s https://sheikh-mohsin.vercel.app/api/spotify
+curl -s https://sheikhmohsin.vercel.app/api/spotify
 ```
 
 Use the same `status` table. If production is `unconfigured`, the vars are on the wrong Vercel project or were not available at build/runtime.

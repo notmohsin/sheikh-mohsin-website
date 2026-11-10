@@ -1,8 +1,8 @@
-# sheikh-mohsin.vercel.app
+# sheikhmohsin.vercel.app
 
 Personal portfolio forked from [Jeet Shah](https://jeetsh4h.dev)'s [jeetsh4h-dev](https://github.com/jeetsh4h/jeetsh4h-dev) project. Terminal UI, diary, CV pipeline, and site structure are based on that work; content is my own.
 
-The template credit is also on the site: footer, [`/credits`](https://sheikh-mohsin.vercel.app/credits), and the terminal `credits` command.
+The template credit is also on the site: footer, [`/credits`](https://sheikhmohsin.vercel.app/credits), and the terminal `credits` command.
 
 ## Attribution
 

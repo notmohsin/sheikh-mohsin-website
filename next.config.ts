@@ -32,7 +32,7 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "index, follow" },
           {
             key: "Link",
-            value: '<https://sheikh-mohsin.vercel.app/cv.pdf>; rel="canonical"',
+            value: '<https://sheikhmohsin.vercel.app/cv.pdf>; rel="canonical"',
           },
         ],
       },
