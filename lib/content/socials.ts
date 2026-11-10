@@ -2,8 +2,8 @@ import type { SocialLink } from "./types";
 import {
   IconBrandGithub,
   IconBrandLinkedin,
-  IconBrandSubstack,
   IconMail,
+  IconNews,
 } from "@tabler/icons-react";
 
 export const SOCIALS: SocialLink[] = [
@@ -20,7 +20,8 @@ export const SOCIALS: SocialLink[] = [
   {
     label: "Substack",
     href: "https://feelingsandnumbers.substack.com",
-    icon: IconBrandSubstack,
+    // Tabler has no Substack brand icon; a newsletter glyph stands in.
+    icon: IconNews,
   },
   {
     label: "Email",
