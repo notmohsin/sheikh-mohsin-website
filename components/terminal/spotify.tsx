@@ -12,10 +12,7 @@ import type {
   SpotifyTimeRange,
   SpotifyTopItem,
 } from "./types";
-import {
-  SPOTIFY_TIME_RANGE_LABELS,
-  SPOTIFY_TIME_RANGES,
-} from "./types";
+import { SPOTIFY_TIME_RANGE_LABELS, SPOTIFY_TIME_RANGES } from "./types";
 
 function getFormattedTimeAgo(dateString: string) {
   const diffMs = Date.now() - new Date(dateString).getTime();

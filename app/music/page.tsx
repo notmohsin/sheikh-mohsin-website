@@ -1,6 +1,4 @@
-import ContentPage, {
-  contentPageMetadata,
-} from "@/components/content-page";
+import ContentPage, { contentPageMetadata } from "@/components/content-page";
 import SpotifyCommand from "@/components/terminal/spotify";
 
 export const metadata = contentPageMetadata({

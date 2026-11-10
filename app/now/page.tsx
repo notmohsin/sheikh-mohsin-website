@@ -1,6 +1,4 @@
-import ContentPage, {
-  contentPageMetadata,
-} from "@/components/content-page";
+import ContentPage, { contentPageMetadata } from "@/components/content-page";
 import Now from "@/components/now";
 
 export const metadata = contentPageMetadata({

@@ -1,6 +1,4 @@
-import ContentPage, {
-  contentPageMetadata,
-} from "@/components/content-page";
+import ContentPage, { contentPageMetadata } from "@/components/content-page";
 import Uses from "@/components/uses";
 
 export const metadata = contentPageMetadata({
