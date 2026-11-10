@@ -44,7 +44,30 @@ pnpm cv:check-deps
 pnpm cv:build
 ```
 
-The generated PDF is copied to `public/cv.pdf` for local preview.
+The generated PDF is copied to `public/cv.pdf`. It is committed, not ignored,
+because Vercel has no LaTeX toolchain; commit it together with the `cv.tex`
+change.
+
+## Role-specific résumés
+
+Sources live in `cv/resumes/<role>.tex` and share `cv/resumes/resume-layout.tex`
+(pdflatex + TeX Gyre Pagella, the same toolchain as the CV).
+
+```bash
+pnpm resumes:build
+```
+
+The build rejects any résumé that is not exactly one page or that overflows its
+margins, then publishes `public/resumes/<role>.pdf`. Those PDFs are committed
+for the same reason as `public/cv.pdf`. Each source declares
+
+```tex
+\resumemetadata{Role Title}{2026-11-10}{One-line description.}
+```
+
+which the `/resumes` page reads directly; adding or deleting a `<role>.tex`
+file adds or removes it from the catalog. Change the date only when the
+content changes. See `UPSTREAM.md` for where this feature came from.
 
 On CachyOS/Arch with `fish` and `paru`, install the required TeX Live packages
 with:
@@ -82,14 +105,16 @@ pnpm pdf:merge --current-order --output application.pdf resume.pdf letter.pdf
 An explicit `--output` path replaces an existing file. The interactive path
 asks before replacing one.
 
-## CI LaTeX Image
+## Deploys and the inherited workflows
 
-Deploy workflows build `public/cv.pdf` with a slim GHCR image:
-
-`ghcr.io/jeetsh4h/jeetsh4h-dev/latex-cv:latest`
-
-If the image dependencies change, update `.github/docker/latex-cv/Dockerfile`
-and run the `Build LaTeX CV Image` workflow before relying on deploy workflows.
+Production deploys happen through Vercel's Git integration on pushes to
+`master` (see `DEPLOY.md`). The GitHub Actions workflows under
+`.github/workflows/` were inherited from the template: they trigger on `main`,
+not `master`, and expect a `latex-cv` image in this repo's GHCR that has never
+been built, so they do not run. Because the PDFs are committed, nothing in the
+deploy path needs LaTeX. Either delete the workflows or, to revive them, build
+the image from `.github/docker/latex-cv/Dockerfile` with the
+`Build LaTeX CV Image` workflow and change the branch triggers.
 
 ## Checks
 

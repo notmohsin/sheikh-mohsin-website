@@ -62,10 +62,40 @@ Scaffold a new post:
 pnpm diary:new
 ```
 
+## Diary photos and footnotes
+
+```mdx
+import Figure from "@/components/diary/figure";
+import { Footnote, FootnoteRef, Footnotes } from "@/components/diary/footnotes";
+
+<Figure
+  src="/diary/slug-photo.jpg"
+  alt="..."
+  width={1456}
+  height={1092}
+  caption="..."
+/>
+
+Some sentence.<FootnoteRef id="1" />
+
+<Footnotes>
+  <Footnote id="1">Footnote text.</Footnote>
+</Footnotes>
+```
+
+Put the image file in `public/diary/`; `width`/`height` are its pixel size.
+
 ## CV (PDF on `/pdf` and terminal `cv`)
 
 - LaTeX source: [`cv/cv.tex`](cv/cv.tex) (copy of [`SheikhMohsinResume.tex`](SheikhMohsinResume.tex))
-- Rebuild after edits: `pnpm cv:build` → updates `public/cv.pdf`
+- Rebuild after edits: `pnpm cv:build` → updates `public/cv.pdf` (commit it)
+
+## Résumés (`/resumes`, one page each)
+
+- Sources: [`cv/resumes/*.tex`](cv/resumes/); shared layout in `resume-layout.tex`
+- Edit the `\resumemetadata{Title}{YYYY-MM-DD}{Description}` line when content changes
+- Rebuild: `pnpm resumes:build` → updates `public/resumes/*.pdf` (commit them)
+- The homepage **Résumé** button points at `PRIMARY_RESUME_PATH` in [`lib/cv.ts`](lib/cv.ts)
 
 ## What you usually do _not_ need to edit
 

@@ -7,14 +7,14 @@ export function applySiteTitleTemplate(title: string) {
 }
 
 export const DIARY_DESCRIPTION =
-  "Writing by Sheikh Mohsin on home, research, and systems.";
+  "Essays and research notes by Sheikh Mohsin: home and Kashmir, SSD storage systems, and craft that has to survive as commerce.";
 
 export const SEO: SeoContent = {
   title: "Sheikh Mohsin | Computer Science & Business Analytics",
   description:
-    "Sheikh Mohsin writes from Pune about how a drive decides what to keep, how a craft survives once it has to be sold, and what a classroom does when its language is not the language of home.",
+    "Sheikh Mohsin is a Computer Science and Business Analytics student at FLAME University, Pune. Research on SSD cache eviction at IIT Ropar, field research on Taraksi silver filigree, and essays on home and Kashmir.",
   url: "https://sheikh-mohsin.vercel.app",
-  updatedAt: "2026-09-29",
+  updatedAt: "2026-11-10",
   areas: [
     "Computer science",
     "Business analytics",
