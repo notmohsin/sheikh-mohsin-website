@@ -1,10 +1,13 @@
 import { defineDiaryEntry } from "@/lib/diary/metadata";
+import Figure from "@/components/diary/figure";
+import { Footnote, FootnoteRef, Footnotes } from "@/components/diary/footnotes";
 
 export const metadata = defineDiaryEntry({
   title: "On Home, Belonging and Kashmir",
   description:
     "A series of reflections on being homesick and home averse at the same time.",
   publishedAt: "2026-09-13",
+  updatedAt: "2026-11-10",
   tags: ["kashmir", "home", "substack"],
 });
 
@@ -40,12 +43,25 @@ I want to understand whether home is somewhere we return to, somewhere we carry 
 
 Perhaps, eventually, I will find an answer.
 
-Or perhaps I will simply find better questions.
+Or perhaps I will simply find better questions
+
+<Figure
+  src="/diary/on-home-belonging-and-kashmir-home-2026.jpg"
+  alt="A valley in Kashmir: fields and trees in the foreground, mountains rising behind them."
+  width={1456}
+  height={1092}
+  caption="A fleeting moment in time at “Home” circa 2026"
+/>
 
 For now, I remain somewhere between the place I came from and the place I am going. Somewhere between memory and reality, between longing and resistance, between solace and solitude, between what I remember and what remains.
 
-A here and a there.
+A here and a there.<FootnoteRef id="1" />
 
-> “It suddenly seemed to me that I was lonely, that everyone was forsaking me and going away from me.” — White Nights, Fyodor Dostoevsky
+<Footnotes>
+  <Footnote id="1">
+    “It suddenly seemed to me that I was lonely, that everyone was forsaking me
+    and going away from me.” — White Nights, Fyodor Dostoevsky
+  </Footnote>
+</Footnotes>
 
 First published on [Substack](https://feelingsandnumbers.substack.com/p/on-home-belonging-and-kashmir).
