@@ -1,0 +1,55 @@
+\input{resume-layout.tex}
+\resumemetadata{Research}{2026-11-10}{Research internships: storage systems, field research, and writing.}
+% Facts mirror cv/cv.tex; this variant leads with research and writing.
+\titlespacing{\section}{0pt}{7pt}{3pt}
+\begin{document}
+\resumeheader[B.Sc. Computer Science \& Business Analytics, FLAME University \textperiodcentered{} Pune, India \textperiodcentered{} Research internships]
+\section{Education}
+\role{FLAME University, Pune}{B.Sc. CS \& Business Analytics, full scholarship \textperiodcentered{} CGPA 7.65/10}{Aug 2024 -- Present}
+\begin{itemize}
+  \item Modeled and verified concurrent and distributed systems with SAT solvers, temporal-logic model checking, and Alloy/TLA+ specifications
+  \item Implemented and compared classification and clustering methods, using PCA to test how feature selection affected model behavior
+  \item Term paper on globalization and India's LPG-era economic reforms (Public Policy coursework)
+\end{itemize}
+\role{Jawahar Navodaya Vidyalaya, Ganderbal}{Senior Secondary Education, merit scholarship, residential}{2017 -- 2024}
+\begin{itemize}
+  \item Coordinated Atal Tinkering Labs and taught junior students to turn ideas into 3D-printed prototypes
+\end{itemize}
+\section{Research Experience}
+\role{IIT Ropar}{Research Intern (Summer Internship Program), SSD Systems}{May 2026 -- Present}
+\begin{itemize}
+  \item Learned SSD storage systems from first principles under Prof.\ Venkata Kalyan Tavva and compared recency- and frequency-based cache eviction strategies in the SimpleSSD-Standalone 2.0 simulator as a foundation for an original performance study
+  \item Designed and implemented spatial prefetching that predicts nearby address-translation entries from how data is grouped in flash; found and fixed a cache-order bug that caused newly loaded entries to evict one another before use
+  \item Investigated how ransomware write bursts interact with the drive's internal cleanup, identified a race that may destroy recoverable data before detection responds, and assessed whether a targeted defense could form a new research contribution
+\end{itemize}
+\role{Discover India Program, FLAME University}{Research, Taraksi (Silver Filigree)}{Sept 2025 -- Apr 2026}
+\begin{itemize}
+  \item Studied, within a 13-member team, how Taraksi silver filigree moved from a household craft to a commercial practice
+  \item Traced the craft's history and technique through literature, then designed field surveys and semi-structured interviews with artisans
+  \item Synthesized qualitative findings into academic documentation and cultural analysis
+\end{itemize}
+\role{Goonj, Delhi}{Research and Operations Intern}{May 2025 -- Jul 2025}
+\begin{itemize}
+  \item Traced donation and redistribution data through the sorting pipeline and tested data patterns against field-team observations before proposing process changes
+\end{itemize}
+\section{Projects}
+\proj{Cache Performance Benchmark Suite}{C++, \texttt{perf\_event\_open}, RDTSCP}{\href{https://github.com/notmohsin/Performance-and-Data-Representation}{Repository}}
+\begin{itemize}
+  \item Measured hardware clock-cycle costs across 16 data structures and compared contiguous and pointer-based layouts across access patterns and data sizes
+\end{itemize}
+\proj{IPL Data Mining}{Python}{\href{https://github.com/notmohsin/IPL---Data-Mining}{Repository}}
+\begin{itemize}
+  \item Repeatable analysis workflow that separates data preparation from interpretation so conclusions can be checked against the records
+\end{itemize}
+\section{Writing}
+\begin{itemize}
+  \item Co-author, \href{https://www.deccanherald.com/india/lost-in-instruction-3568384}{``Lost in Instruction''}, Deccan Herald, on education policy and technology
+  \item Reflective and literary writing, including a published poem, at \href{https://kashmirpoetics.com}{Kashmir Poetics}; essays at \href{https://feelingsandnumbers.substack.com}{Feelings and Numbers} (Substack)
+\end{itemize}
+\section{Skills}
+\skill{Programming}{Python, C++, JavaScript, SQL, LaTeX, Git/GitHub, Linux}
+\skill{Systems and data}{FTL/NAND flash internals, hardware performance profiling (\texttt{perf\_event\_open}, RDTSCP), data analysis, data visualization, statistical reasoning}
+\skill{Communication}{Technical writing, research communication, survey and interview design; English, Hindi, Urdu, Kashmiri}
+\section{Leadership}
+\role{Karta Initiative India Foundation}{University Leader (40+ scholars); Technical and Operations Lead, workshops}{Aug 2024 -- Present}
+\end{document}

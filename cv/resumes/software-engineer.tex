@@ -1,0 +1,57 @@
+\input{resume-layout.tex}
+\resumemetadata{Software Engineer}{2026-11-10}{Systems programming, performance measurement, and software engineering internships.}
+% Dense but scannable: one-line entry headers, one idea per bullet, no
+% trailing periods, technology named inline. Facts mirror cv/cv.tex.
+\newgeometry{left=0.55in,right=0.55in,top=0.45in,bottom=0.45in}
+\titlespacing{\section}{0pt}{6pt}{2.5pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=0.8pt,topsep=1.2pt,parsep=0pt,partopsep=0pt}
+\begin{document}
+\resumeheader[B.Sc. Computer Science \& Business Analytics, FLAME University \textperiodcentered{} Pune, India \textperiodcentered{} Software engineering internships]
+\section{Education}
+\role{FLAME University, Pune}{B.Sc. CS \& Business Analytics, full scholarship \textperiodcentered{} CGPA 7.65/10}{Aug 2024 -- Present}
+\begin{itemize}
+  \item Modeled and verified concurrent and distributed systems with SAT solvers, temporal-logic model checking, and Alloy/TLA+ specifications
+  \item Implemented and compared classification and clustering methods, using PCA to test how feature selection affected model behavior
+  \item Member, Dot Slash Club; interdisciplinary projects connecting computer science with Philosophy and Public Policy
+\end{itemize}
+\section{Experience}
+\role{IIT Ropar}{Research Intern (Summer Internship Program), SSD Systems}{May 2026 -- Present}
+\begin{itemize}
+  \item Compared recency- and frequency-based cache eviction strategies in the SimpleSSD-Standalone 2.0 simulator under Prof.\ Venkata Kalyan Tavva
+  \item Designed and implemented spatial prefetching that predicts nearby address-translation entries from how data is grouped in flash
+  \item Found and fixed a cache-order bug that caused newly loaded entries to evict one another before use
+  \item Investigated how ransomware write bursts interact with the drive's internal cleanup and identified a race that may destroy recoverable data before detection responds
+\end{itemize}
+\role{PartyHub (Remote)}{QA Testing Intern}{Jul 2025 -- Aug 2025}
+\begin{itemize}
+  \item Tested frontend and backend features before release, focusing on edge cases that could break real user flows rather than only the happy path
+  \item Wrote reproducible bug reports with exact steps and expected-versus-actual behavior, giving developers a clear path from discovery to triage
+  \item Checked API responses and cross-device behavior to expose integration issues before release
+\end{itemize}
+\section{Projects}
+\proj{Cache Performance Benchmark Suite}{C++, \texttt{perf\_event\_open}, RDTSCP, Chart.js}{\href{https://github.com/notmohsin/Performance-and-Data-Representation}{Repository}}
+\begin{itemize}
+  \item Measured hardware clock-cycle costs across 16 data structures with performance counters, isolating machine-level behavior from wall-clock noise
+  \item Compared contiguous (array-of-structs, struct-of-arrays) and pointer-based layouts across access patterns and data sizes
+  \item Automated collection, CSV export, and Chart.js visualization so results are reproducible
+\end{itemize}
+\proj{IPL Data Mining}{Python, data analysis, visualization}{\href{https://github.com/notmohsin/IPL---Data-Mining}{Repository}}
+\begin{itemize}
+  \item Built a repeatable analysis workflow that separates data preparation from interpretation so conclusions can be checked against the underlying records
+\end{itemize}
+\proj{sheikh-mohsin.vercel.app}{personal website and diary}{\href{https://github.com/notmohsin/sheikh-mohsin-website}{Repository}}
+\begin{itemize}
+  \item Next.js, TypeScript, and MDX site with a terminal UI, file-based diary, and LaTeX CV pipeline; deployed on Vercel from a template by Jeet Shah
+\end{itemize}
+\section{Skills}
+\skill{Languages}{Python, C++, JavaScript, TypeScript, SQL, HTML/CSS, LaTeX}
+\skill{Systems}{Data structures and algorithms, FTL/NAND flash internals, hardware performance profiling (\texttt{perf\_event\_open}, RDTSCP), Linux}
+\skill{Tools}{Git/GitHub, Next.js, Vercel, basic AWS, Markdown}
+\skill{Communication}{Technical writing, research communication; English, Hindi, Urdu, Kashmiri}
+\section{Leadership}
+\role{Karta Initiative India Foundation}{University Leader; Technical and Operations Lead, workshops}{Aug 2024 -- Present}
+\begin{itemize}
+  \item Peer representative for 40+ Karta Scholars; ran weekly Sabhas, onboarded new scholars, and escalated concerns to mentors
+  \item Ran technical operations for a five-day winter workshop and coordinated housing, food, events, and schedules for the summer workshop
+\end{itemize}
+\end{document}

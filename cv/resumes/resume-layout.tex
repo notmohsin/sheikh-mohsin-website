@@ -1,0 +1,47 @@
+% Shared typography for the role-specific, one-page application résumés.
+% Compiled with pdflatex, the same engine as cv/cv.tex. Facts live in each
+% <role>.tex; this file only sets type, spacing, and the header.
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tgpagella}
+\usepackage[margin=0.55in]{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{titlesec}
+\definecolor{linkblue}{HTML}{3657D6}
+\hypersetup{colorlinks=true,urlcolor=linkblue,linkcolor=linkblue,pdfauthor={Sheikh Mohsin}}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\emergencystretch=1em
+\raggedright
+\setlist[itemize]{leftmargin=1.2em,itemsep=1pt,topsep=2pt,parsep=0pt,partopsep=0pt}
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing{\section}{0pt}{6pt}{3pt}
+\newcommand{\entry}[3]{\textbf{#1}\hfill\textit{#2}\par #3\par}
+\newcommand{\project}[2]{\textbf{#1}\hfill #2\par}
+% #1 organization, #2 role, #3 right-aligned dates or link.
+\newcommand{\role}[3]{\par\vspace{2pt}\textbf{#1}\enspace\textperiodcentered\enspace\textit{#2}\hfill #3\par}
+\newcommand{\proj}[3]{\par\vspace{2pt}\textbf{#1}\enspace\textperiodcentered\enspace\textit{#2}\hfill #3\par}
+% One skill group per line; wrapped lines hang under the label.
+\newcommand{\skill}[2]{\par\hangindent=1.1em\hangafter=1\textbf{#1:} #2\par}
+% Plain-text metadata is also read by the website's résumé catalog
+% (lib/resumes.ts): keep all three fields on one line, no braces or macros.
+\newcommand{\resumemetadata}[3]{%
+  \def\resumetitle{#1}%
+  \def\resumeupdated{#2}%
+  \hypersetup{pdftitle={Sheikh Mohsin - #1 Resume},pdfsubject={#3 Updated #2}}%
+}
+\newcommand{\resumeheader}[1][\resumetitle]{%
+  \begin{center}
+    {\fontsize{23}{25}\selectfont\bfseries Sheikh Mohsin}\\[3pt]
+    #1\\[4pt]
+    \href{mailto:sheikh.mohsin@flame.edu.in}{sheikh.mohsin@flame.edu.in} \enspace|\enspace
+    \href{https://sheikh-mohsin.vercel.app}{sheikh-mohsin.vercel.app} \enspace|\enspace
+    \href{https://github.com/notmohsin}{github.com/notmohsin} \enspace|\enspace
+    \href{https://www.linkedin.com/in/sheikh-mohsin-213653254}{linkedin.com/in/sheikh-mohsin}
+  \end{center}
+}

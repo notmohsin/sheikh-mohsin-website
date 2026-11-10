@@ -58,3 +58,6 @@ cv/cv.pdf
 
 # used for CLI
 docs/*
+
+# Résumé build artifacts (keep public/resumes/*.pdf committed for Vercel deploys)
+cv/resumes/.build.*/
