@@ -42,12 +42,6 @@ function SectionHeading({
         id={id}
         className="text-xl font-bold tracking-tight text-foreground sm:text-2xl"
       >
-        <span
-          aria-hidden="true"
-          className="mr-2.5 font-normal text-primary-readable"
-        >
-          $
-        </span>
         {command}
       </h2>
       <Link

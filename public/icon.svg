@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#24273a"/>
+  <!-- stylised chinar (Platanus orientalis) leaf: five pointed lobes -->
+  <path d="M32 7 L37 19 L46 12 L44 25 L56 24 L47 33 L53 39 L41 39 L38 47 L32 42 L26 47 L23 39 L11 39 L17 33 L8 24 L20 25 L18 12 L27 19 Z"
+        fill="#f5a97f"/>
+  <!-- veins + stem -->
+  <path d="M32 42 V57 M32 42 L32 14 M32 36 L44 19 M32 36 L20 19 M32 38 L49 30 M32 38 L15 30"
+        fill="none" stroke="#24273a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M32 44 V57" stroke="#f5a97f" stroke-width="3" stroke-linecap="round"/>
+</svg>
