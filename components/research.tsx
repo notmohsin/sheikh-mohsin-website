@@ -43,7 +43,7 @@ function ResearchEntry({ paper }: { paper: ResearchEntryModel }) {
           </p>
         )}
 
-        <p className="font-serif text-[0.9375rem] leading-relaxed text-foreground">
+        <p className="text-sm leading-relaxed text-foreground">
           {paper.summary}
         </p>
 

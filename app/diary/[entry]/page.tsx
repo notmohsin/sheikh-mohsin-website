@@ -189,7 +189,7 @@ export default async function DiaryEntryPage({ params }: DiaryEntryPageProps) {
           )}
         </header>
 
-        <div className="diary-prose space-y-6 font-serif">
+        <div className="diary-prose space-y-6">
           <Component />
         </div>
       </article>

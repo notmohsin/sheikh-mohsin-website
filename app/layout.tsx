@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-import { Crafty_Girls, DM_Serif_Text, JetBrains_Mono } from "next/font/google";
+import { Crafty_Girls, JetBrains_Mono } from "next/font/google";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TRPCReactProvider } from "@/trpc/react";
@@ -13,16 +13,6 @@ import { SEO, SITE_TITLE_TEMPLATE } from "@/lib/content/seo";
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-});
-
-// Reading text: bio, entry bullets, summaries, and diary prose.
-// Names, headings, dates, and the terminal stay in JetBrains Mono.
-const dmSerifText = DM_Serif_Text({
-  weight: "400",
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
 });
 
 const craftyGirls = Crafty_Girls({
@@ -114,7 +104,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${jetbrainsMono.variable} ${dmSerifText.variable} ${craftyGirls.variable} antialiased bg-background text-foreground selection:bg-accent selection:text-accent-foreground`}
+        className={`${jetbrainsMono.variable} ${craftyGirls.variable} antialiased bg-background text-foreground selection:bg-accent selection:text-accent-foreground`}
       >
         <a
           href="#main-content"

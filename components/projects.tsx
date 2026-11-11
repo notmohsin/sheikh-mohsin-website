@@ -33,7 +33,7 @@ function ProjectCard({ project }: { project: ProjectEntryModel }) {
         </p>
       )}
 
-      <p className="font-serif text-[0.875rem] leading-relaxed text-subtext">
+      <p className="text-[0.8125rem] leading-relaxed text-subtext">
         {project.description}
       </p>
 

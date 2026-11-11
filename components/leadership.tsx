@@ -34,7 +34,7 @@ export default function Leadership() {
                 : `${entry.roles.join(", ")}, ${entry.period}`}
               </p>
               {entry.description && (
-                <p className="pt-1 font-serif text-[0.9375rem] leading-relaxed text-foreground">
+                <p className="pt-1 text-sm leading-relaxed text-foreground">
                   {entry.description}
                 </p>
               )}
