@@ -54,7 +54,7 @@ function MdxCode({ className, children, ...props }: ComponentProps<"code">) {
   return (
     <code
       className={cn(
-        "diary-inline-code bg-input/30 px-1.5 py-0.5 text-secondary",
+        "diary-inline-code bg-input/30 px-1.5 py-0.5 font-mono text-[0.875em] text-secondary",
         className,
       )}
       {...props}
@@ -64,7 +64,8 @@ function MdxCode({ className, children, ...props }: ComponentProps<"code">) {
   );
 }
 
-const headingClassName = "scroll-mt-24 font-bold tracking-normal text-primary";
+const headingClassName =
+  "scroll-mt-24 font-mono font-bold tracking-normal text-primary";
 
 // TODO: Add table and image component
 export function useMDXComponents(components: MDXComponents): MDXComponents {

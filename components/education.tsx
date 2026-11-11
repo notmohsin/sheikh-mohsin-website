@@ -28,7 +28,7 @@ function DetailList({ details }: { details: string[] }) {
   }
 
   return (
-    <ul className="mt-3 max-w-[72ch] list-outside list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-foreground marker:text-muted-foreground">
+    <ul className="mt-3 max-w-[72ch] list-outside list-disc space-y-1.5 pl-4 font-serif text-[0.9375rem] leading-relaxed text-foreground marker:text-muted-foreground">
       {details.map((detail) => (
         <li key={detail}>{detail}</li>
       ))}

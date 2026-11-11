@@ -8,6 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif), Georgia, serif;
   --font-hand: var(--font-hand);
 
   --color-success: var(--success);
@@ -262,7 +263,7 @@
   --warning: #eed49f; /* Yellow */
   --term-muted: #5b6078; /* Surface2 */
 
-  --diary-prose-font-size: 0.9375rem;
+  --diary-prose-font-size: 1.0625rem;
   --diary-prose-line-height: 1.75;
   --diary-inline-code-radius: 0.25rem;
   --syntax-background: var(--card);

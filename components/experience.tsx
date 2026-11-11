@@ -33,8 +33,8 @@ function ExperienceEntry({
         {job.description.length > 0 && (
           <ul
             className={cn(
-              "mt-3 max-w-[72ch] list-outside list-disc space-y-2 pl-4 text-sm leading-relaxed text-foreground marker:text-muted-foreground",
-              !compact && "md:text-[0.9375rem]",
+              "mt-3 max-w-[72ch] list-outside list-disc space-y-2 pl-4 font-serif text-[0.9375rem] leading-relaxed text-foreground marker:text-muted-foreground",
+              !compact && "md:text-base",
             )}
           >
             {job.description.map((item) => (
