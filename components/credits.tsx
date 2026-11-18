@@ -91,6 +91,23 @@ export default function Credits({ compact = false }: { compact?: boolean }) {
       </section>
 
       <section className="space-y-2">
+        <h2 className={headingClass}>Design ideas</h2>
+        <p>
+          Organization logos on a timeline, diary tags, contents lists, and the
+          homepage quote were inspired by {CREDITS.designIdeas.author}&apos;s{" "}
+          <Link
+            href={CREDITS.designIdeas.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline decoration-primary/40 hover:decoration-primary"
+          >
+            {CREDITS.designIdeas.label}
+          </Link>{" "}
+          (ideas only; no code was copied).
+        </p>
+      </section>
+
+      <section className="space-y-2">
         <h2 className={headingClass}>Color scheme</h2>
         <p>
           <Link

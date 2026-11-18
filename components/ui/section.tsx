@@ -17,6 +17,23 @@ const sectionRowClassName =
 const sectionMetaClassName =
   "order-first text-xs leading-6 text-muted-foreground lg:pt-0.5";
 
+/**
+ * Content cell of a row on a logo timeline: a thin rule runs from under the
+ * row's OrgMark down to the next row's mark, like a `git log --graph` line.
+ * The parent <li> carries `group/tl`, so the last row draws no tail. Pick the
+ * tail length that matches the list's vertical spacing (space-y-10 or -8);
+ * below `lg` the next row's date sits above its mark, hence the longer tail.
+ */
+const timelineCellClassName =
+  "relative before:absolute before:left-[13px] before:top-9 before:w-px before:bg-border group-last/tl:before:hidden";
+const timelineTailClassName = {
+  10: "before:-bottom-16 lg:before:-bottom-9",
+  8: "before:-bottom-14 lg:before:-bottom-7",
+} as const;
+
+/** Indent for anything under a timeline row's heading, clear of the rule. */
+const timelineBodyClassName = "ml-10";
+
 /** Typesets "Oct 2024 - Aug 2026" ranges with an en dash. */
 function formatPeriod(period: string) {
   return period.replace(/ - /g, " – ");
@@ -91,4 +108,7 @@ export {
   formatPeriod,
   sectionRowClassName,
   sectionMetaClassName,
+  timelineBodyClassName,
+  timelineCellClassName,
+  timelineTailClassName,
 };

@@ -1,11 +1,27 @@
 import type { TablerIcon } from "@tabler/icons-react";
 import type { DateString } from "@/lib/diary/metadata";
 
+export interface AboutQuote {
+  text: string;
+  /** Where the line comes from, shown after an em dash. */
+  source: string;
+  href?: string;
+}
+
 export interface AboutContent {
   name: string;
   role: string;
   location: string;
   bio: string;
+  /** Short italic line under the bio. */
+  quote?: AboutQuote;
+  /**
+   * One closing line at the foot of the homepage. `{Org name}` (or
+   * `{Org name|shown text}`) renders as an
+   * organization mention (see lib/content/organizations.ts) and
+   * `[text](href)` as a link.
+   */
+  misc?: string;
 }
 
 export interface SeoContent {

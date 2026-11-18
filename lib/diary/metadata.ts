@@ -6,6 +6,8 @@ type BaseDiaryEntryMetadataInput = {
   publishedAt?: DateString;
   updatedAt?: DateString;
   tags?: readonly string[];
+  /** Show on the homepage under "selected writing". */
+  featured?: boolean;
 };
 
 type PublishedDiaryEntryMetadataInput = BaseDiaryEntryMetadataInput & {
@@ -28,6 +30,7 @@ export type DiaryEntryMetadata = {
   publishedAt?: DateString;
   updatedAt?: DateString;
   tags: readonly string[];
+  featured: boolean;
   draft: boolean;
 };
 
@@ -142,6 +145,12 @@ export function defineDiaryEntry(
     throw new Error("draft must be a boolean.");
   }
 
+  const featured = input.featured ?? false;
+
+  if (typeof featured !== "boolean") {
+    throw new Error("featured must be a boolean.");
+  }
+
   const description = optionalString(input.description, "description") ?? "";
   const publishedAt = validateDate(input.publishedAt, "publishedAt");
   const updatedAt = validateDate(input.updatedAt, "updatedAt") ?? publishedAt;
@@ -166,6 +175,7 @@ export function defineDiaryEntry(
     publishedAt,
     updatedAt,
     tags: normalizeTags(input.tags),
+    featured,
     draft,
   };
 }

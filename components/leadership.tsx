@@ -1,3 +1,4 @@
+import OrgMark from "./ui/org-mark";
 import { SectionHeading, sectionRowClassName } from "./ui/section";
 import { buildLeadershipSection } from "@/lib/site-content";
 import type { LeadershipEntryModel } from "@/lib/site-content";
@@ -25,14 +26,19 @@ export default function Leadership() {
               key={`${entry.organization}-${entry.period}`}
               className="space-y-1"
             >
-              <h3 className="text-[0.9375rem] font-bold leading-snug text-primary-readable">
-                {entry.organization}
-              </h3>
-              <p className="text-xs leading-5 text-subtext">
-                {periodNamesRoles(entry) ?
-                  entry.period
-                : `${entry.roles.join(", ")}, ${entry.period}`}
-              </p>
+              <div className="flex items-start gap-3">
+                <OrgMark name={entry.organization} />
+                <div className="min-w-0">
+                  <h3 className="text-[0.9375rem] font-bold leading-snug text-primary-readable">
+                    {entry.organization}
+                  </h3>
+                  <p className="text-xs leading-5 text-subtext">
+                    {periodNamesRoles(entry) ?
+                      entry.period
+                    : `${entry.roles.join(", ")}, ${entry.period}`}
+                  </p>
+                </div>
+              </div>
               {entry.description && (
                 <p className="pt-1 text-sm leading-relaxed text-foreground">
                   {entry.description}

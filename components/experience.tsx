@@ -1,10 +1,14 @@
 import ExperienceDescription from "./experience-description";
+import OrgMark from "./ui/org-mark";
 import {
   SectionDisclosure,
   SectionHeading,
   formatPeriod,
   sectionMetaClassName,
   sectionRowClassName,
+  timelineBodyClassName,
+  timelineCellClassName,
+  timelineTailClassName,
 } from "./ui/section";
 import { buildExperienceSection } from "@/lib/site-content";
 import type { ExperienceEntryModel } from "@/lib/site-content";
@@ -18,22 +22,37 @@ function ExperienceEntry({
   compact?: boolean;
 }) {
   return (
-    <li className={sectionRowClassName}>
-      <div className="min-w-0">
-        <h3
-          className={cn(
-            "font-bold leading-snug text-primary-readable",
-            compact ? "text-base" : "text-base sm:text-lg",
-          )}
-        >
-          {job.company}
-        </h3>
-        <p className="text-sm leading-6 text-subtext">{job.role}</p>
+    <li className={cn(sectionRowClassName, "group/tl")}>
+      <div
+        className={cn(
+          "min-w-0",
+          timelineCellClassName,
+          timelineTailClassName[compact ? 8 : 10],
+        )}
+      >
+        <div className="flex items-start gap-3">
+          <OrgMark
+            name={job.company}
+            className="mt-0.5"
+          />
+          <div className="min-w-0">
+            <h3
+              className={cn(
+                "font-bold leading-snug text-primary-readable",
+                compact ? "text-base" : "text-base sm:text-lg",
+              )}
+            >
+              {job.company}
+            </h3>
+            <p className="text-sm leading-6 text-subtext">{job.role}</p>
+          </div>
+        </div>
 
         {job.description.length > 0 && (
           <ul
             className={cn(
               "mt-3 max-w-[72ch] list-outside list-disc space-y-2 pl-4 text-sm leading-relaxed text-foreground marker:text-muted-foreground",
+              timelineBodyClassName,
               !compact && "md:text-[0.9375rem]",
             )}
           >

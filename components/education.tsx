@@ -2,11 +2,15 @@ import Link from "next/link";
 import { IconArrowUpRight } from "@tabler/icons-react";
 
 import { Card } from "./ui/card";
+import OrgMark from "./ui/org-mark";
 import {
   SectionHeading,
   formatPeriod,
   sectionMetaClassName,
   sectionRowClassName,
+  timelineBodyClassName,
+  timelineCellClassName,
+  timelineTailClassName,
 } from "./ui/section";
 import { buildEducationSection } from "@/lib/site-content";
 import { cn, externalLinkProps } from "@/lib/utils";
@@ -28,7 +32,12 @@ function DetailList({ details }: { details: string[] }) {
   }
 
   return (
-    <ul className="mt-3 max-w-[72ch] list-outside list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-foreground marker:text-muted-foreground">
+    <ul
+      className={cn(
+        timelineBodyClassName,
+        "mt-3 max-w-[72ch] list-outside list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-foreground marker:text-muted-foreground",
+      )}
+    >
       {details.map((detail) => (
         <li key={detail}>{detail}</li>
       ))}
@@ -50,18 +59,32 @@ export default function Education() {
         {education.higherEducation.map((edu) => (
           <li
             key={`${edu.institution}-${edu.period}`}
-            className={sectionRowClassName}
+            className={cn(sectionRowClassName, "group/tl")}
           >
-            <div className="min-w-0">
-              <h3 className="text-base font-bold leading-snug text-primary-readable sm:text-lg">
-                {edu.institution}
-              </h3>
-              <p className="text-sm leading-6 text-foreground">
-                <DegreeName degree={edu.degree} />
-              </p>
-              <p className="text-xs leading-6 text-muted-foreground">
-                {edu.location}
-              </p>
+            <div
+              className={cn(
+                "min-w-0",
+                timelineCellClassName,
+                timelineTailClassName[10],
+              )}
+            >
+              <div className="flex items-start gap-3">
+                <OrgMark
+                  name={edu.institution}
+                  className="mt-0.5"
+                />
+                <div className="min-w-0">
+                  <h3 className="text-base font-bold leading-snug text-primary-readable sm:text-lg">
+                    {edu.institution}
+                  </h3>
+                  <p className="text-sm leading-6 text-foreground">
+                    <DegreeName degree={edu.degree} />
+                  </p>
+                  <p className="text-xs leading-6 text-muted-foreground">
+                    {edu.location}
+                  </p>
+                </div>
+              </div>
               <DetailList details={edu.details} />
             </div>
             <p className={cn(sectionMetaClassName, "lg:pt-1")}>
@@ -73,15 +96,29 @@ export default function Education() {
         {education.priorEducation.map((edu) => (
           <li
             key={`${edu.institution}-${edu.period}`}
-            className={sectionRowClassName}
+            className={cn(sectionRowClassName, "group/tl")}
           >
-            <div className="min-w-0">
-              <h3 className="text-base font-bold leading-snug text-primary-readable">
-                {edu.institution}
-              </h3>
-              <p className="text-sm leading-6 text-foreground">
-                <DegreeName degree={edu.degree} />
-              </p>
+            <div
+              className={cn(
+                "min-w-0",
+                timelineCellClassName,
+                timelineTailClassName[10],
+              )}
+            >
+              <div className="flex items-start gap-3">
+                <OrgMark
+                  name={edu.institution}
+                  className="mt-0.5"
+                />
+                <div className="min-w-0">
+                  <h3 className="text-base font-bold leading-snug text-primary-readable">
+                    {edu.institution}
+                  </h3>
+                  <p className="text-sm leading-6 text-foreground">
+                    <DegreeName degree={edu.degree} />
+                  </p>
+                </div>
+              </div>
               <DetailList details={edu.details} />
             </div>
             <p className={sectionMetaClassName}>{formatPeriod(edu.period)}</p>

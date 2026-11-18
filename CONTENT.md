@@ -85,6 +85,54 @@ Some sentence.<FootnoteRef id="1" />
 
 Put the image file in `public/diary/`; `width`/`height` are its pixel size.
 
+More figure options:
+
+```mdx
+import Figure, { FigureRow } from "@/components/diary/figure";
+
+<Figure
+  hero
+  src="..."
+  alt="..."
+  width={1600}
+  height={900}
+  caption="**Bold** and _italic_ work"
+/>
+
+<FigureRow
+  images={[
+    { src: "/diary/a.jpg", alt: "...", width: 1200, height: 900 },
+    { src: "/diary/b.jpg", alt: "...", width: 900, height: 1200 },
+  ]}
+  caption="One caption for both"
+/>
+```
+
+`hero` makes the image wider than the text column; use it once, near the top.
+
+## Diary tags, contents list, featured entries
+
+- `tags: [...]` in an entry's metadata: each tag gets a page at
+  `/diary/tags/<tag>` and a coloured chip (same colour everywhere).
+- `featured: true` puts the entry on the homepage under **diary**.
+- Write `## Section` / `### Subsection` headings and a contents list appears
+  automatically (from two headings up): a sidebar on wide screens, a
+  collapsible block on phones.
+- To name an organization in colour with its logo inside an entry:
+  `import { OrgMention as Org } from "@/components/ui/org-mark";` then
+  `<Org name="FLAME University" />`.
+
+## Organization logos, quote, closing line
+
+- Logos and brand colours: [`lib/content/organizations.ts`](lib/content/organizations.ts).
+  The `name` must match the company/institution/organization text in the
+  content files (a test checks this). Logos are SVGs in `public/logos/`;
+  an organization without one shows a letter badge.
+- Quote under the bio and the closing line at the bottom of the homepage:
+  `quote` and `misc` in [`lib/content/about.ts`](lib/content/about.ts).
+  In `misc`, `{FLAME University}` becomes an organization mention and
+  `[text](https://...)` a link.
+
 ## CV (PDF on `/pdf` and terminal `cv`)
 
 - LaTeX source: [`cv/cv.tex`](cv/cv.tex) (copy of [`SheikhMohsinResume.tex`](SheikhMohsinResume.tex))

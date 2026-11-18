@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import TableOfContents from "@/components/diary/table-of-contents";
+import TagChip from "@/components/diary/tag-chip";
 import ThemeToggle from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,6 +14,7 @@ import {
 } from "@/lib/diary/entries";
 import { ABOUT } from "@/lib/content/about";
 import { SEO } from "@/lib/content/seo";
+import { getDiaryEntryHeadings } from "@/lib/diary/headings";
 import { dateStringToIsoDateTime } from "@/lib/diary/metadata";
 
 type DiaryEntryPageProps = {
@@ -110,6 +113,7 @@ export default async function DiaryEntryPage({ params }: DiaryEntryPageProps) {
   }
 
   const { Component } = entry;
+  const headings = await getDiaryEntryHeadings(entry.slug);
   const entryUrl = `${SEO.url}/diary/${entry.slug}`;
   const blogPostingSchema = {
     "@context": "https://schema.org",
@@ -177,17 +181,16 @@ export default async function DiaryEntryPage({ params }: DiaryEntryPageProps) {
           {entry.tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {entry.tags.map((tag) => (
-                <Badge
+                <TagChip
                   key={tag}
-                  size="xs"
-                  className="text-muted-foreground"
-                >
-                  {tag}
-                </Badge>
+                  tag={tag}
+                />
               ))}
             </div>
           )}
         </header>
+
+        <TableOfContents headings={headings} />
 
         <div className="diary-prose space-y-6">
           <Component />

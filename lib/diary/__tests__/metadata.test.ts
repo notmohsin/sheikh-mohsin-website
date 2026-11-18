@@ -25,6 +25,7 @@ describe("defineDiaryEntry", () => {
       ...validPublishedMetadata,
       updatedAt: validPublishedMetadata.publishedAt,
       tags: [],
+      featured: false,
       draft: false,
     });
     expect(explicitlyUpdated).toMatchObject({
@@ -33,6 +34,18 @@ describe("defineDiaryEntry", () => {
       tags: ["nextjs", "systems"],
       draft: false,
     });
+  });
+
+  it("carries the featured flag and rejects non-booleans", () => {
+    expect(
+      defineDiaryEntry({ ...validPublishedMetadata, featured: true }).featured,
+    ).toBe(true);
+    expect(() =>
+      defineDiaryEntry({
+        ...validPublishedMetadata,
+        featured: "yes" as unknown as boolean,
+      }),
+    ).toThrow("featured must be a boolean.");
   });
 
   it("allows drafts to omit descriptions and dates", () => {
@@ -48,6 +61,7 @@ describe("defineDiaryEntry", () => {
       publishedAt: undefined,
       updatedAt: undefined,
       tags: [],
+      featured: false,
     });
   });
 

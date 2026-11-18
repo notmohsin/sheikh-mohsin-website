@@ -130,6 +130,7 @@ describe("executeParsedCommand", () => {
         publishedAt: "2026-08-06",
         updatedAt: "2026-08-06",
         tags: ["terminal"],
+        featured: false,
         draft: false,
       },
     ];

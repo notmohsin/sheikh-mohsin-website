@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { Badge } from "@/components/ui/badge";
+import DiaryEntryList from "@/components/diary/entry-list";
+import TagChip from "@/components/diary/tag-chip";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { getPublishedDiaryEntries } from "@/lib/diary/entries";
+import { countDiaryTags } from "@/lib/diary/tags";
 import { ABOUT } from "@/lib/content/about";
 import { DIARY_DESCRIPTION } from "@/lib/content/seo";
 import ThemeToggle from "@/components/theme-toggle";
@@ -41,19 +36,9 @@ export const metadata: Metadata = {
   },
 };
 
-const dateFormatter = new Intl.DateTimeFormat("en", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-function formatEntryDate(date: string) {
-  return dateFormatter.format(new Date(`${date}T00:00:00.000Z`));
-}
-
 export default async function DiaryPage() {
   const entries = await getPublishedDiaryEntries();
+  const tags = countDiaryTags(entries);
 
   return (
     <main
@@ -88,44 +73,28 @@ export default async function DiaryPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5">
-          {entries.map((entry) => (
+        {tags.length > 0 && (
+          <nav
+            aria-label="Diary tags"
+            className="mb-8 flex flex-wrap items-center gap-2"
+          >
             <Link
-              key={entry.slug}
-              href={`/diary/${entry.slug}`}
-              className="group block"
+              href="/diary/tags"
+              className="mr-1 text-xs text-muted-foreground underline decoration-muted-foreground/40 underline-offset-4 hover:text-foreground"
             >
-              <Card variant="interactive">
-                <CardHeader className="px-0">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
-                    <CardTitle className="text-lg text-primary">
-                      {entry.title}
-                    </CardTitle>
-                    <Badge>{formatEntryDate(entry.publishedAt)}</Badge>
-                  </div>
-                  <CardDescription className="text-sm">
-                    {entry.description}
-                  </CardDescription>
-                </CardHeader>
-                {entry.tags.length > 0 && (
-                  <CardContent className="px-0">
-                    <div className="flex flex-wrap gap-2">
-                      {entry.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          size="xs"
-                          className="text-muted-foreground"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                )}
-              </Card>
+              tags:
             </Link>
-          ))}
-        </div>
+            {tags.map(({ tag, count }) => (
+              <TagChip
+                key={tag}
+                tag={tag}
+                count={count}
+              />
+            ))}
+          </nav>
+        )}
+
+        <DiaryEntryList entries={entries} />
       </div>
     </main>
   );

@@ -33,10 +33,12 @@ describe("sitemap", () => {
         {
           slug: "published-entry",
           updatedAt: "2026-06-08",
+          tags: ["home", "kashmir"],
         },
         {
           slug: "older-entry",
           updatedAt: "2026-06-02",
+          tags: ["home"],
         },
       ],
     });
@@ -61,8 +63,15 @@ describe("sitemap", () => {
         `${SEO.url}/diary`,
         `${SEO.url}/diary/published-entry`,
         `${SEO.url}/diary/older-entry`,
+        `${SEO.url}/diary/tags`,
+        `${SEO.url}/diary/tags/home`,
+        `${SEO.url}/diary/tags/kashmir`,
       ]),
     );
+    expect(
+      entries.find((entry) => entry.url === `${SEO.url}/diary/tags/home`)
+        ?.lastModified,
+    ).toEqual(dateStringToUtcDate("2026-06-08"));
     expect(urls).not.toContain(`${SEO.url}/pdf`);
     expect(urls).not.toContain(`${SEO.url}/terminal`);
     expect(urls).not.toContain(`${SEO.url}/resumes`);

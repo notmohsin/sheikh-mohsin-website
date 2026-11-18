@@ -29,6 +29,11 @@ export const CREDITS = {
     label: "Pet Cat Pack (Luiz Melo)",
     href: "https://luizmelo.itch.io/pet-cat-pack",
   },
+  designIdeas: {
+    author: "Pingbang Hu",
+    label: "pbb.sh",
+    href: "https://github.com/sleepymalc/pbb.sh",
+  },
   colors: {
     label: "Catppuccin",
     href: "https://catppuccin.com",

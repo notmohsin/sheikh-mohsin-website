@@ -6,6 +6,8 @@ import Education from "@/components/education";
 import Projects from "@/components/projects";
 import Skills from "@/components/skills";
 import Leadership from "@/components/leadership";
+import MiscLine from "@/components/misc-line";
+import Writing from "@/components/writing";
 import { ABOUT } from "@/lib/content/about";
 import { EDUCATION } from "@/lib/content/education";
 import { SEO } from "@/lib/content/seo";
@@ -132,6 +134,14 @@ export default function Page() {
         </section>
 
         <section
+          id="writing"
+          className="scroll-mt-8 space-y-8"
+          aria-labelledby="writing-heading"
+        >
+          <Writing />
+        </section>
+
+        <section
           id="research"
           className="scroll-mt-8 space-y-8"
           aria-labelledby="research-heading"
@@ -162,6 +172,8 @@ export default function Page() {
         >
           <Leadership />
         </section>
+
+        <MiscLine />
       </div>
     </main>
   );

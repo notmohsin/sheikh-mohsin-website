@@ -1,7 +1,8 @@
 import Link from "next/link";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import type { MDXComponents } from "mdx/types";
 
+import { slugifyHeading } from "@/lib/diary/slug";
 import { cn } from "@/lib/utils";
 
 function MdxLink({ href = "", className, ...props }: ComponentProps<"a">) {
@@ -66,6 +67,24 @@ function MdxCode({ className, children, ...props }: ComponentProps<"code">) {
 
 const headingClassName = "scroll-mt-24 font-bold tracking-normal text-primary";
 
+function textOf(node: ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node);
+  }
+  if (Array.isArray(node)) {
+    return node.map(textOf).join("");
+  }
+  if (node && typeof node === "object" && "props" in node) {
+    return textOf((node.props as { children?: ReactNode }).children);
+  }
+  return "";
+}
+
+/** Stable anchor for a heading, so the table of contents can link to it. */
+function headingId(children: ReactNode) {
+  return slugifyHeading(textOf(children));
+}
+
 // TODO: Add table and image component
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -76,8 +95,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-    h2: ({ className, ...props }) => (
+    h2: ({ className, id, ...props }) => (
       <h2
+        id={id ?? headingId(props.children)}
         className={cn(
           "mt-12 border-b border-border pb-2 text-2xl",
           headingClassName,
@@ -86,8 +106,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-    h3: ({ className, ...props }) => (
+    h3: ({ className, id, ...props }) => (
       <h3
+        id={id ?? headingId(props.children)}
         className={cn("mt-8 text-xl", headingClassName, className)}
         {...props}
       />
