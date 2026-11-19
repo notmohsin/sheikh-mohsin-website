@@ -70,6 +70,14 @@ export function buildSitemapEntries({
       lastModified: dateStringToUtcDate(SEO.updatedAt),
     },
     {
+      url: `${SEO.url}/experience`,
+      lastModified: dateStringToUtcDate(SEO.updatedAt),
+    },
+    {
+      url: `${SEO.url}/projects`,
+      lastModified: dateStringToUtcDate(SEO.updatedAt),
+    },
+    {
       url: `${SEO.url}/credits`,
       lastModified: dateStringToUtcDate(SEO.updatedAt),
     },

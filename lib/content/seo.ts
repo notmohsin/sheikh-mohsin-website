@@ -14,7 +14,7 @@ export const SEO: SeoContent = {
   description:
     "Sheikh Mohsin is a Computer Science and Business Analytics student at FLAME University, Pune. Research on SSD cache eviction at IIT Ropar, field research on Taraksi silver filigree, and essays on home and Kashmir.",
   url: "https://sheikhmohsin.vercel.app",
-  updatedAt: "2026-11-10",
+  updatedAt: "2026-11-19",
   areas: [
     "Computer science",
     "Business analytics",

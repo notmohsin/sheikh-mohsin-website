@@ -122,6 +122,22 @@ import Figure, { FigureRow } from "@/components/diary/figure";
   `import { OrgMention as Org } from "@/components/ui/org-mark";` then
   `<Org name="FLAME University" />`.
 
+## Layout (profile card + tabs)
+
+- The main pages live in `app/(main)/`: About (`/`), Experience, Projects,
+  Diary. The left profile card is
+  [`components/layout/profile-card.tsx`](components/layout/profile-card.tsx);
+  the tab bar is [`components/layout/site-tabs.tsx`](components/layout/site-tabs.tsx).
+- Profile photo: put a square image in `public/` and set `avatar: "/me.jpg"`
+  in [`lib/content/about.ts`](lib/content/about.ts). Until then the chinar
+  icon stands in.
+- `intro` (in the same file) holds the paragraphs under the bio on About.
+  `*word*` = underlined italic, `**words**` = accent bold, `{FLAME University}`
+  = organization mention.
+- Diary cards show a cover when the entry has `cover: "/diary/photo.jpg"`;
+  projects take `cover: { src, alt, width, height }` in `lib/content/projects.ts`.
+  Both lists have a filter panel built from tags / stack.
+
 ## Organization logos, quote, closing line
 
 - Logos and brand colours: [`lib/content/organizations.ts`](lib/content/organizations.ts).

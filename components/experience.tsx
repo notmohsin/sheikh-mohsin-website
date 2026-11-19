@@ -67,7 +67,7 @@ function ExperienceEntry({
           </ul>
         )}
       </div>
-      <p className={cn(sectionMetaClassName, !compact && "lg:pt-1")}>
+      <p className={cn(sectionMetaClassName, !compact && "xl:pt-1")}>
         {formatPeriod(job.period)}
       </p>
     </li>
@@ -96,11 +96,11 @@ export default function Experience() {
 
       {earlierCount > 0 && (
         <SectionDisclosure
-          className="lg:pl-[13.5rem]"
+          className="xl:pl-[13.5rem]"
           closedLabel={`${earlierCount} earlier roles`}
           openLabel="hide earlier roles"
         >
-          <ol className="space-y-8 lg:-ml-[13.5rem]">
+          <ol className="space-y-8 xl:-ml-[13.5rem]">
             {experience.compactEntries.map((job) => (
               <ExperienceEntry
                 key={`${job.company}-${job.role}-${job.period}`}

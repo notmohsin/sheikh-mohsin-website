@@ -8,6 +8,8 @@ type BaseDiaryEntryMetadataInput = {
   tags?: readonly string[];
   /** Show on the homepage under "selected writing". */
   featured?: boolean;
+  /** Image under /public shown on the entry's card in the diary list. */
+  cover?: string;
 };
 
 type PublishedDiaryEntryMetadataInput = BaseDiaryEntryMetadataInput & {
@@ -31,6 +33,7 @@ export type DiaryEntryMetadata = {
   updatedAt?: DateString;
   tags: readonly string[];
   featured: boolean;
+  cover?: string;
   draft: boolean;
 };
 
@@ -151,6 +154,12 @@ export function defineDiaryEntry(
     throw new Error("featured must be a boolean.");
   }
 
+  const cover = optionalString(input.cover, "cover") || undefined;
+
+  if (cover && !cover.startsWith("/")) {
+    throw new Error("cover must be a path under /public, starting with /.");
+  }
+
   const description = optionalString(input.description, "description") ?? "";
   const publishedAt = validateDate(input.publishedAt, "publishedAt");
   const updatedAt = validateDate(input.updatedAt, "updatedAt") ?? publishedAt;
@@ -176,6 +185,7 @@ export function defineDiaryEntry(
     updatedAt,
     tags: normalizeTags(input.tags),
     featured,
+    ...(cover ? { cover } : {}),
     draft,
   };
 }

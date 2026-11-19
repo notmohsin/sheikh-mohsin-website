@@ -67,7 +67,7 @@ function ResearchEntry({ paper }: { paper: ResearchEntryModel }) {
           </ul>
         )}
       </div>
-      <p className={`${sectionMetaClassName} flex gap-3 lg:flex-col lg:gap-0`}>
+      <p className={`${sectionMetaClassName} flex gap-3 xl:flex-col xl:gap-0`}>
         <span>{paper.year}</span>
         <span>{KIND_LABELS[paper.kind]}</span>
       </p>

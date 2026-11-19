@@ -1,3 +1,4 @@
+import { stripInlineMarkup } from "@/lib/inline-markup";
 import { buildIntroSection } from "@/lib/site-content";
 
 export default function About() {
@@ -11,7 +12,7 @@ export default function About() {
         <span className="text-subtext">{intro.location}</span>.
       </p>
       <br />
-      <p>{intro.bio}</p>
+      <p>{stripInlineMarkup(intro.bio)}</p>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function Leadership() {
       />
 
       <div className={sectionRowClassName}>
-        <ul className="grid grid-cols-1 gap-x-10 gap-y-7 md:grid-cols-2 lg:col-start-2">
+        <ul className="grid grid-cols-1 gap-x-10 gap-y-7 md:grid-cols-2 xl:col-start-2">
           {leadership.entries.map((entry) => (
             <li
               key={`${entry.organization}-${entry.period}`}

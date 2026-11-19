@@ -8,27 +8,27 @@ import { cn } from "@/lib/utils";
 /**
  * Two-column row used by every homepage section: a narrow meta gutter
  * (dates, years, category names) beside the content column. The gutter
- * collapses above the content below `lg`.
+ * collapses above the content below `xl`.
  */
 const sectionRowClassName =
-  "grid gap-x-10 gap-y-1 lg:grid-cols-[11rem_minmax(0,1fr)]";
+  "grid gap-x-10 gap-y-1 xl:grid-cols-[11rem_minmax(0,1fr)]";
 
 /** Gutter cell. Rendered after the content in the DOM, shown first. */
 const sectionMetaClassName =
-  "order-first text-xs leading-6 text-muted-foreground lg:pt-0.5";
+  "order-first text-xs leading-6 text-muted-foreground xl:pt-0.5";
 
 /**
  * Content cell of a row on a logo timeline: a thin rule runs from under the
  * row's OrgMark down to the next row's mark, like a `git log --graph` line.
  * The parent <li> carries `group/tl`, so the last row draws no tail. Pick the
  * tail length that matches the list's vertical spacing (space-y-10 or -8);
- * below `lg` the next row's date sits above its mark, hence the longer tail.
+ * below `xl` the next row's date sits above its mark, hence the longer tail.
  */
 const timelineCellClassName =
   "relative before:absolute before:left-[13px] before:top-9 before:w-px before:bg-border group-last/tl:before:hidden";
 const timelineTailClassName = {
-  10: "before:-bottom-16 lg:before:-bottom-9",
-  8: "before:-bottom-14 lg:before:-bottom-7",
+  10: "before:-bottom-16 xl:before:-bottom-9",
+  8: "before:-bottom-14 xl:before:-bottom-7",
 } as const;
 
 /** Indent for anything under a timeline row's heading, clear of the rule. */
@@ -39,6 +39,21 @@ function formatPeriod(period: string) {
   return period.replace(/ - /g, " – ");
 }
 
+const SECTION_EMOJI: Record<TerminalCommandLinkCommand, string> = {
+  socials: "🔗",
+  experience: "💼",
+  research: "🔬",
+  skills: "🧰",
+  projects: "🛠️",
+  education: "🎓",
+  leadership: "🧭",
+  diary: "📝",
+};
+
+/**
+ * pbb.sh-style section title: an emoji and the section name over a short
+ * accent underline, with the matching terminal command on the right.
+ */
 function SectionHeading({
   id,
   command,
@@ -49,21 +64,22 @@ function SectionHeading({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "flex items-baseline justify-between gap-4 border-b border-border pb-3",
-        className,
-      )}
-    >
+    <div className={cn("flex items-end justify-between gap-4", className)}>
       <h2
         id={id}
-        className="text-xl font-bold tracking-tight text-foreground sm:text-2xl"
+        className="inline-flex items-center gap-2 border-b-2 border-accent pb-1.5 text-lg font-bold tracking-tight text-foreground sm:text-xl"
       >
+        <span
+          aria-hidden="true"
+          className="text-base sm:text-lg"
+        >
+          {SECTION_EMOJI[command]}
+        </span>
         {command}
       </h2>
       <Link
         href={`/terminal?cmd=${command}`}
-        className="inline-flex shrink-0 items-center gap-1.5 rounded-sm text-xs text-muted-foreground transition-colors hover:text-accent-readable"
+        className="mb-1.5 inline-flex shrink-0 items-center gap-1.5 rounded-sm text-xs text-muted-foreground transition-colors hover:text-accent-readable"
       >
         <IconTerminal2
           className="size-3.5"

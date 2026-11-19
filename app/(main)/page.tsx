@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import Profile from "@/components/profile";
-import Experience from "@/components/experience";
-import Research from "@/components/research";
-import Education from "@/components/education";
-import Projects from "@/components/projects";
-import Skills from "@/components/skills";
-import Leadership from "@/components/leadership";
+import About from "@/components/about";
 import MiscLine from "@/components/misc-line";
+import Projects from "@/components/projects";
 import Writing from "@/components/writing";
 import { ABOUT } from "@/lib/content/about";
 import { EDUCATION } from "@/lib/content/education";
@@ -104,77 +99,34 @@ export default function Page() {
   }).replace(/</g, "\\u003c");
 
   return (
-    <main
-      id="main-content"
-      className="flex-1 font-mono"
-    >
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: structuredData }}
       />
-      <div className="mx-auto max-w-6xl space-y-16 px-4 pb-16 pt-6 sm:px-7 md:space-y-24 md:py-12">
-        <section>
-          <Profile />
-        </section>
-
-        <section
-          id="experience"
-          className="scroll-mt-8 space-y-8"
-          aria-labelledby="experience-heading"
-        >
-          <Experience />
-        </section>
-
-        <section
-          id="projects"
-          className="scroll-mt-8 space-y-8"
-          aria-labelledby="projects-heading"
-        >
-          <Projects />
+      <div className="space-y-14 md:space-y-16">
+        <section aria-label="About">
+          <About />
         </section>
 
         <section
           id="writing"
-          className="scroll-mt-8 space-y-8"
+          className="scroll-mt-24 space-y-8"
           aria-labelledby="writing-heading"
         >
           <Writing />
         </section>
 
         <section
-          id="research"
-          className="scroll-mt-8 space-y-8"
-          aria-labelledby="research-heading"
+          id="projects"
+          className="scroll-mt-24 space-y-8"
+          aria-labelledby="projects-heading"
         >
-          <Research />
-        </section>
-
-        <section
-          id="skills"
-          className="scroll-mt-8 space-y-8"
-          aria-labelledby="skills-heading"
-        >
-          <Skills />
-        </section>
-
-        <section
-          id="education"
-          className="scroll-mt-8 space-y-8"
-          aria-labelledby="education-heading"
-        >
-          <Education />
-        </section>
-
-        <section
-          id="leadership"
-          className="scroll-mt-8 space-y-8"
-          aria-labelledby="leadership-heading"
-        >
-          <Leadership />
+          <Projects variant="selected" />
         </section>
 
         <MiscLine />
       </div>
-    </main>
+    </>
   );
 }

@@ -13,6 +13,13 @@ export interface AboutContent {
   role: string;
   location: string;
   bio: string;
+  /**
+   * Paragraphs after the bio on the About page. Same inline markup as
+   * `misc`, plus `**bold**` and `*italic*`.
+   */
+  intro?: string[];
+  /** Square photo under /public for the profile card; the chinar icon stands in until set. */
+  avatar?: string;
   /** Short italic line under the bio. */
   quote?: AboutQuote;
   /**
@@ -104,6 +111,15 @@ export interface ProjectItem {
   links: LinkItem[];
   confidentialityNote?: string;
   featured?: boolean;
+  /** Optional cover image shown at the top of the card (file in /public). */
+  cover?: CoverImage;
+}
+
+export interface CoverImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
 }
 
 export interface AwardItem {

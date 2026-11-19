@@ -87,7 +87,7 @@ export default function Education() {
               </div>
               <DetailList details={edu.details} />
             </div>
-            <p className={cn(sectionMetaClassName, "lg:pt-1")}>
+            <p className={cn(sectionMetaClassName, "xl:pt-1")}>
               {formatPeriod(edu.period)}
             </p>
           </li>
@@ -131,7 +131,7 @@ export default function Education() {
           <h3
             className={cn(
               sectionMetaClassName,
-              "text-sm font-bold text-primary-readable lg:pt-3",
+              "text-sm font-bold text-primary-readable xl:pt-3",
             )}
           >
             Selected coursework{" "}

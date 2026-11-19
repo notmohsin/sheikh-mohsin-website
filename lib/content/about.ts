@@ -4,7 +4,11 @@ export const ABOUT: AboutContent = {
   name: "Sheikh Mohsin",
   role: "BSc (Hons) Computer Science and Business Analytics",
   location: "Pune, India",
-  bio: "I am still turning things over until they get a little less opaque: how a drive decides what to keep, how a craft survives once it has to be sold, and what a classroom does when its language is not the language of home. I write when the question will not leave me alone.",
+  avatar: "/mohsin.jpg",
+  bio: "I am still turning things over until they get a little less opaque: how a *drive* decides what to keep, how a *craft* survives once it has to be sold, and what a *classroom* does when its language is not the language of home. I write when the question will not leave me alone.",
+  intro: [
+    "I study **Computer Science and Business Analytics** at {FLAME University} on a full scholarship. This year I am a research intern at {IIT Ropar}, working on how SSDs cache their address-translation entries. Before that I studied Taraksi silver filigree with FLAME's Discover India Program, tested software at {PartyHub}, and worked on data and operations at {Goonj, Delhi|Goonj}.",
+  ],
   quote: {
     text: "A here and a there.",
     source: "On Home, Belonging and Kashmir",

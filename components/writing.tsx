@@ -67,7 +67,7 @@ export default async function Writing() {
       <div className={sectionRowClassName}>
         <Link
           href="/diary"
-          className="w-fit text-sm text-accent-readable underline decoration-accent-readable/40 underline-offset-4 hover:decoration-accent-readable lg:col-start-2"
+          className="w-fit text-sm text-accent-readable underline decoration-accent-readable/40 underline-offset-4 hover:decoration-accent-readable xl:col-start-2"
         >
           all {entries.length} diary entries →
         </Link>

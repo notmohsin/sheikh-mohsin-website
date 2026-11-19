@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { IconArrowUpRight } from "@tabler/icons-react";
 
 import { Card } from "./ui/card";
-import { SectionDisclosure, SectionHeading } from "./ui/section";
+import { SectionHeading } from "./ui/section";
+import TagFilter from "./ui/tag-filter";
 import { buildProjectsSection } from "@/lib/site-content";
 import type { ProjectEntryModel } from "@/lib/site-content";
 
@@ -14,6 +16,16 @@ function ProjectCard({ project }: { project: ProjectEntryModel }) {
       variant={primaryLink ? "interactive" : "content"}
       className="relative h-full gap-4 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
     >
+      {project.cover && (
+        <Image
+          src={project.cover.src}
+          alt={project.cover.alt}
+          width={project.cover.width}
+          height={project.cover.height}
+          sizes="(min-width: 80rem) 24rem, (min-width: 48rem) 45vw, 100vw"
+          className="-mx-5 -mt-5 mb-1 aspect-[16/9] w-[calc(100%+2.5rem)] max-w-none object-cover"
+        />
+      )}
       <h3 className="text-base font-bold leading-snug text-primary-readable sm:text-lg">
         {primaryLink ?
           <Link
@@ -119,12 +131,36 @@ function ProjectGrid({ projects }: { projects: ProjectEntryModel[] }) {
   );
 }
 
-export default function Projects() {
+/**
+ * `selected`: featured projects only, for the About tab, with a link to the
+ * Projects tab. `all`: every project behind a filter on its stack.
+ */
+export default function Projects({
+  variant = "all",
+}: {
+  variant?: "selected" | "all";
+}) {
   const projects = buildProjectsSection();
-  const featuredProjects = projects.entries.filter(
-    (project) => project.featured,
-  );
-  const otherProjects = projects.entries.filter((project) => !project.featured);
+
+  if (variant === "selected") {
+    const featured = projects.entries.filter((project) => project.featured);
+
+    return (
+      <>
+        <SectionHeading
+          id="projects-heading"
+          command="projects"
+        />
+        <ProjectGrid projects={featured} />
+        <Link
+          href="/projects"
+          className="inline-block text-sm text-accent-readable underline decoration-accent-readable/40 underline-offset-4 hover:decoration-accent-readable"
+        >
+          all {projects.entries.length} projects →
+        </Link>
+      </>
+    );
+  }
 
   return (
     <>
@@ -132,17 +168,14 @@ export default function Projects() {
         id="projects-heading"
         command="projects"
       />
-
-      <ProjectGrid projects={featuredProjects} />
-
-      {otherProjects.length > 0 && (
-        <SectionDisclosure
-          closedLabel={`${otherProjects.length} more projects`}
-          openLabel="show fewer projects"
-        >
-          <ProjectGrid projects={otherProjects} />
-        </SectionDisclosure>
-      )}
+      <TagFilter
+        listClassName="grid grid-cols-1 gap-4 md:grid-cols-2"
+        items={projects.entries.map((project) => ({
+          key: project.title,
+          tags: project.stack ?? [],
+          node: <ProjectCard project={project} />,
+        }))}
+      />
     </>
   );
 }
