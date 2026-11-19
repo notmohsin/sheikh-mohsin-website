@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
+import { wireHeadingClassName } from "@/components/ui/section";
+import { cn } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
 import DiaryEntryList from "@/components/diary/entry-list";
@@ -49,9 +52,7 @@ export default async function DiaryTagPage({ params }: DiaryTagPageProps) {
         ← all tags
       </Link>
       <div className="space-y-3">
-        <h1 className="inline-block border-b-2 border-accent pb-1.5 text-2xl font-bold tracking-tight text-foreground">
-          #{tag}
-        </h1>
+        <h1 className={cn(wireHeadingClassName, "text-2xl")}>#{tag}</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           {entries.length} {entries.length === 1 ? "entry" : "entries"}.{" "}
           <Link

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { wireHeadingClassName } from "@/components/ui/section";
+import { cn } from "@/lib/utils";
+
 import TagChip from "@/components/diary/tag-chip";
 import { getPublishedDiaryEntries } from "@/lib/diary/entries";
 import { countDiaryTags } from "@/lib/diary/tags";
@@ -23,9 +26,7 @@ export default async function DiaryTagsPage() {
         ← diary
       </Link>
       <div className="space-y-3">
-        <h1 className="inline-block border-b-2 border-accent pb-1.5 text-2xl font-bold tracking-tight text-foreground">
-          tags
-        </h1>
+        <h1 className={cn(wireHeadingClassName, "text-2xl")}>tags</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           {tags.length} {tags.length === 1 ? "tag" : "tags"} across the diary.
           Pick one to see its entries.

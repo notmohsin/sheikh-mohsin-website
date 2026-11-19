@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { IconArrowUpRight } from "@tabler/icons-react";
 
-import { Card } from "./ui/card";
 import OrgMark from "./ui/org-mark";
 import {
   SectionHeading,
@@ -131,7 +130,7 @@ export default function Education() {
           <h3
             className={cn(
               sectionMetaClassName,
-              "text-sm font-bold text-primary-readable xl:pt-3",
+              "text-sm font-bold text-primary-readable",
             )}
           >
             Selected coursework{" "}
@@ -139,40 +138,31 @@ export default function Education() {
               FLAME University
             </span>
           </h3>
-          <ul className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2">
+          <ul className="grid min-w-0 grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
             {education.coursework.map((course) => (
-              <li key={`${course.code}-${course.title}`}>
-                <Card
-                  variant={course.link ? "interactive" : "content"}
-                  size="sm"
-                  className="relative h-full gap-2 p-4 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <h4 className="text-sm font-bold leading-snug text-primary-readable">
-                      {course.link ?
-                        <Link
-                          href={course.link}
-                          {...externalLinkProps(course.link)}
-                          className="outline-none after:absolute after:inset-0 after:content-['']"
-                        >
-                          {course.title}
-                        </Link>
-                      : course.title}
-                    </h4>
-                    <span className="inline-flex shrink-0 items-center gap-1 text-[11px] leading-5 text-muted-foreground">
-                      {course.code}
-                      {course.link && (
-                        <IconArrowUpRight
-                          className="size-3 text-accent-readable"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </span>
-                  </div>
-                  <p className="text-xs leading-relaxed text-foreground">
-                    {course.artifact}
-                  </p>
-                </Card>
+              <li
+                key={`${course.code}-${course.title}`}
+                className="space-y-1"
+              >
+                <h4 className="text-sm font-bold leading-snug text-primary-readable">
+                  {course.link ?
+                    <Link
+                      href={course.link}
+                      {...externalLinkProps(course.link)}
+                      className="inline-flex items-baseline gap-1 underline decoration-primary-readable/30 underline-offset-4 hover:decoration-primary-readable"
+                    >
+                      {course.title}
+                      <IconArrowUpRight
+                        className="size-3 self-center text-accent-readable"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  : course.title}
+                </h4>
+                <p className="text-xs leading-relaxed text-subtext">
+                  <span className="text-muted-foreground">{course.code}</span>{" "}
+                  {course.artifact}
+                </p>
               </li>
             ))}
           </ul>

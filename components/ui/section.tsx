@@ -18,14 +18,14 @@ const sectionMetaClassName =
   "order-first text-xs leading-6 text-muted-foreground xl:pt-0.5";
 
 /**
- * Content cell of a row on a logo timeline: a thin rule runs from under the
- * row's OrgMark down to the next row's mark, like a `git log --graph` line.
+ * Content cell of a row on a logo timeline: a twisted filigree wire runs from
+ * under the row's OrgMark down to the next row's mark.
  * The parent <li> carries `group/tl`, so the last row draws no tail. Pick the
  * tail length that matches the list's vertical spacing (space-y-10 or -8);
  * below `xl` the next row's date sits above its mark, hence the longer tail.
  */
 const timelineCellClassName =
-  "relative before:absolute before:left-[13px] before:top-9 before:w-px before:bg-border group-last/tl:before:hidden";
+  "relative before:absolute before:left-[9px] before:top-9 before:w-2.5 before:bg-muted-foreground/35 before:wire-y group-last/tl:before:hidden";
 const timelineTailClassName = {
   10: "before:-bottom-16 xl:before:-bottom-9",
   8: "before:-bottom-14 xl:before:-bottom-7",
@@ -39,20 +39,16 @@ function formatPeriod(period: string) {
   return period.replace(/ - /g, " – ");
 }
 
-const SECTION_EMOJI: Record<TerminalCommandLinkCommand, string> = {
-  socials: "🔗",
-  experience: "💼",
-  research: "🔬",
-  skills: "🧰",
-  projects: "🛠️",
-  education: "🎓",
-  leadership: "🧭",
-  diary: "📝",
-};
+/**
+ * Title with a filigree wire underneath in the accent colour: the one
+ * ornament the site allows itself. Shared by section and page headings.
+ */
+const wireHeadingClassName =
+  "relative inline-block pb-3 font-bold tracking-tight text-foreground after:absolute after:inset-x-0 after:bottom-0 after:h-2 after:bg-accent after:wire-x";
 
 /**
- * pbb.sh-style section title: an emoji and the section name over a short
- * accent underline, with the matching terminal command on the right.
+ * Section title over a filigree wire, with the matching terminal command on
+ * the right.
  */
 function SectionHeading({
   id,
@@ -67,19 +63,13 @@ function SectionHeading({
     <div className={cn("flex items-end justify-between gap-4", className)}>
       <h2
         id={id}
-        className="inline-flex items-center gap-2 border-b-2 border-accent pb-1.5 text-lg font-bold tracking-tight text-foreground sm:text-xl"
+        className={cn(wireHeadingClassName, "text-lg sm:text-xl")}
       >
-        <span
-          aria-hidden="true"
-          className="text-base sm:text-lg"
-        >
-          {SECTION_EMOJI[command]}
-        </span>
         {command}
       </h2>
       <Link
         href={`/terminal?cmd=${command}`}
-        className="mb-1.5 inline-flex shrink-0 items-center gap-1.5 rounded-sm text-xs text-muted-foreground transition-colors hover:text-accent-readable"
+        className="mb-2 inline-flex shrink-0 items-center gap-1.5 rounded-sm text-xs text-muted-foreground transition-colors hover:text-accent-readable"
       >
         <IconTerminal2
           className="size-3.5"
@@ -127,4 +117,5 @@ export {
   timelineBodyClassName,
   timelineCellClassName,
   timelineTailClassName,
+  wireHeadingClassName,
 };

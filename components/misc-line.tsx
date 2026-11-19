@@ -8,14 +8,14 @@ export default function MiscLine() {
   }
 
   return (
-    <p className="max-w-[72ch] border-t border-border pt-8 text-sm leading-7 text-subtext">
-      <span
+    <div className="space-y-6">
+      <div
         aria-hidden="true"
-        className="mr-2 text-muted-foreground"
-      >
-        ~
-      </span>
-      {renderInline(ABOUT.misc)}
-    </p>
+        className="h-2 w-32 bg-muted-foreground/40 wire-x"
+      />
+      <p className="max-w-[72ch] text-sm leading-7 text-subtext">
+        {renderInline(ABOUT.misc)}
+      </p>
+    </div>
   );
 }
