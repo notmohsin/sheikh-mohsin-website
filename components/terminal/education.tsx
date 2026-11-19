@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OrgName } from "@/components/ui/org-mark";
 import { buildEducationSection } from "@/lib/site-content";
 
 function DegreeName({ degree }: { degree: string }) {
@@ -26,9 +27,10 @@ export default function Education({ view = "all" }: { view?: EducationView }) {
             className={idx > 0 ? "border-t border-input/50 pt-2" : ""}
           >
             <div className="flex justify-between items-baseline">
-              <span className="text-primary font-bold text-base">
-                {edu.institution}
-              </span>
+              <OrgName
+                name={edu.institution}
+                className="text-primary font-bold text-base"
+              />
               <span className="text-xs text-muted-foreground bg-input/20 px-2 py-0.5 rounded w-fit">
                 {edu.period}
               </span>
@@ -58,7 +60,10 @@ export default function Education({ view = "all" }: { view?: EducationView }) {
           <ul className="text-xs text-foreground marker:text-accent list-disc list-inside mt-1 ml-1 space-y-1">
             {education.priorEducation.map((edu) => (
               <li key={`${edu.institution}-${edu.period}`}>
-                <span className="text-primary">{edu.institution}</span>{" "}
+                <OrgName
+                  name={edu.institution}
+                  className="text-primary"
+                />{" "}
                 <span className="text-secondary">
                   (<DegreeName degree={edu.degree} />)
                 </span>

@@ -1,4 +1,4 @@
-import OrgMark from "./ui/org-mark";
+import OrgMark, { OrgName } from "./ui/org-mark";
 import { SectionHeading, sectionRowClassName } from "./ui/section";
 import { buildLeadershipSection } from "@/lib/site-content";
 import type { LeadershipEntryModel } from "@/lib/site-content";
@@ -30,7 +30,7 @@ export default function Leadership() {
                 <OrgMark name={entry.organization} />
                 <div className="min-w-0">
                   <h3 className="text-[0.9375rem] font-bold leading-snug text-primary-readable">
-                    {entry.organization}
+                    <OrgName name={entry.organization} />
                   </h3>
                   <p className="text-xs leading-5 text-subtext">
                     {periodNamesRoles(entry) ?

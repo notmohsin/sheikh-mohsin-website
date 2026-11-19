@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { buildResearchSection } from "@/lib/site-content";
 import { externalLinkProps } from "@/lib/utils";
+import { renderInline } from "@/components/ui/inline-text";
 
 export default function Research({ kind }: { kind?: string }) {
   const research = buildResearchSection();
@@ -41,7 +42,9 @@ export default function Research({ kind }: { kind?: string }) {
               )}
               <span className="text-subtext">{paper.year}</span>
             </div>
-            <p className="mt-1 text-xs text-foreground">{paper.summary}</p>
+            <p className="mt-1 text-xs text-foreground">
+              {renderInline(paper.summary)}
+            </p>
             {secondaryLinks.length > 0 && (
               <div className="mt-2 flex flex-wrap gap-3 text-xs text-accent underline decoration-accent/40">
                 {secondaryLinks.map((link) => (

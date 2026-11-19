@@ -69,6 +69,14 @@ export interface ExperienceSectionModel {
   compactEntries: ExperienceEntryModel[];
 }
 
+/** Consecutive roles at one organization, shown under a single header. */
+export interface ExperienceGroupModel {
+  company: string;
+  /** Span from the earliest start to the latest end across the roles. */
+  period: string;
+  roles: ExperienceEntryModel[];
+}
+
 export interface ResearchSectionModel {
   id: "research";
   entries: ResearchEntryModel[];
@@ -128,6 +136,39 @@ export function buildExperienceSection(): ExperienceSectionModel {
     featuredEntries: EXPERIENCE.filter((entry) => !entry.compact),
     compactEntries: EXPERIENCE.filter((entry) => entry.compact),
   };
+}
+
+const PERIOD_SEPARATOR = " — ";
+
+/**
+ * Groups consecutive entries with the same company, LinkedIn style. Entries
+ * are listed newest first, so the group starts when the last role started
+ * and ends when the first role ends.
+ */
+export function groupExperienceByCompany(
+  entries: readonly ExperienceEntryModel[],
+): ExperienceGroupModel[] {
+  const groups: ExperienceGroupModel[] = [];
+
+  for (const entry of entries) {
+    const current = groups.at(-1);
+    if (current && current.company === entry.company) {
+      current.roles.push(entry);
+    } else {
+      groups.push({ company: entry.company, period: "", roles: [entry] });
+    }
+  }
+
+  for (const group of groups) {
+    const newest = group.roles[0].period.split(PERIOD_SEPARATOR);
+    const oldest = group.roles.at(-1)!.period.split(PERIOD_SEPARATOR);
+    group.period =
+      group.roles.length === 1 ?
+        group.roles[0].period
+      : `${oldest[0]}${PERIOD_SEPARATOR}${newest.at(-1)}`;
+  }
+
+  return groups;
 }
 
 export function buildResearchSection(): ResearchSectionModel {

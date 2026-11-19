@@ -9,6 +9,7 @@ import {
 import { ABOUT } from "@/lib/content/about";
 import { buildResearchSection } from "@/lib/site-content";
 import type { ResearchEntryModel } from "@/lib/site-content";
+import { renderInline } from "./ui/inline-text";
 import { externalLinkProps } from "@/lib/utils";
 
 const KIND_LABELS: Record<ResearchEntryModel["kind"], string> = {
@@ -44,7 +45,7 @@ function ResearchEntry({ paper }: { paper: ResearchEntryModel }) {
         )}
 
         <p className="text-sm leading-relaxed text-foreground">
-          {paper.summary}
+          {renderInline(paper.summary)}
         </p>
 
         {paper.links && paper.links.length > 0 && (

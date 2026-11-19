@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { renderInline } from "@/components/ui/inline-text";
 import { NOW } from "@/lib/content/now";
 
 export default function Now({ compact = false }: { compact?: boolean }) {
@@ -13,7 +14,7 @@ export default function Now({ compact = false }: { compact?: boolean }) {
           key={line}
           className="leading-relaxed text-foreground"
         >
-          {line}
+          {renderInline(line)}
         </p>
       ))}
       <p className="text-sm leading-relaxed text-muted-foreground">

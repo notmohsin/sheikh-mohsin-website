@@ -10,6 +10,7 @@ import {
   buildResearchSection,
   buildSkillsSection,
   buildSocialsSection,
+  groupExperienceByCompany,
 } from "../site-content";
 import { ABOUT } from "../content/about";
 import { AWARDS } from "../content/awards";
@@ -34,6 +35,28 @@ describe("site-content", () => {
       bio: ABOUT.bio,
       socialLinks: SOCIALS,
     });
+  });
+
+  it("groups consecutive roles at the same company", () => {
+    const role = (company: string, period: string) => ({
+      company,
+      role: `${company} role`,
+      period,
+      category: "research" as const,
+      description: [],
+    });
+    const groups = groupExperienceByCompany([
+      role("A", "Sept 2026 — Present"),
+      role("A", "May 2025 — Aug 2026"),
+      role("B", "Jan 2025 — Apr 2025"),
+      role("A", "2024"),
+    ]);
+
+    expect(groups.map((group) => group.company)).toEqual(["A", "B", "A"]);
+    expect(groups[0].roles).toHaveLength(2);
+    expect(groups[0].period).toBe("May 2025 — Present");
+    expect(groups[1].period).toBe("Jan 2025 — Apr 2025");
+    expect(groups[2].period).toBe("2024");
   });
 
   it("splits experience entries by compact display contract", () => {

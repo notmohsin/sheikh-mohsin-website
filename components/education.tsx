@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { IconArrowUpRight } from "@tabler/icons-react";
 
-import OrgMark from "./ui/org-mark";
+import OrgMark, { OrgName } from "./ui/org-mark";
 import {
   SectionHeading,
   formatPeriod,
@@ -74,7 +74,7 @@ export default function Education() {
                 />
                 <div className="min-w-0">
                   <h3 className="text-base font-bold leading-snug text-primary-readable sm:text-lg">
-                    {edu.institution}
+                    <OrgName name={edu.institution} />
                   </h3>
                   <p className="text-sm leading-6 text-foreground">
                     <DegreeName degree={edu.degree} />
@@ -111,7 +111,7 @@ export default function Education() {
                 />
                 <div className="min-w-0">
                   <h3 className="text-base font-bold leading-snug text-primary-readable">
-                    {edu.institution}
+                    <OrgName name={edu.institution} />
                   </h3>
                   <p className="text-sm leading-6 text-foreground">
                     <DegreeName degree={edu.degree} />
@@ -134,9 +134,10 @@ export default function Education() {
             )}
           >
             Selected coursework{" "}
-            <span className="block text-xs font-normal text-muted-foreground">
-              FLAME University
-            </span>
+            <OrgName
+              name="FLAME University"
+              className="block w-fit text-xs font-normal text-muted-foreground"
+            />
           </h3>
           <ul className="grid min-w-0 grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
             {education.coursework.map((course) => (

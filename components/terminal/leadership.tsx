@@ -1,3 +1,4 @@
+import { OrgName } from "@/components/ui/org-mark";
 import { buildLeadershipSection } from "@/lib/site-content";
 
 export default function Leadership() {
@@ -7,7 +8,9 @@ export default function Leadership() {
     <div className="mt-2 flex flex-col gap-4">
       {leadership.entries.map((entry) => (
         <div key={`${entry.organization}-${entry.period}`}>
-          <div className="font-bold text-primary">{entry.organization}</div>
+          <div className="font-bold text-primary">
+            <OrgName name={entry.organization} />
+          </div>
           <div className="text-xs text-secondary">
             {entry.roles.join(" · ")}
           </div>

@@ -1,7 +1,8 @@
+import Link from "next/link";
 import type { CSSProperties } from "react";
 
 import { getOrganization } from "@/lib/content/organizations";
-import { cn } from "@/lib/utils";
+import { cn, externalLinkProps } from "@/lib/utils";
 
 /**
  * Small mark for an organization: its logo on a light tile (logos are drawn
@@ -59,6 +60,42 @@ export default function OrgMark({
 }
 
 /**
+ * An organization's name, linked to its official site when one is on file
+ * (opens in a new tab). Inherits the surrounding text style; only adds an
+ * underline that strengthens on hover.
+ */
+export function OrgName({
+  name,
+  label,
+  className,
+}: {
+  name: string;
+  /** Text to show, when it differs from the registry name. */
+  label?: string;
+  className?: string;
+}) {
+  const org = getOrganization(name);
+  const text = label ?? name;
+
+  if (!org?.href) {
+    return <span className={className}>{text}</span>;
+  }
+
+  return (
+    <Link
+      href={org.href}
+      {...externalLinkProps(org.href)}
+      className={cn(
+        "underline decoration-current/25 underline-offset-4 transition-colors hover:decoration-current",
+        className,
+      )}
+    >
+      {text}
+    </Link>
+  );
+}
+
+/**
  * An organization named inside running text, in its brand colour with a
  * small inline logo. Usable from MDX as `<Org name="FLAME University" />`.
  * Unknown names render as plain text.
@@ -99,7 +136,15 @@ export function OrgMention({
           className="mr-1 inline-block size-[1.1em] rounded-[3px] bg-white p-px align-[-0.2em] dark:bg-[#e6e9ef]"
         />
       )}
-      {text}
+      {org.href ?
+        <Link
+          href={org.href}
+          {...externalLinkProps(org.href)}
+          className="underline decoration-current/25 underline-offset-4 transition-colors hover:decoration-current"
+        >
+          {text}
+        </Link>
+      : text}
     </span>
   );
 }

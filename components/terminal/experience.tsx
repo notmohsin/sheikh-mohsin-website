@@ -1,4 +1,5 @@
 import ExperienceDescription from "../experience-description";
+import { OrgName } from "../ui/org-mark";
 import { buildExperienceSection } from "@/lib/site-content";
 import type { ExperienceEntryModel } from "@/lib/site-content";
 
@@ -20,7 +21,10 @@ function ExperienceEntry({ job }: { job: ExperienceEntryModel }) {
       <div className="absolute -left-5.75 top-1.75 size-3 rounded-full border-2 border-card bg-accent ring-1 ring-input/50" />
 
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <span className="text-base font-bold text-primary">{job.company}</span>
+        <OrgName
+          name={job.company}
+          className="text-base font-bold text-primary"
+        />
         <span className="w-fit rounded bg-input/20 px-2 py-0.5 text-xs text-muted-foreground">
           {job.period}
         </span>

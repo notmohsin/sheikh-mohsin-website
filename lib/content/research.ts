@@ -40,7 +40,7 @@ export const RESEARCH: ResearchItem[] = [
     kind: "interest",
     status: "in-progress",
     summary:
-      "Summer research at IIT Ropar on SSD cache eviction, spatial prefetching for address-translation entries, and how ransomware write bursts collide with the cleanup a drive does in private. Along the way: a cache-order bug where newly loaded entries evicted one another before anything used them, and an open question about whether a targeted defense against that collision is a contribution in its own right.",
+      "Summer research at {IIT Ropar} on SSD cache eviction, spatial prefetching for address-translation entries, and how ransomware write bursts collide with the cleanup a drive does in private. Along the way: a cache-order bug where newly loaded entries evicted one another before anything used them, and an open question about whether a targeted defense against that collision is a contribution in its own right.",
     featured: true,
     links: [
       {
