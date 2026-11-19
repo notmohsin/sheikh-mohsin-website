@@ -2,6 +2,34 @@ import type { ExperienceItem } from "./types";
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
+    company: "FLAME University",
+    role: "Research Assistant — Blockchain",
+    period: "Sept 2026 — Present",
+    category: "research",
+    description: [
+      "Building CustodyChain under the guidance of Prof. Lokendra Vishwakarma: a permissioned Hyperledger Fabric ledger that keeps a tamper-evident chain of custody for criminal evidence.",
+      "Reproduced a published Fabric chain-of-custody prototype and found that its records held free text but nothing tying a record to the evidence it described.",
+      "Designed an evidence-fingerprinting model that separates integrity (SHA-256 over a canonical, schema-validated manifest and a salted Merkle root of its files) from identity (perceptual image hashes and 3D-scan comparison), so only fingerprints and custody events go on-chain.",
+      "Built a Byzantine-fault-tolerant ordering service on Fabric v3 (SmartBFT) with four orderers run by separate agencies, tested it through node failures, leader failover, and restarts, and made the ledger persist across shutdowns.",
+    ],
+    textLinks: [
+      {
+        label: "Prof. Lokendra Vishwakarma",
+        href: "https://www.flame.edu.in/faculty/lokendra-vishwakarma",
+      },
+    ],
+  },
+  {
+    company: "FLAME University",
+    role: "Student Campus Ambassador",
+    period: "Sept 2026 — Present",
+    category: "teaching-writing",
+    description: [
+      "Give campus tours to prospective students and their families, showing what studying and living at FLAME looks like day to day.",
+      "Talk with prospective students about the move from school to college and help them work out whether FLAME is the right fit for them.",
+    ],
+  },
+  {
     company: "IIT Ropar",
     role: "Research Intern (Summer Internship Program) — SSD Systems",
     period: "May 2026 — Present",

@@ -58,7 +58,7 @@
 \cvheader{Sheikh Mohsin}{+91 6005277810}{sheikh.mohsin@flame.edu.in}{sheikh-mohsin-213653254}{notmohsin}{https://sheikhmohsin.vercel.app/}
 
 \section*{Profile Summary}
-Third-year B.Sc. Computer Science and Business Analytics student at FLAME University, Pune. Summer research on SSD cache eviction and spatial prefetching at IIT Ropar; a year of field research on Taraksi silver filigree; co-author of a Deccan Herald piece on education policy. Comfortable moving between systems code and qualitative fieldwork, and writing clearly about both.
+Third-year B.Sc. Computer Science and Business Analytics student at FLAME University, Pune. Research assistant building a tamper-evident chain-of-custody ledger for criminal evidence on Hyperledger Fabric; summer research on SSD cache eviction and spatial prefetching at IIT Ropar; a year of field research on Taraksi silver filigree; co-author of a Deccan Herald piece on education policy. Comfortable moving between systems code and qualitative fieldwork, and writing clearly about both.
 
 \section*{Education}
 
@@ -76,6 +76,20 @@ Third-year B.Sc. Computer Science and Business Analytics student at FLAME Univer
 \end{itemize}
 
 \section*{Experience}
+
+\experience{FLAME University}{Sept 2026 -- Present}{Research Assistant -- Blockchain}{}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Building CustodyChain under the guidance of Prof. Lokendra Vishwakarma: a permissioned Hyperledger Fabric ledger that keeps a tamper-evident chain of custody for criminal evidence
+    \item Reproduced a published Fabric chain-of-custody prototype and found that its records held free text but nothing tying a record to the evidence it described
+    \item Designed an evidence-fingerprinting model that separates integrity (SHA-256 over a canonical, schema-validated manifest and a salted Merkle root of its files) from identity (perceptual image hashes and 3D-scan comparison), so only fingerprints and custody events go on-chain
+    \item Built a Byzantine-fault-tolerant ordering service on Fabric v3 (SmartBFT) with four orderers run by separate agencies, tested it through node failures, leader failover, and restarts, and made the ledger persist across shutdowns
+\end{itemize}
+
+\experience{FLAME University}{Sept 2026 -- Present}{Student Campus Ambassador}{}
+\begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
+    \item Give campus tours to prospective students and their families, showing what studying and living at FLAME looks like day to day
+    \item Talk with prospective students about the move from school to college and help them work out whether FLAME is the right fit for them
+\end{itemize}
 
 \experience{IIT Ropar}{May 2026 -- Present}{Research Intern (Summer Internship Program) -- SSD Systems}{}
 \begin{itemize}[leftmargin=*, itemsep=0pt, parsep=0pt, topsep=1pt]
@@ -117,8 +131,8 @@ Designed and built a responsive personal website from scratch to present project
 
 \section*{Technical Skills}
 
-\textbf{Programming \& Tools:} Python, C++, JavaScript, SQL, HTML/CSS, Git/GitHub, Linux, LaTeX, Markdown\\
-\textbf{Data \& Systems:} Data Structures \& Algorithms, Data Analysis, Data Mining, Data Visualization, Statistical Reasoning, FTL/NAND flash internals, hardware performance profiling (\texttt{perf\_event\_open}, RDTSCP), basic AWS\\
+\textbf{Programming \& Tools:} Python, C++, JavaScript, SQL, HTML/CSS, Git/GitHub, Linux, Docker, Hyperledger Fabric, LaTeX, Markdown\\
+\textbf{Data \& Systems:} Data Structures \& Algorithms, Data Analysis, Data Mining, Data Visualization, Statistical Reasoning, FTL/NAND flash internals, blockchain consensus (Raft, BFT), hardware performance profiling (\texttt{perf\_event\_open}, RDTSCP), basic AWS\\
 \textbf{Soft Skills:} Technical writing, research communication, independent learning, analytical thinking, collaboration\\
 \textbf{Languages:} English, Hindi, Urdu, Kashmiri
 
