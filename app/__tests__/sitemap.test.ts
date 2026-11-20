@@ -4,7 +4,7 @@ import {
   getAllDiaryEntries,
   getPublishedDiaryEntries,
 } from "@/lib/diary/entries";
-import { SEO } from "@/lib/content/seo";
+import { SEO } from "@/lib/content/site";
 import { dateStringToUtcDate } from "@/lib/diary/metadata";
 
 import sitemap, { buildSitemapEntries } from "../sitemap";

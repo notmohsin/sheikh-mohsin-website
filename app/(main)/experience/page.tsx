@@ -4,7 +4,7 @@ import Education from "@/components/education";
 import Experience from "@/components/experience";
 import Leadership from "@/components/leadership";
 import Skills from "@/components/skills";
-import { ABOUT } from "@/lib/content/about";
+import { ABOUT } from "@/lib/content/site";
 
 const description = `Research, internships, education and leadership: ${ABOUT.name}'s experience at a glance.`;
 

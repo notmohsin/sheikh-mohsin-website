@@ -1,13 +1,10 @@
 import Link from "next/link";
-
-import { buildAwardsSection } from "@/lib/site-content";
+import { AWARDS } from "@/lib/content/site";
 
 export default function Awards() {
-  const awards = buildAwardsSection();
-
   return (
     <div className="mt-2 flex flex-col gap-4">
-      {awards.entries.map((award) => (
+      {AWARDS.map((award) => (
         <div key={`${award.title}-${award.year}`}>
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <span className="font-bold text-primary">{award.title}</span>

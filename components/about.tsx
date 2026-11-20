@@ -1,5 +1,5 @@
 import { renderInline } from "./ui/inline-text";
-import { ABOUT } from "@/lib/content/about";
+import { ABOUT } from "@/lib/content/site";
 
 /** Bio and intro paragraphs at the top of the About tab. */
 export default function About() {

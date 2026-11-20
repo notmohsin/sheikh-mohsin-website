@@ -137,3 +137,32 @@ export interface LeadershipItem {
 }
 
 export type Skills = Record<string, string[]>;
+
+export type UsesGroup = {
+  heading: string;
+  items: { name: string; note: string }[];
+};
+
+export type ListeningSnapshot = {
+  label: string;
+  note: string;
+};
+
+export interface Organization {
+  /** Name as it appears in content, used for matching. */
+  name: string;
+  /** Other spellings used across content files. */
+  aliases?: string[];
+  /** SVG under /public/logos, transparent background. */
+  logo?: string;
+  /** Logo width ÷ height when it is not square (a wordmark beside a mark). */
+  logoAspect?: number;
+  /** One or two letters for the monogram fallback. */
+  monogram: string;
+  /** Brand colour for inline mentions (light mode). */
+  color?: string;
+  /** Brand colour for dark mode, picked to stay readable on #24273a. */
+  colorDark?: string;
+  /** Official website; the organization's name links here wherever it appears. */
+  href?: string;
+}

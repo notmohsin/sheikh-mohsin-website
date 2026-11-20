@@ -105,16 +105,13 @@ pnpm pdf:merge --current-order --output application.pdf resume.pdf letter.pdf
 An explicit `--output` path replaces an existing file. The interactive path
 asks before replacing one.
 
-## Deploys and the inherited workflows
+## Deploys
 
 Production deploys happen through Vercel's Git integration on pushes to
-`master` (see `DEPLOY.md`). The GitHub Actions workflows under
-`.github/workflows/` were inherited from the template: they trigger on `main`,
-not `master`, and expect a `latex-cv` image in this repo's GHCR that has never
-been built, so they do not run. Because the PDFs are committed, nothing in the
-deploy path needs LaTeX. Either delete the workflows or, to revive them, build
-the image from `.github/docker/latex-cv/Dockerfile` with the
-`Build LaTeX CV Image` workflow and change the branch triggers.
+`master` (see `DEPLOY.md`). There is no CI: the GitHub Actions workflows
+inherited from the template never ran here and were removed on 2026-11-19.
+Because the CV and résumé PDFs are committed, nothing in the deploy path needs
+LaTeX. Run `pnpm verify` locally before pushing.
 
 ## Checks
 
@@ -132,11 +129,10 @@ site:
 
 - `diary/*.mdx`: keep `publishedAt` as the original publish date and set
   `updatedAt` only when the entry content meaningfully changes.
-- `lib/content/seo.ts`: update `SEO.updatedAt` when the homepage/site content has
+- `SEO` in `lib/content/site.ts`: update `SEO.updatedAt` when the homepage/site content has
   a meaningful content update; it feeds sitemap freshness for the canonical
   homepage.
-- `lib/content/experience.ts`, `lib/content/education.ts`, and
-  `lib/content/research.ts`: review date ranges, `Present` entries, research
+- `EXPERIENCE`, `EDUCATION` and `RESEARCH` in `lib/content/site.ts`: review date ranges, `Present` entries, research
   years, and any revisit notes whenever profile content changes.
 - `cv/cv.tex`: keep experience, publication, and education dates in sync with
   the site content.

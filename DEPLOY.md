@@ -24,7 +24,7 @@ project (`my-digital-showcase-237`) and does **not** serve this site. Don't
 link to it.
 
 If the domain ever changes, update every reference together:
-[`lib/content/seo.ts`](lib/content/seo.ts) `url`, the canonical header in
+`SEO.url` in [`lib/content/site.ts`](lib/content/site.ts), the canonical header in
 [`next.config.ts`](next.config.ts), the header in
 [`cv/resumes/resume-layout.tex`](cv/resumes/resume-layout.tex), and the links in
 [`cv/cv.tex`](cv/cv.tex); then run `pnpm cv:build && pnpm resumes:build` and

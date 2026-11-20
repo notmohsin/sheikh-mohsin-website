@@ -6,13 +6,13 @@ import {
   sectionMetaClassName,
   sectionRowClassName,
 } from "./ui/section";
-import { ABOUT } from "@/lib/content/about";
-import { buildResearchSection } from "@/lib/site-content";
-import type { ResearchEntryModel } from "@/lib/site-content";
+import { ABOUT } from "@/lib/content/site";
 import { renderInline } from "./ui/inline-text";
 import { externalLinkProps } from "@/lib/utils";
+import { RESEARCH } from "@/lib/content/site";
+import type { ResearchItem } from "@/lib/content/types";
 
-const KIND_LABELS: Record<ResearchEntryModel["kind"], string> = {
+const KIND_LABELS: Record<ResearchItem["kind"], string> = {
   preprint: "preprint",
   thesis: "thesis",
   presentation: "talk",
@@ -30,7 +30,7 @@ function Authors({ authors }: { authors: string }) {
   ));
 }
 
-function ResearchEntry({ paper }: { paper: ResearchEntryModel }) {
+function ResearchEntry({ paper }: { paper: ResearchItem }) {
   return (
     <li className={sectionRowClassName}>
       <div className="min-w-0 max-w-[72ch] space-y-2">
@@ -77,8 +77,7 @@ function ResearchEntry({ paper }: { paper: ResearchEntryModel }) {
 }
 
 export default function Research() {
-  const research = buildResearchSection();
-  const featuredResearch = research.entries.filter((entry) => entry.featured);
+  const featuredResearch = RESEARCH.filter((entry) => entry.featured);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import ExperienceDescription from "../experience-description";
 import { OrgName } from "../ui/org-mark";
-import { buildExperienceSection } from "@/lib/site-content";
-import type { ExperienceEntryModel } from "@/lib/site-content";
+import { EXPERIENCE } from "@/lib/content/site";
+import type { ExperienceItem } from "@/lib/content/types";
 
 export type ExperienceCategory =
   | "all"
@@ -15,7 +15,7 @@ const CATEGORY_LABELS: Record<Exclude<ExperienceCategory, "all">, string> = {
   "teaching-writing": "Teaching & Writing",
 };
 
-function ExperienceEntry({ job }: { job: ExperienceEntryModel }) {
+function ExperienceEntry({ job }: { job: ExperienceItem }) {
   return (
     <div className="relative">
       <div className="absolute -left-5.75 top-1.75 size-3 rounded-full border-2 border-card bg-accent ring-1 ring-input/50" />
@@ -54,7 +54,7 @@ function ExperienceGroup({
   showHeading,
 }: {
   category: Exclude<ExperienceCategory, "all">;
-  entries: ExperienceEntryModel[];
+  entries: ExperienceItem[];
   showHeading: boolean;
 }) {
   if (entries.length === 0) return null;
@@ -83,8 +83,7 @@ export default function Experience({
 }: {
   category?: ExperienceCategory;
 }) {
-  const experience = buildExperienceSection();
-  const entries = [...experience.featuredEntries, ...experience.compactEntries];
+  const entries = EXPERIENCE;
   const categories = (
     category === "all" ?
       ["engineering", "research", "teaching-writing"]

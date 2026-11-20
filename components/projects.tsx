@@ -8,16 +8,16 @@ import {
   sectionRowClassName,
 } from "./ui/section";
 import TagFilter from "./ui/tag-filter";
-import { buildProjectsSection } from "@/lib/site-content";
-import type { ProjectEntryModel } from "@/lib/site-content";
 import { externalLinkProps } from "@/lib/utils";
+import { PROJECTS } from "@/lib/content/site";
+import type { ProjectItem } from "@/lib/content/types";
 
 /**
  * One project as an open entry, not a boxed card: the title links to the
  * project, then its one-line summary, description, stack and other links.
  * Entries share the meta gutter used by experience, holding any highlights.
  */
-function ProjectEntry({ project }: { project: ProjectEntryModel }) {
+function ProjectEntry({ project }: { project: ProjectItem }) {
   const [primaryLink, ...extraLinks] = project.links;
 
   return (
@@ -108,7 +108,7 @@ function ProjectEntry({ project }: { project: ProjectEntryModel }) {
   );
 }
 
-function ProjectList({ projects }: { projects: ProjectEntryModel[] }) {
+function ProjectList({ projects }: { projects: ProjectItem[] }) {
   return (
     <ul className="space-y-10">
       {projects.map((project) => (
@@ -129,10 +129,8 @@ export default function Projects({
 }: {
   variant?: "selected" | "all";
 }) {
-  const projects = buildProjectsSection();
-
   if (variant === "selected") {
-    const featured = projects.entries.filter((project) => project.featured);
+    const featured = PROJECTS.filter((project) => project.featured);
 
     return (
       <>
@@ -145,7 +143,7 @@ export default function Projects({
           href="/projects"
           className="inline-block text-sm text-accent-readable underline decoration-accent-readable/40 underline-offset-4 hover:decoration-accent-readable"
         >
-          See all {projects.entries.length} projects and research
+          See all {PROJECTS.length} projects and research
         </Link>
       </>
     );
@@ -159,7 +157,7 @@ export default function Projects({
       />
       <TagFilter
         listClassName="space-y-10"
-        items={projects.entries.map((project) => ({
+        items={PROJECTS.map((project) => ({
           key: project.title,
           tags: project.stack ?? [],
           node: <ProjectEntry project={project} />,

@@ -3,10 +3,14 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { EDUCATION, PRIOR_EDUCATION } from "../content/education";
-import { EXPERIENCE } from "../content/experience";
-import { LEADERSHIP } from "../content/leadership";
-import { ORGANIZATIONS, getOrganization } from "../content/organizations";
+import {
+  EDUCATION,
+  PRIOR_EDUCATION,
+  EXPERIENCE,
+  LEADERSHIP,
+  ORGANIZATIONS,
+} from "../content/site";
+import { getOrganization } from "../organizations";
 
 describe("organizations", () => {
   it("has a mark for every organization named in content", () => {

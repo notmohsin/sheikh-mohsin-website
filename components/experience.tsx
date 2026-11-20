@@ -10,21 +10,20 @@ import {
   timelineCellClassName,
   timelineTailClassName,
 } from "./ui/section";
-import {
-  buildExperienceSection,
-  groupExperienceByCompany,
-} from "@/lib/site-content";
-import type {
-  ExperienceEntryModel,
-  ExperienceGroupModel,
-} from "@/lib/site-content";
 import { cn } from "@/lib/utils";
+import {
+  EARLIER_EXPERIENCE,
+  FEATURED_EXPERIENCE,
+  groupExperienceByCompany,
+  type ExperienceGroup,
+} from "@/lib/experience";
+import type { ExperienceItem } from "@/lib/content/types";
 
 function ExperienceEntry({
   job,
   compact = false,
 }: {
-  job: ExperienceEntryModel;
+  job: ExperienceItem;
   compact?: boolean;
 }) {
   return (
@@ -80,7 +79,7 @@ function ExperienceEntry({
   );
 }
 
-function RoleDescription({ job }: { job: ExperienceEntryModel }) {
+function RoleDescription({ job }: { job: ExperienceItem }) {
   if (job.description.length === 0) {
     return null;
   }
@@ -104,7 +103,7 @@ function RoleDescription({ job }: { job: ExperienceEntryModel }) {
  * logo and the overall span, then each role as a node on the timeline wire
  * with its own title, dates and bullets.
  */
-function ExperienceGroup({ group }: { group: ExperienceGroupModel }) {
+function ExperienceGroup({ group }: { group: ExperienceGroup }) {
   return (
     <li className={cn(sectionRowClassName, "group/tl")}>
       <div
@@ -158,8 +157,7 @@ function ExperienceGroup({ group }: { group: ExperienceGroupModel }) {
 }
 
 export default function Experience() {
-  const experience = buildExperienceSection();
-  const earlierCount = experience.compactEntries.length;
+  const earlierCount = EARLIER_EXPERIENCE.length;
 
   return (
     <>
@@ -169,7 +167,7 @@ export default function Experience() {
       />
 
       <ol className="space-y-10">
-        {groupExperienceByCompany(experience.featuredEntries).map((group) =>
+        {groupExperienceByCompany(FEATURED_EXPERIENCE).map((group) =>
           group.roles.length === 1 ?
             <ExperienceEntry
               key={`${group.company}-${group.period}`}
@@ -189,7 +187,7 @@ export default function Experience() {
           openLabel="hide earlier roles"
         >
           <ol className="space-y-8 xl:-ml-[13.5rem]">
-            {experience.compactEntries.map((job) => (
+            {EARLIER_EXPERIENCE.map((job) => (
               <ExperienceEntry
                 key={`${job.company}-${job.role}-${job.period}`}
                 job={job}

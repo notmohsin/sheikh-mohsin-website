@@ -1,5 +1,5 @@
 import { renderInline } from "./ui/inline-text";
-import { ABOUT } from "@/lib/content/about";
+import { ABOUT } from "@/lib/content/site";
 
 /** The closing line of the homepage, after every section. */
 export default function MiscLine() {

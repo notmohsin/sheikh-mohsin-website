@@ -12,8 +12,7 @@ import {
   getPublishedDiaryEntrySlugs,
   type PublishedDiaryEntry,
 } from "@/lib/diary/entries";
-import { ABOUT } from "@/lib/content/about";
-import { SEO } from "@/lib/content/seo";
+import { ABOUT, SEO } from "@/lib/content/site";
 import { getDiaryEntryHeadings } from "@/lib/diary/headings";
 import { dateStringToIsoDateTime } from "@/lib/diary/metadata";
 

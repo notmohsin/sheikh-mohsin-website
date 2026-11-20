@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import Projects from "@/components/projects";
 import Research from "@/components/research";
-import { ABOUT } from "@/lib/content/about";
+import { ABOUT } from "@/lib/content/site";
 
 const description = `Projects and research by ${ABOUT.name}, filterable by what they were built with.`;
 

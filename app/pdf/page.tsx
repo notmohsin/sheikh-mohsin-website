@@ -9,7 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ABOUT } from "@/lib/content/about";
+import { ABOUT } from "@/lib/content/site";
 import { CV_DOWNLOAD_FILENAME, CV_PATH } from "@/lib/cv";
 
 export const metadata: Metadata = {

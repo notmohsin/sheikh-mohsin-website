@@ -1,6 +1,5 @@
 import { getPublishedDiaryEntries } from "@/lib/diary/entries";
-import { ABOUT } from "@/lib/content/about";
-import { DIARY_DESCRIPTION, SEO } from "@/lib/content/seo";
+import { ABOUT, DIARY_DESCRIPTION, SEO } from "@/lib/content/site";
 import {
   dateStringToIsoDateTime,
   type PublishedDiaryEntrySummary,

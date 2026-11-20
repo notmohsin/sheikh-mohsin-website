@@ -3,11 +3,14 @@ import {
   sectionMetaClassName,
   sectionRowClassName,
 } from "./ui/section";
-import { buildSkillsSection } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
+import { SKILLS } from "@/lib/content/site";
 
 export default function Skills() {
-  const skills = buildSkillsSection();
+  const categories = Object.entries(SKILLS).map(([name, items]) => ({
+    name,
+    items,
+  }));
 
   return (
     <>
@@ -17,7 +20,7 @@ export default function Skills() {
       />
 
       <dl className="-mt-4 divide-y divide-border">
-        {skills.categories.map((category) => (
+        {categories.map((category) => (
           <div
             key={category.name}
             className={cn(sectionRowClassName, "gap-y-2 py-4")}

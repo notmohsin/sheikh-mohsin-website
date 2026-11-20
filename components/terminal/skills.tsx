@@ -1,18 +1,21 @@
-import { buildSkillsSection } from "@/lib/site-content";
+import { SKILLS } from "@/lib/content/site";
 
 export default function Skills({ filter }: { filter?: string }) {
-  const skills = buildSkillsSection();
+  const allCategories = Object.entries(SKILLS).map(([name, items]) => ({
+    name,
+    items,
+  }));
   const normalizedFilter = filter?.toLowerCase();
   const categories =
     normalizedFilter ?
-      skills.categories.filter(
+      allCategories.filter(
         (category) =>
           category.name.toLowerCase().includes(normalizedFilter) ||
           category.items.some((item) =>
             item.toLowerCase().includes(normalizedFilter),
           ),
       )
-    : skills.categories;
+    : allCategories;
 
   if (categories.length === 0) {
     return (

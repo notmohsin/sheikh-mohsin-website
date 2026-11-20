@@ -1,18 +1,16 @@
 import { stripInlineMarkup } from "@/lib/inline-markup";
-import { buildIntroSection } from "@/lib/site-content";
+import { ABOUT } from "@/lib/content/site";
 
 export default function About() {
-  const intro = buildIntroSection();
-
   return (
     <div className="text-foreground leading-relaxed">
       <p>
-        My name is <span className="text-primary">{intro.name}</span> and I am a{" "}
-        <span className="text-subtext">{intro.role}</span>. I am from{" "}
-        <span className="text-subtext">{intro.location}</span>.
+        My name is <span className="text-primary">{ABOUT.name}</span> and I am a{" "}
+        <span className="text-subtext">{ABOUT.role}</span>. I am from{" "}
+        <span className="text-subtext">{ABOUT.location}</span>.
       </p>
       <br />
-      <p>{stripInlineMarkup(intro.bio)}</p>
+      <p>{stripInlineMarkup(ABOUT.bio)}</p>
     </div>
   );
 }

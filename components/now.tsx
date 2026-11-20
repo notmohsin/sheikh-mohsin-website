@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { renderInline } from "@/components/ui/inline-text";
-import { NOW } from "@/lib/content/now";
+import { NOW } from "@/lib/content/site";
 
 export default function Now({ compact = false }: { compact?: boolean }) {
   return (

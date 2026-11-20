@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 
-import { getOrganization } from "@/lib/content/organizations";
+import { getOrganization } from "@/lib/organizations";
 import { cn, externalLinkProps } from "@/lib/utils";
 
 /**

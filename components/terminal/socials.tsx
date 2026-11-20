@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { buildSocialsSection } from "@/lib/site-content";
+import { SOCIALS } from "@/lib/content/site";
 
 export default function Socials() {
-  const socials = buildSocialsSection();
-
   return (
     <div className="flex flex-col items-start gap-2 mt-2 text-primary font-semibold">
-      {socials.links.map((link) => {
+      {SOCIALS.map((link) => {
         const SocialIcon = link.icon;
         const opensInNewTab =
           link.href.startsWith("http://") || link.href.startsWith("https://");

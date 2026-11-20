@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { MetadataRoute } from "next";
 import { getPublishedDiaryEntries } from "@/lib/diary/entries";
-import { SEO } from "@/lib/content/seo";
+import { SEO } from "@/lib/content/site";
 import { tagHref } from "@/lib/diary/tags";
 import {
   dateStringToUtcDate,

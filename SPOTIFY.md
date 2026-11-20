@@ -113,7 +113,7 @@ That data needs the `user-top-read` scope. `pnpm spotify:auth` requests it. If y
 
 The `music` command and `/music` default to the last 6 months (`medium_term`). The toggle also requests 4 weeks (`short_term`) and all time (`long_term`).
 
-A curated static list can live in [`lib/content/listening.ts`](lib/content/listening.ts). It stays hidden while the array is empty.
+A curated static list can live in `LISTENING_SNAPSHOT` in [`lib/content/site.ts`](lib/content/site.ts). It stays hidden while the array is empty.
 
 ---
 

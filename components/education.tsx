@@ -11,8 +11,8 @@ import {
   timelineCellClassName,
   timelineTailClassName,
 } from "./ui/section";
-import { buildEducationSection } from "@/lib/site-content";
 import { cn, externalLinkProps } from "@/lib/utils";
+import { COURSEWORK, EDUCATION, PRIOR_EDUCATION } from "@/lib/content/site";
 
 function DegreeName({ degree }: { degree: string }) {
   return degree.split(" · ").map((part, index) => (
@@ -45,8 +45,6 @@ function DetailList({ details }: { details: string[] }) {
 }
 
 export default function Education() {
-  const education = buildEducationSection();
-
   return (
     <>
       <SectionHeading
@@ -55,7 +53,7 @@ export default function Education() {
       />
 
       <ol className="space-y-10">
-        {education.higherEducation.map((edu) => (
+        {EDUCATION.map((edu) => (
           <li
             key={`${edu.institution}-${edu.period}`}
             className={cn(sectionRowClassName, "group/tl")}
@@ -92,7 +90,7 @@ export default function Education() {
           </li>
         ))}
 
-        {education.priorEducation.map((edu) => (
+        {PRIOR_EDUCATION.map((edu) => (
           <li
             key={`${edu.institution}-${edu.period}`}
             className={cn(sectionRowClassName, "group/tl")}
@@ -125,7 +123,7 @@ export default function Education() {
         ))}
       </ol>
 
-      {education.coursework.length > 0 && (
+      {COURSEWORK.length > 0 && (
         <div className={sectionRowClassName}>
           <h3
             className={cn(
@@ -140,7 +138,7 @@ export default function Education() {
             />
           </h3>
           <ul className="grid min-w-0 grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
-            {education.coursework.map((course) => (
+            {COURSEWORK.map((course) => (
               <li
                 key={`${course.code}-${course.title}`}
                 className="space-y-1"

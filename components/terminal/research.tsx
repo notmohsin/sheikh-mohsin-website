@@ -1,14 +1,11 @@
 import Link from "next/link";
-import { buildResearchSection } from "@/lib/site-content";
 import { externalLinkProps } from "@/lib/utils";
 import { renderInline } from "@/components/ui/inline-text";
+import { RESEARCH } from "@/lib/content/site";
 
 export default function Research({ kind }: { kind?: string }) {
-  const research = buildResearchSection();
   const entries =
-    kind ?
-      research.entries.filter((entry) => entry.kind === kind)
-    : research.entries;
+    kind ? RESEARCH.filter((entry) => entry.kind === kind) : RESEARCH;
 
   if (entries.length === 0) {
     return (

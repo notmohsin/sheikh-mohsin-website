@@ -5,8 +5,7 @@ import { FilterableDiaryList } from "@/components/diary/entry-list";
 import { wireHeadingClassName } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 import { getPublishedDiaryEntries } from "@/lib/diary/entries";
-import { ABOUT } from "@/lib/content/about";
-import { DIARY_DESCRIPTION } from "@/lib/content/seo";
+import { ABOUT, DIARY_DESCRIPTION } from "@/lib/content/site";
 
 export const metadata: Metadata = {
   title: "Diary",

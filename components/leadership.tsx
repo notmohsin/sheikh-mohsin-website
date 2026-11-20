@@ -1,17 +1,15 @@
 import OrgMark, { OrgName } from "./ui/org-mark";
 import { SectionHeading, sectionRowClassName } from "./ui/section";
-import { buildLeadershipSection } from "@/lib/site-content";
-import type { LeadershipEntryModel } from "@/lib/site-content";
+import { LEADERSHIP } from "@/lib/content/site";
+import type { LeadershipItem } from "@/lib/content/types";
 
 // Multi-role periods already name each role ("President 2023-2024 ·
 // Treasurer 2024-2025"), so they replace the separate role line.
-function periodNamesRoles(entry: LeadershipEntryModel) {
+function periodNamesRoles(entry: LeadershipItem) {
   return entry.roles.some((role) => entry.period.includes(role));
 }
 
 export default function Leadership() {
-  const leadership = buildLeadershipSection();
-
   return (
     <>
       <SectionHeading
@@ -21,7 +19,7 @@ export default function Leadership() {
 
       <div className={sectionRowClassName}>
         <ul className="grid grid-cols-1 gap-x-10 gap-y-7 md:grid-cols-2 xl:col-start-2">
-          {leadership.entries.map((entry) => (
+          {LEADERSHIP.map((entry) => (
             <li
               key={`${entry.organization}-${entry.period}`}
               className="space-y-1"

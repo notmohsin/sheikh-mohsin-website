@@ -1,46 +1,20 @@
 # Editing site text
 
-All copy on the homepage and in the terminal comes from a small set of files. Edit these directly — no need to touch React components for normal content updates.
+All the site's copy lives in **one file**, [`lib/content/site.ts`](lib/content/site.ts), in the order the site reads it. Edit it directly; components only render what it holds. The shapes (what fields each entry takes) are in [`lib/content/types.ts`](lib/content/types.ts).
 
-## Profile (name, byline, location, bio)
+| Section in `site.ts`                           | What it controls                                                       |
+| ---------------------------------------------- | ---------------------------------------------------------------------- |
+| `ABOUT`                                        | Name, byline, location, photo, bio, intro paragraphs, quote, misc line |
+| `SEO`                                          | Site title, description, URL, keywords; `DIARY_DESCRIPTION` for RSS    |
+| `SOCIALS`                                      | GitHub, LinkedIn, Substack, email                                      |
+| `EXPERIENCE`                                   | Experience tab (newest first)                                          |
+| `EDUCATION`, `PRIOR_EDUCATION`, `COURSEWORK`   | Education section                                                      |
+| `PROJECTS`, `RESEARCH`                         | Projects tab                                                           |
+| `SKILLS`, `LEADERSHIP`, `AWARDS`               | Experience tab and terminal                                            |
+| `ORGANIZATIONS`                                | Logos, brand colours and links for every organization                  |
+| `NOW`, `USES`, `LISTENING_SNAPSHOT`, `CREDITS` | Those pages                                                            |
 
-[`lib/content/about.ts`](lib/content/about.ts)
-
-```ts
-export const ABOUT = {
-  name: "...",
-  role: "...", // byline under your name on the homepage
-  location: "...",
-  bio: "...", // short paragraph on the homepage
-};
-```
-
-## SEO (title, description, site URL, keywords)
-
-[`lib/content/seo.ts`](lib/content/seo.ts) — also controls diary RSS description via `DIARY_DESCRIPTION`.
-
-## Social links
-
-[`lib/content/socials.ts`](lib/content/socials.ts)
-
-## Sections (homepage + matching terminal commands)
-
-| Section            | File                                                     |
-| ------------------ | -------------------------------------------------------- |
-| Experience         | [`lib/content/experience.ts`](lib/content/experience.ts) |
-| Research & writing | [`lib/content/research.ts`](lib/content/research.ts)     |
-| Projects           | [`lib/content/projects.ts`](lib/content/projects.ts)     |
-| Education          | [`lib/content/education.ts`](lib/content/education.ts)   |
-| Skills             | [`lib/content/skills.ts`](lib/content/skills.ts)         |
-| Awards             | [`lib/content/awards.ts`](lib/content/awards.ts)         |
-| Leadership         | [`lib/content/leadership.ts`](lib/content/leadership.ts) |
-| Coursework         | [`lib/content/coursework.ts`](lib/content/coursework.ts) |
-| Credits            | [`lib/content/credits.ts`](lib/content/credits.ts)       |
-| Now                | [`lib/content/now.ts`](lib/content/now.ts)               |
-| Uses               | [`lib/content/uses.ts`](lib/content/uses.ts)             |
-| Listening snapshot | [`lib/content/listening.ts`](lib/content/listening.ts)   |
-
-Each file exports a typed array or object. Types live in [`lib/content/types.ts`](lib/content/types.ts) if you need the shape.
+The terminal commands read the same data, so one edit updates both views.
 
 ## Diary / blog posts
 
@@ -129,23 +103,23 @@ import Figure, { FigureRow } from "@/components/diary/figure";
   [`components/layout/profile-card.tsx`](components/layout/profile-card.tsx);
   the tab bar is [`components/layout/site-tabs.tsx`](components/layout/site-tabs.tsx).
 - Profile photo: put a square image in `public/` and set `avatar: "/me.jpg"`
-  in [`lib/content/about.ts`](lib/content/about.ts). Until then the chinar
+  in [`lib/content/site.ts`](lib/content/site.ts) (`ABOUT`). Until then the chinar
   icon stands in.
 - `intro` (in the same file) holds the paragraphs under the bio on About.
   `*word*` = underlined italic, `**words**` = accent bold, `{FLAME University}`
   = organization mention.
 - Diary cards show a cover when the entry has `cover: "/diary/photo.jpg"`;
-  projects take `cover: { src, alt, width, height }` in `lib/content/projects.ts`.
+  projects take `cover: { src, alt, width, height }` in `PROJECTS` in `lib/content/site.ts`.
   Both lists have a filter panel built from tags / stack.
 
 ## Organization logos, quote, closing line
 
-- Logos and brand colours: [`lib/content/organizations.ts`](lib/content/organizations.ts).
+- Logos, brand colours and links: `ORGANIZATIONS` in [`lib/content/site.ts`](lib/content/site.ts).
   The `name` must match the company/institution/organization text in the
   content files (a test checks this). Logos are SVGs in `public/logos/`;
   an organization without one shows a letter badge.
 - Quote under the bio and the closing line at the bottom of the homepage:
-  `quote` and `misc` in [`lib/content/about.ts`](lib/content/about.ts).
+  `quote` and `misc` in `ABOUT` in [`lib/content/site.ts`](lib/content/site.ts).
   In `misc`, `{FLAME University}` becomes an organization mention and
   `[text](https://...)` a link.
 
@@ -164,8 +138,8 @@ import Figure, { FigureRow } from "@/components/diary/figure";
 ## What you usually do _not_ need to edit
 
 - `components/` — layout and terminal UI (only if you want design changes)
-- `app/page.tsx` — wires sections together; content comes from `lib/content/`
-- `lib/site-content.ts` — builders only; edit the `lib/content/*.ts` files instead
+- `app/(main)/*/page.tsx` — wires sections together; content comes from `lib/content/site.ts`
+- `lib/experience.ts`, `lib/organizations.ts` — small helpers (grouping roles, looking up logos)
 
 ## After editing
 

@@ -3,10 +3,7 @@ import About from "@/components/about";
 import MiscLine from "@/components/misc-line";
 import Projects from "@/components/projects";
 import Writing from "@/components/writing";
-import { ABOUT } from "@/lib/content/about";
-import { EDUCATION } from "@/lib/content/education";
-import { SEO } from "@/lib/content/seo";
-import { SOCIALS } from "@/lib/content/socials";
+import { ABOUT, EDUCATION, SEO, SOCIALS } from "@/lib/content/site";
 import { dateStringToIsoDateTime } from "@/lib/diary/metadata";
 
 export const metadata: Metadata = {

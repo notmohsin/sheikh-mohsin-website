@@ -1,4 +1,4 @@
-import { LISTENING_SNAPSHOT } from "@/lib/content/listening";
+import { LISTENING_SNAPSHOT } from "@/lib/content/site";
 
 export default function ListeningSnapshot({
   compact = false,

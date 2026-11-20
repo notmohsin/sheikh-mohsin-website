@@ -9,7 +9,7 @@
 
 ## Content and voice
 
-- Site copy lives in `lib/content/*.ts`. Edit those, not the components, for text changes.
+- All site copy lives in one file, `lib/content/site.ts` (shapes in `lib/content/types.ts`). Edit it, not the components, for text changes.
 - Everything in `diary/*.mdx`, including titles and descriptions, is authored by Mohsin. Preserve his wording, tone, capitalization, and opinions. Do not rewrite diary content for style, consistency, recruiter appeal, or SEO unless explicitly asked.
 - Only flag objective suspected typos; never silently fix them. Report the location and suggested correction.
 - Entries first published on Substack ([feelingsandnumbers.substack.com](https://feelingsandnumbers.substack.com)) should match the Substack text and link back to it. Use `components/diary/figure.tsx` for photos and `components/diary/footnotes.tsx` for footnotes.
@@ -19,10 +19,10 @@
 
 - `cv/cv.tex` is the source of truth for CV facts. `public/cv.pdf` and `public/resumes/*.pdf` are generated but **committed**, because Vercel has no LaTeX toolchain. Rebuild with `pnpm cv:build` and `pnpm resumes:build` after editing sources, and commit the PDFs with the change.
 - `cv/resumes/<role>.tex` are one-page role-specific résumés; the build rejects a second page or overflowing content. Each declares `\resumemetadata{Title}{YYYY-MM-DD}{Description}` which `/resumes` reads. Update the date only when content changes.
-- Never invent experience, skills, dates, or metrics. Keep experience, education, research, and dates consistent across `cv/cv.tex`, `cv/resumes/*.tex`, and `lib/content/*.ts`.
+- Never invent experience, skills, dates, or metrics. Keep experience, education, research, and dates consistent across `cv/cv.tex`, `cv/resumes/*.tex`, and `lib/content/site.ts`.
 
 ## SEO-sensitive edits
 
-- The canonical production origin is `https://sheikhmohsin.vercel.app` (`lib/content/seo.ts`). When editing an indexable route, preserve accurate page-specific metadata, its self-canonical, crawlable HTML content, and structured data that matches visible content.
+- The canonical production origin is `https://sheikhmohsin.vercel.app` (`SEO` in `lib/content/site.ts`). When editing an indexable route, preserve accurate page-specific metadata, its self-canonical, crawlable HTML content, and structured data that matches visible content.
 - Indexing policy: `/`, `/experience`, `/projects`, `/diary`, `/diary/tags` and its tag pages, published diary entries, `/cv.pdf`, `/now`, `/uses`, `/music`, `/guestbook`, and `/credits` are indexable; `/pdf`, `/resumes`, `/resumes/*.pdf`, `/terminal`, drafts, and error or utility pages are not. Only canonical indexable URLs belong in `app/sitemap.ts`.
 - When a route or published diary entry changes, keep its metadata, canonical URL, robots policy, sitemap entry, RSS entry, dates, structured data, and relevant tests consistent. Do not alter diary prose for SEO.

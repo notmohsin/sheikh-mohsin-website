@@ -1,12 +1,10 @@
 import { OrgName } from "@/components/ui/org-mark";
-import { buildLeadershipSection } from "@/lib/site-content";
+import { LEADERSHIP } from "@/lib/content/site";
 
 export default function Leadership() {
-  const leadership = buildLeadershipSection();
-
   return (
     <div className="mt-2 flex flex-col gap-4">
-      {leadership.entries.map((entry) => (
+      {LEADERSHIP.map((entry) => (
         <div key={`${entry.organization}-${entry.period}`}>
           <div className="font-bold text-primary">
             <OrgName name={entry.organization} />

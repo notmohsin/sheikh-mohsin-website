@@ -1,4 +1,4 @@
-import { USES } from "@/lib/content/uses";
+import { USES } from "@/lib/content/site";
 
 export default function Uses({ compact = false }: { compact?: boolean }) {
   const headingClass =

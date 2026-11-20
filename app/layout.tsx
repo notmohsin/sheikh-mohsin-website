@@ -8,7 +8,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import CrtOverlay from "@/components/ui/crt-overlay";
-import { SEO, SITE_TITLE_TEMPLATE } from "@/lib/content/seo";
+import { SEO, SITE_TITLE_TEMPLATE } from "@/lib/content/site";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],

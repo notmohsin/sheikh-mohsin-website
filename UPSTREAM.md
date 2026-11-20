@@ -29,10 +29,13 @@ Then `pnpm verify`, commit with the upstream SHA in the message, and update the
 
 - **Port:** layout and component changes under `components/`, `app/globals.css`,
   `lib/content/types.ts`, scripts and tooling, tests.
-- **Skip:** anything under `lib/content/*.ts` other than `types.ts`, `cv/`,
+- **Skip:** `lib/content/site.ts` (all of Mohsin's copy, merged into one file on
+  2026-11-21; Jeet keeps his in several `lib/content/*.ts` files), `cv/`,
   `diary/`, `AGENTS.md`, `README.md` prose, and his SEO/URLs. Those are his
   facts, not ours.
-- **Re-apply after copying a component:** `externalLinkProps()` from
+- **Re-apply after copying a component:** read data straight from
+  `lib/content/site.ts` instead of Jeet's `lib/site-content.ts` `build*Section()`
+  helpers (removed here on 2026-11-21), `externalLinkProps()` from
   `lib/utils.ts` on external links, the `featured` filter in `research.tsx`,
   the site-page nav and résumé/CV links in `profile.tsx`, and the empty-link
   guard on coursework cards in `education.tsx`.

@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { ABOUT } from "@/lib/content/about";
+import { ABOUT } from "@/lib/content/site";
 
 export const alt = "Sheikh Mohsin | Computer Science & Business Analytics";
 export const size = {

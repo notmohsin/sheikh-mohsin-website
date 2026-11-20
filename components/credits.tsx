@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { CREDITS } from "@/lib/content/credits";
+import { CREDITS } from "@/lib/content/site";
 
 export default function Credits({ compact = false }: { compact?: boolean }) {
   const headingClass =

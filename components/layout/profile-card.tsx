@@ -7,8 +7,7 @@ import {
   IconTerminal2,
 } from "@tabler/icons-react";
 
-import { ABOUT } from "@/lib/content/about";
-import { SOCIALS } from "@/lib/content/socials";
+import { ABOUT, SOCIALS } from "@/lib/content/site";
 import { PRIMARY_RESUME_PATH } from "@/lib/cv";
 import { externalLinkProps } from "@/lib/utils";
 

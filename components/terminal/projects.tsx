@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { buildProjectsSection } from "@/lib/site-content";
-import type { ProjectEntryModel } from "@/lib/site-content";
+import { PROJECTS } from "@/lib/content/site";
+import type { ProjectItem } from "@/lib/content/types";
 
-function ProjectCard({ project }: { project: ProjectEntryModel }) {
+function ProjectCard({ project }: { project: ProjectItem }) {
   return (
     <div className="mb-4 inline-block w-full break-inside-avoid rounded-lg border border-border bg-card p-4">
       <div className="text-md mb-2 text-primary">{project.title}</div>
@@ -48,7 +48,7 @@ function ProjectCard({ project }: { project: ProjectEntryModel }) {
   );
 }
 
-function matchesProject(project: ProjectEntryModel, filter: string) {
+function matchesProject(project: ProjectItem, filter: string) {
   const normalizedFilter = filter.toLowerCase();
 
   if (normalizedFilter === "featured") return project.featured;
@@ -59,11 +59,10 @@ function matchesProject(project: ProjectEntryModel, filter: string) {
 }
 
 export default function Projects({ filter }: { filter?: string }) {
-  const projects = buildProjectsSection();
   const entries =
     filter ?
-      projects.entries.filter((project) => matchesProject(project, filter))
-    : projects.entries;
+      PROJECTS.filter((project) => matchesProject(project, filter))
+    : PROJECTS;
 
   if (entries.length === 0) {
     return (
